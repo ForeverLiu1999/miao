@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>day6</title>
+</head>
+<body>
+  <script>
+    var nums1 = [1, 2, 3, 4];
+    var sum1 = nums1[0] + nums1[1] + nums1[2] + nums1[3];
+    console.log(sum1);
+
+    var nums2 = [1, 2, 3, 4, 5];
+    var sum2 = 0;
+    for (var i2 = 0; i2 < nums2.length; ++i2) {
+      sum2 += nums2[i2];
+    }
+    console.log(sum2);
+
+    var sentence3 = "Hey guys! We have a gift for you!";
+    var words3 = sentence3.split(" ");
+    for (var i3 = 0; i3 < words3.length; ++i3) {
+      console.log("words3" + " " + i3 + " : " + words3[i3]);
+    }
+
+    // 浅克隆
+    var nums4 = [];
+    for (var i4 = 0; i4 < 5; i4++) {
+      nums4[i4] = i4 + 1;
+      console.log(nums4);
+    }
+    var samenums4 = nums4;
+    console.log(nums4[0]);
+    console.log(samenums4);
+    nums4[0] = 1000;
+    console.log(nums4[0]);
+    console.log(samenums4[0]);
+    // 深客隆
+    function copy5(arr5, arr5_) {
+      for (var i5 = 0; i5 < arr5.length; ++i5) {
+        arr5_[i5] = arr5[i5];
+      }
+    }
+    var nums5 = [1, 2, 3, 4, 5];
+    var samenums5 = [];
+    copy5(nums5, samenums5);
+    console.log(nums5);
+    console.log(samenums5);
+    nums5[0] = 999;
+    console.log(nums5[0]);
+    console.log(samenums5[0]);
+
+    // indexOf 成功返回索引,失败返回-1.
+    var names6 = ["abc", "def", "ghi", "jkl"];
+    var name6 = "jkl";
+    var position6 = names6.indexOf(name6);
+    if (position6 >= 0) {
+      console.log("Found" + name6 + "at position " + position6);
+    }
+    else {
+      console.log(name6 + " not found in array.");
+    }
+
+    // lastIndexOf 返回相同元素中最后一个元素的索引,未找到返回-1.
+    var names7 = ["abc", "def", "ghi", "jkl", "abc"];
+    var name7 = "abc";
+    var firstPosition7 = names7.indexOf(name7);
+    var lastPosition7 = names7.lastIndexOf(name7);
+    console.log("First found " + name7 + " at position " + firstPosition7);
+    console.log("Last found " + name7 + " at position " + lastPosition7);
+
+    // 数组转化为字符串
+    var names8 = ["mno", "pqr", "stu", "vwxyz"];
+    var namestr8 = names8.join();
+    console.log(namestr8);
+    var namestr8_ = names8.toString();
+    console.log(namestr8_);
+
+    // concat方法合并数组.
+    var son9 = ["a", "b", "c"];
+    var son9_ = ["d", "e", "f"];
+    var father9 = son9.concat(son9_);
+    var father9_ = son9_.concat(son9);
+    console.log(father9);
+    console.log(father9_);
+
+    // splice截取数组子集创建一个新的数组splice的参数设置是多种多样的,主要表现为删除插入和替换.
+    var origin10 = ["a", "b", "c", "d", "e"];
+    console.log(origin10);
+    // 两个数字参数时,第一个参数为截取起始索引,第二个参数为截取长度.
+    var intercept10 = origin10.splice(2, 2);
+    var remain10 = origin10;
+    console.log(intercept10);
+    console.log(remain10);
+    // 两个数字参数(第二个参数不为0) + 元素参数时,先删除,后添加元素,返回的是被删除的元素.
+    var origin10_ = ["a", "b", "c", "d", "e"];
+    console.log(origin10_);
+    var intercept10_ = origin10_.splice(2, 1, "F", "G");
+    var remain10_ = origin10_;
+    console.log(intercept10_);
+    console.log(remain10_);
+    // 第二个数字为0,说明只加不删，所以是在起始索引位置加,会把原索引位置的元素往后挤,返回的也是空数组.
+    var _origin10_ = ["a", "b", "c"];
+    console.log(_origin10_);
+    var _intercept10_ = _origin10_.splice(1, 0, "F", "G");
+    var _remain10_ = _origin10_;
+    console.log(_intercept10_);
+    console.log(_remain10_);
+
+    // 为数组添加元素.push在尾加
+    var names11 = ["a", "b", "c"];
+    names11.push("d");
+    console.log(names11);
+    names11[names11.length] = "e";
+    console.log(names11);
+    names11.pop();
+    console.log(names11);
+    names11.pop();
+    console.log(names11);
+    // unshift在数组开头添加元素.
+    var names12 = [1, 2, 3];
+    console.log(names12);
+    // unshift添加一个元素
+    var _names12 = 0;
+    names12.unshift(_names12);
+    console.log(names12);
+    // unshift添加多个元素
+    var newnames12 = -3;
+    names12.unshift(newnames12, -2, -1);
+    console.log(names12);
+
+    // 从数组中删除元素
+    // pop方法从数组末尾删除元素.
+    var nums13 = [0, 1, 2, 3, 4,5];
+    console.log(nums13);
+    nums13.pop();
+    console.log(nums13);
+    // shift方法从数组头删除元素
+    nums13.shift();
+    console.log(nums13);
+    // pop和shift豆浆删掉的元素作为方法的返回值，所以可以使用一个变量保存.
+    var originFirst13 = nums13.shift();
+    nums13.push(originFirst13);
+    console.log(nums13);
+
+    // 数组排序.
+    // reverse反转.
+    var nums14 = [1, 2, 3, 4, 5];
+    nums14.reverse();
+    console.log(nums14);
+    // 字符串则用sort
+    var names14 = ["David", "Mike", "Cynthia", "Claython", "Bryan", "Raymind"];
+    names14.sort();
+    console.log(names14);
+    // 但sort对数字数组的排序不合适，所以用两数相减的结果来判断大小.
+    function compare(num14, num14_) {
+      return num14 - num14_;
+    }
+    var numsList14 = [3, 1, 2, 100, 4, 200];
+    numsList14.sort(compare);
+    console.log(numsList14);
+
+    // 各种迭代器
+    // 不生成新数组的迭代器方法.
+    // forEach 接受一个函数作为参数,对数组中每个元素使用此函数.
+    function square(num15) {
+      console.log(num15, num15 * num15);
+    }
+    var nums15 = [1, 2, 3, 4, 5];
+    var a15 = nums15.forEach(square);
+    console.log(nums15);
+    console.log(a15);
+
+    // every 接受一个返回值为布尔类型的函数，对数组每个元素使用此函数，
+    // 如果对于所有的函数，该函数都返回true,则该方法返回true.
+    function isEven16(a) {
+      return a % 2 == 0;
+    }
+    var nums16 = [2, 4, 6, 8];
+    var nums16_ = [2, 4, 6, 7];
+    var even16 = nums16.every(isEven16);
+    var even16_ = nums16_.every(isEven16);
+    if (even16) {
+      console.log("nums16的所有元素都是偶数.");
+    }
+    else {
+      console.log("nums16的所有元素不都是偶数.");
+    }
+    if (even16_) {
+      console.log("nums16_的所有元素都是偶数.");
+    }
+    else {
+      console.log("nums16_的所有元素不都是偶数.");
+    }
+
+    // reduce 接受一个函数,返回一个值.从一个累加器开始，不断对累加值
+    // 和数组中的后续元素调用该函数,知道数组中最后一个元素,最后返回得到的
+    // 累加值.
+    function add(runningTotal17, currentValue17) {
+      return runningTotal17 + currentValue17;
+    }
+    var nums17 = [1, 2, 3, 4, 5, 6, 7];
+    var sum17 = nums17.reduce(add);
+    console.log(sum17);
+    // reduce方法和add方法一起从左到右执行,add(1, 2) -> 3; add(3, 3) -> 6;
+    // add(6, 4) -> 10......
+
+    // reduce方法也可以将数组中的元素连接成一个长字符串
+    function concat(accumulatedString18, item18) {
+      return accumulatedString18 + item18;
+    }
+    var words18 = ["The ", "quick ","brown ", "fox "];
+    var sentence18 = words18.reduce(concat);
+    console.log(sentence18);
+
+    // reduceRight 方法从右向左执行
+    function concat(a19, b19) {
+      return a19 + b19;
+    }
+    var words19 = ["Hey! ", "guys! ", "We have a gift for you!"];
+    var re_sentence19 = words19.reduceRight(concat);
+    console.log(re_sentence19);
+
+    // 生成新数组的迭代器方法
+    // map 对数组中每个元素使用某个函数，map返回一个新的数组，该数组元素
+    // 是对原有元素应用某个函数得到的结果.
+    function curve20(grade20) {
+      return grade20 += 5;
+    }
+    var grades20 = [77, 65, 81, 92, 83];
+    var newgrades20 = grades20.map(curve20);
+    console.log(newgrades20);
+
+    // 对字符串数组使用map方法.
+    function first21(word21) {
+      return word21[0];
+    }
+    var words21 = ["for", "your", "information"];
+    var acronym21 = words21.map(first21);
+    console.log(acronym21.toString(""));
+    console.log(acronym21.join(""));
+
+    // filter(过滤器) 传入一个返回值为布尔类型的函数,和every区别:当对数组所有元素使用该函数，
+    // 结果均为true时,该方法并不返回true,而是返回一个新数组,该数组包含应用该函数后结果为
+    // true的元素.
+    function isEven22(num22) {
+       return num22 % 2 == 0;
+    }
+    function isOdd22(num22) {
+      return num22 % 2!= 0;
+    }
+    var nums22 = [];
+    for (var i22 = 0; i22 < 20; ++i22) {
+      nums22[i22] = i22 + 1;
+    }
+    var evens22 = nums22.filter(isEven22);
+    console.log("Even numbers: ");
+    console.log(evens22);
+    var odds22 = nums22.filter(isOdd22);
+    console.log("Odd numbers: ");
+    console.log(odds22);
+
+    // filter demo
+    function passing23(num23) {
+      return num23 >= 50;
+    }
+    var grades23 = [];
+    for (var i23 = 0; i23 < 5; ++i23) {
+      grades23[i23] = Math.floor(Math.random() * 100);
+    }
+    var passGrades23 = grades23.filter(passing23);
+    console.log("All grades23:" + grades23);
+    console.log("Passing grades23: " + passGrades23);
+    console.log(Math.floor(Math.random() * 100));
+
+    // filter 过滤字符串数组,如下过滤掉不包含sb的字符串
+    function afterc24(str24) {
+      if (str24.indexOf("sb") > -1) {
+        return true;
+      }
+      return false;
+    }
+    var words24 = ["1sb", "2sb", "3sb", "4"];
+    var misspelled24 = words24.filter(afterc24);
+    console.log(misspelled24);
+
+    // 二维数组
+    var grades25 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+    console.log(grades25);
+    console.log(grades25[1][2]);
+
+    // 处理二维数组的元素
+    // 两层for循环,外层行,内层列.
+    var grades26 = [[89, 77, 78], [74, 65,94], [91, 92,89]];
+    var total26 = 0;
+    var average26 = 0.0;
+    for (var row26 = 0; row26 < grades26.length; ++row26) {
+      for (var col26 = 0; col26 < grades26[row26].length; ++col26) {
+        total26 += grades26[row26][col26];
+      }
+      average26 = total26 / grades26[row26].length;
+      console.log("Student " + parseInt(row26 + 1) + " average: " +
+      average26.toFixed(2));
+      total26 = 0;
+      average26 = 0.0;
+    }
+
+    // 求学生各科平均成绩
+    var grades27 = [[89, 77, 78], [76, 82, 81], [91, 94, 89]];
+    var total27 = 0;
+    var average27 = 0.0;
+    for (var col27 = 0; col27 < grades27.length; ++col27) {
+      for (var row27 = 0; row27 < grades27[col27].length; ++row27) {
+        total27 += grades27[row27][col27];
+      }
+      average27 = total27 / grades27[col27].length;
+      console.log("Test " + parseInt(col27 + 1) + " average: " + average27.toFixed(2));
+      total27 = 0;
+      average27 = 0.0;
+    }
+
+    // 参差不齐的二维数组
+    var grades28 = [[89, 77], [76, 82, 81], [91, 94, 89, 99]];
+    var total28 = 0;
+    var average28 = 0.0;
+    for (var row28 = 0; row28 < grades28.length; ++row28) {
+      for(var col28 = 0; col28 < grades28[row28].length; ++col28) {
+        total28 += grades28[row28][col28];
+      }
+      average28 = total28 / grades28[row28].length;
+      console.log("Student " + parseInt(row28 + 1) + " average28: " + average28.toFixed(2));
+      total28 = 0;
+      average28 = 0.0;
+    }
+
+    // 对象数组
+    // 创建一个对象用于保存观测到的周最高温,其中的方法一,怎加一条新的气温纪录,灵体个方法用来存储在对象中的平均气温.
+    function weekTemps29() {
+      this.dataStore29 = [];
+      this.add29 = add29;
+      this.average29 = average29;
+    }
+    function add29(temp29) {
+      this.dataStore29.push(temp29);
+    }
+    function average29() {
+      var total29 = 0;
+      for (var i29 = 0; i29 < this.dataStore29.length; ++i29) {
+        total29 += this.dataStore29[i29];
+      }
+      return total29 / this.dataStore29.length;
+    }
+    var thisWeek29 = new weekTemps29();
+    thisWeek29.add29(52);
+    thisWeek29.add29(54);
+    console.log(thisWeek29);
+    console.log(thisWeek29.average29());
+
+    // 创建一个记录学生成绩的对象，提供一个添加成绩的方法，以及一个显示学生平均成绩的方法.
+    // https://blog.csdn.net/VTeGong/article/details/53956428?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.essearch_pc_relevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.essearch_pc_relevant
+    // 将一组单词存储在一个数组中，并按正序和倒序分别显示这些单词.
+
+    //修改本章前面出现过的weeklyTemps对象，使它可以使用一个二维数组来存储每月的有用数据。增加一些方法用以显示月平均数，具体某一周平均数和所有周平均数.
+    // 创建这样一个对象，它将字母存储在一个数组中，并且用一个方法可以将字母连在一起，显示成一个单词.
+    var word30 = {
+      letters30:["s", "h", "a", "b", "a", "o"],
+      getWord30: function () {
+        return this.letters30.join('');
+      }
+    };
+    console.log(word30.getWord30());
+
+
+  </script>
+</body>
+</html>
