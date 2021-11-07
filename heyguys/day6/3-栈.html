@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 手动实现一个栈
+    function stack () {
+      this.dataStore = [];
+      this.top = 0;
+      this.push = push;
+      this.pop = pop;
+      this.peek = peek;
+    }
+    // push实现 压入新元素时,保存到数组中top所在的位置，
+    // 然后将top的值加,让其指向数组中下一个空位置.
+    function push (element) {
+      this.dataStore[this.top++] = element;
+    }
+    // pop实现,返回栈顶元素,同时将top值减1.
+    function pop () {
+      return this.dataStore[--this.top];
+    }
+    // peek返回栈顶元素 空栈返回undefined
+    function peek () {
+      return this.dataStore[this.top - 1];
+    }
+    // length
+    function length () {
+      return this.top;
+    }
+    // 将top的值设为0,清空栈
+    function clear () {
+      this.top = 0;
+    }
+    // 测试
+    var s = new stack();
+    s.push("1");
+    s.push("2");
+    console.log(s);
+    console.log(s.top);
+    console.log(s.peek);
+    var s_pop = s.pop();
+    console.log(s_pop);
+    s.push("a");
+    console.log(s.peek());
+
+    // 进制转化demo (只用于基数2-9)
+    // 1 最高位 n%b 压入栈.
+    // 2 使用n/b代替n.
+    // 3 重复1和2,直到n=0且无余数.
+    // 4 持续将栈内元素弹出直至栈空,
+    //   依次排列则为进制转换后数字的字符串.
+    function mulBase2 (num2, base2) {
+      var s2 = new stack();
+      do {
+        s2.push (num2 % base2);
+        num2 = Math.floor(num2 /= base2);
+      } while (num2 > 0);
+      var converted2 = "";
+      while (s2.length > 0) {
+        coverted2 += s2.pop();
+      }
+      return converted2;
+    }
+    num2 = 8;
+    base2 = 2;
+    newNum2 = mulBase2 (num2, base2);
+    console.log(num2 + " converted2 to base2 "  + base2 + " is " + newNum2);
+    num2 = 17;
+    base2 = 8;
+    var newNum2 = mulBase2(num2, base2);
+    console.log(num2 + " converted2 to base2 " + base2 + " is " + newNum2);
+
+    // 回文:从左往右写和从右往左写一致,ex: dad,racecar,"A man, a plan, a cancal: Panama"，1001.
+    // 用栈判断回文,左向右压入栈,全入栈之后,再持续弹出栈内得到新的字符串,与原字符串相反则是一个回文.
+    function isPalindrome3 (word3) {
+      var s3 = new stack();
+      for (var i3 = 0; i3 < word3.length; ++i3) {
+        s3.push(word3[i3]);
+      }
+      var re_word3 = "";
+      while (s3.length > 0) {
+        re_word3 += s3.pop();
+      }
+      if (word3 == re_word3) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    var word3 = "abac";
+    if (isPalindrome3 (word3)) {
+      console.log(word3 + " is a palindrome.");
+    }
+    else {
+      console.log(word3 + " is not a palindrome.");
+    }
+
+    // 递归
+    // 计算阶乘
+    var n4 = 5;
+    function factorial4(n4) {
+      if (n4 === 0) {
+        return 1;
+      }
+      else {
+        return n4 * factorial4(n4 - 1);
+      }
+    }
+    console.log(factorial4(n4));
+
+    // 使用栈模拟递归过程
+    function fact5(n5) {
+      var s5 = new stack();
+      while (n5 > 1) {
+        s5.push(n5--);
+      }
+      var product5 = 1;
+      while (s5.length > 0) {
+        product5 *= s5.pop();
+      }
+      return product5;
+    }
+    console.log(fact5(5));
+
+    // 队列
+    names6 = [];
+    names6.push("a");
+    names6.push("b");
+    console.log(names6);
+    names6.shift();
+    console.log(names6);
+    function Queue6() {
+      this.dataStore6 = [];
+      this.enqueue6 = enqueue6;
+      this.dequeue6 = dequeue6;
+      this.front6 = front6;
+      this.back6 = back6;
+      this.toString6 = toString6;
+      this.empty6 = empty6;
+    }
+    // enqueue向队尾添加一个元素.
+    function enqueue6(element6) {
+      this.dataStore6.push(element6);
+    }
+    // dequeue删除队首的元素.
+    function dequeue6() {
+      return this.dataStore6.shift();
+    }
+    // front读取队首 back读取队尾
+    function front6() {
+      return this.dataStore6[0];
+    }
+    function back6() {
+      return this.dataStore6[this.dataStore6.length - 1];
+    }
+    // toString方法显示队列所有元素.
+    function toString6() {
+      var retStr6 = "";
+      for (var i6 = 0; i6 < this.dataStore6.length; ++i6) {
+        retStr6 += this.dataStore6[i6] + ", ";
+      }
+      return retStr6;
+    }
+    // 加一个判断队列是否为空
+    function empty6() {
+      if (this.dataStore6.length == 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    // 测试
+    var q6 = new Queue6();
+    q6.enqueue6("a");
+    q6.enqueue6("b");
+    q6.enqueue6("c");
+    console.log(q6.toString6());
+    q6.dequeue6();
+    console.log(q6.toString6());
+    console.log("Front6 of queue: " + q6.front6());
+    console.log("Back6 of queue: " + q6.back6());
+  </script>
+</body>
+</html>
