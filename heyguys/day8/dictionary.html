@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Dictionary() {
+      this.add = add;
+      this.datastore = new Array();
+      this.find = find;
+      this.remove = remove;
+      this.showAll = showAll;
+    }
+    function add(key, value) {
+      this.datastore[key] = value;
+    }
+    function find(key) {
+      return this.datastore[key];
+    }
+    function remove(key) {
+      delete this.datastore[key];
+    }
+    function showAll() {
+      for (var key in Object.keys(this.datastore)) {
+        console.log(key + " -> " + this.datastore[key]);
+      }
+    }
+    // load("Dictionary.js");
+    var pbook = new Dictionary();
+    pbook.add("a", "1");
+    pbook.add("b", "2");
+    pbook.add("c", "3");
+    pbook.add("d", "4");
+    // console.log(pbook.find("a"));
+    // pbook.remove("a");
+    console.log(pbook.showAll());
+  </script>
+</body>
+</html>

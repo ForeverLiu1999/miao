@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <script>
     // 手动实现一个栈
-    function stack () {
+    function stack() {
       this.dataStore = [];
       this.top = 0;
       this.push = push;
@@ -18,23 +20,23 @@
     }
     // push实现 压入新元素时,保存到数组中top所在的位置，
     // 然后将top的值加,让其指向数组中下一个空位置.
-    function push (element) {
+    function push(element) {
       this.dataStore[this.top++] = element;
     }
     // pop实现,返回栈顶元素,同时将top值减1.
-    function pop () {
+    function pop() {
       return this.dataStore[--this.top];
     }
     // peek返回栈顶元素 空栈返回undefined
-    function peek () {
+    function peek() {
       return this.dataStore[this.top - 1];
     }
     // length
-    function length () {
+    function length() {
       return this.top;
     }
     // 将top的值设为0,清空栈
-    function clear () {
+    function clear() {
       this.top = 0;
     }
     // 测试
@@ -55,10 +57,10 @@
     // 3 重复1和2,直到n=0且无余数.
     // 4 持续将栈内元素弹出直至栈空,
     //   依次排列则为进制转换后数字的字符串.
-    function mulBase2 (num2, base2) {
+    function mulBase2(num2, base2) {
       var s2 = new stack();
       do {
-        s2.push (num2 % base2);
+        s2.push(num2 % base2);
         num2 = Math.floor(num2 /= base2);
       } while (num2 > 0);
       var converted2 = "";
@@ -69,8 +71,8 @@
     }
     num2 = 8;
     base2 = 2;
-    newNum2 = mulBase2 (num2, base2);
-    console.log(num2 + " converted2 to base2 "  + base2 + " is " + newNum2);
+    newNum2 = mulBase2(num2, base2);
+    console.log(num2 + " converted2 to base2 " + base2 + " is " + newNum2);
     num2 = 17;
     base2 = 8;
     var newNum2 = mulBase2(num2, base2);
@@ -78,7 +80,7 @@
 
     // 回文:从左往右写和从右往左写一致,ex: dad,racecar,"A man, a plan, a cancal: Panama"，1001.
     // 用栈判断回文,左向右压入栈,全入栈之后,再持续弹出栈内得到新的字符串,与原字符串相反则是一个回文.
-    function isPalindrome3 (word3) {
+    function isPalindrome3(word3) {
       var s3 = new stack();
       for (var i3 = 0; i3 < word3.length; ++i3) {
         s3.push(word3[i3]);
@@ -95,7 +97,7 @@
       }
     }
     var word3 = "abac";
-    if (isPalindrome3 (word3)) {
+    if (isPalindrome3(word3)) {
       console.log(word3 + " is a palindrome.");
     }
     else {
@@ -187,6 +189,49 @@
     console.log(q6.toString6());
     console.log("Front6 of queue: " + q6.front6());
     console.log("Back6 of queue: " + q6.back6());
+
+    // 0-99数字排序,第一次排个位,第二次排十位
+    // function distribute7(nums7, queues7, n7, digit7) {
+    //   for (var i7 = 0; i7 < n7; ++i7) {
+    //     if (digit7 == 1) {
+    //       queues7[nums7[i7] % 10].enqueue7(nums7[i7]);
+    //     }
+    //     else {
+    //       queues7[Math.floor(cums7[i7] / 10)].enqueue7(nums7[i7]);
+    //     }
+    //   }
+    // }
+    // function collect7(queues7, nums7) {
+    //   var i7 = 0;
+    //   for (var digit7 = 0; digit7 < 10; ++digit7) {
+    //     while (!queues[digit7].empty7()) {
+    //       nums[i++] = queues7[digit7].dequeue7();
+    //     }
+    //   }
+    // }
+    // function dispArray7(arr7) {
+    //   for (var i7 = 0; i7 < arr7.length; ++i) {
+    //     putstr(arr7[i7] + " ");
+    //   }
+    // }
+    // 主程序
+    // var queues7 = [];
+    // for (var i7 = 0; i7 < 10; ++i7) {
+    //   queues7[i7] = new Queue7();
+    // }
+    // var nums7 = [];
+    // for (var i7 = 0; i7 < 10; ++i7) {
+    //   nums7[i7] = Math.floor(Math.floor(Math.random() * 101));
+    // }
+    // console.log("Before radix sort: ");
+    // disArray7(nums7);
+    // distribute7(nums7, queues7, 10, 1);
+    // collect7(queues7, nums7);
+    // distribute7(nums7, queues7, 10, 10);
+    // collect7(queues7, nums7);
+    // console.log("After7 radix7 sort: ");
+    // dispArray7(nums7);
   </script>
 </body>
+
 </html>

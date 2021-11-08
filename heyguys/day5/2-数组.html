@@ -24,31 +24,6 @@
       nums6[i6] = i6 + 1;
     }
     console.log(nums6);
-
-    // 0-99数字排序,第一次排个位,第二次排十位
-    function distribute7(nums7, queues7, n7, digit7) {
-      for (var i7 = 0; i7 < n7; ++i7) {
-        if (digit7 == 1) {
-          queues7[nums7[i7]%10].enqueue7(nums7[i7]);
-        }
-        else {
-          queues7[Math.floor(cums7[i7] / 10)].enqueue7(nums7[i7]);
-        }
-      }
-    }
-    function collect7(queues7, nums7) {
-      var i7 = 0;
-      for (var digit7 = 0; digit7 < 10; ++digit7) {
-        while (!queues[digit7].empty7()) {
-          nums[i++] = queues7[digit7].dequeue7();
-        }
-      }
-    }
-    function dispArray7(arr7) {
-      for (var i7 = 0; i7 < arr7.length; ++i) {
-        putstr(arr7[i7] + " ");
-      }
-    }
   </script>
 </body>
 </html>

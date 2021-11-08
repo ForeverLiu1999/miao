@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Node1 (element1) {
+      this.element1 = element1;
+      this.next = null;
+    }
+    function LList1() {
+      this.head1 = new Node1("head1");
+      this.find1 = find1;
+      this.insert1 = insert1;
+      this.display1 = display1;
+    }
+    function find1 (item1) {
+      var currNode1 = this.head1;
+      while (currNode1.element1 != item1) {
+        currNode1 = currNode1.next;
+      }
+      return currNode1;
+    }
+    function insert1 (newElement1, item1) {
+      var newNode1 = new Node1(newElement1);
+      var current1=  this.find1(item1);
+      newNode1.next = current1.next;
+      current1.next = newNode1;
+    }
+    function display1() {
+      var currNode1 = this.head1;
+      while(!(currNode.next == null)) {
+        console.log(currNode1.next.element1);
+        currNode1 = currNode1.next;
+      }
+    }
+    var cities1 = new LList1();
+    cities1.insert1("Counway", "head");
+    cities.inert("Russellville", "Conway");
+    cities.insert1("Alma", "Russellville");
+    cities1.display1();
+    // 链表.html:23 Uncaught TypeError: Cannot read properties of null (reading 'element1')
+    // at LList1.find1 (链表.html:23)
+    // at LList1.insert1 (链表.html:30)
+    // at 链表.html:42
+  </script>
+</body>
+</html>
