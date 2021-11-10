@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const person = new Map();
+    person.set("name", "ForeverLiu");
+    person.set("age", 22);
+    person.set("hobby", ["手冲", "开导", "打胶"]);
+    console.log(person);
+    var a = person.get("name");
+    console.log(a);
+    var b = person.get("hobby");
+    console.log(b);
+    var c = person.size;
+    console.log(c);
+    var d = person.has("age");
+    console.log(d);
+    person.set("age", 23);
+    console.log(person);
+    person.delete("age");
+    console.log(person);
+
+  </script>
+</body>
+</html>

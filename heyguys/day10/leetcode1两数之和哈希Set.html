@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 时间复杂度: O(n)
+    // 空间复杂度: O(n)
+    // 空间换时间
+    var twoSum = function (nums, target) {
+      const map = new Map()
+      nums.forEach((num, i) => map.set(num, i))
+      for (let i = 0; i < nums.lenth; i++) {
+        const x = nums[i];
+        if (map.has(target - x)) {
+          const index = map.get(target - x)
+          if (i != index) return [i, index]
+        }
+      }
+      return []
+    }
+    console.log(twoSum([1, 2, 3, 4], 5));
+  </script>
+</body>
+</html>
