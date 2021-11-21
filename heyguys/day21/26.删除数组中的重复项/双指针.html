@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 相等元素的数组下标一定连续
+    var removeDuplicates = function(nums) {
+      const n = nums.length;
+      if (n === 0) {
+        return 0;
+      }
+      // 如果数组长度为0,说明无任何元素,直接返回0
+      let fast = 1, slow = 1;
+      // 快指针遍历到达的下标位置,慢指针表示下一个不同元素要填入的下标位置
+      while (fast < n) {
+        if (nums[fast] != nums[fast - 1]) {
+          // 如果nums[fast] != nums[fast - 1]说明和之前元素不同
+          nums[slow] = nums[fast];
+          // 将nums[fast]复制到nums[slow]
+          ++slow;
+          // 然后取下一个位置
+        }
+        ++fast;
+      }
+      return slow;
+    }
+    let a = removeDuplicates([1,1,2]);
+    console.log(a);
+
+  </script>
+</body>
+</html>
