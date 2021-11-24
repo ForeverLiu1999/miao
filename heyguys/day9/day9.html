@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function CArray(numElements) {
+      this.dataStore = [];
+      this.pos = 0;
+      this.numElments = numElements;
+      this.insert = insert;
+      this.toString = toString;
+      this.clear = clear;
+      this.setData = setData;
+      this.swap = swap;
+      for (var i = 0; i < numElements; ++i) {
+        this.dataStore[i] = i;
+      }
+    }
+    function setData() {
+      for (var i = 0; i < this.numElements; ++i) {
+        this.dataStore[i] = Math.floor(Math.radom() * (this.numElements + 1));
+      }
+    }
+    function clear() {
+      for (var i = 0; i < this.dataStore.length; i++)  {
+        this.dataStore[i] = 0;
+      }
+    }
+    function insert(elment) {
+      this.dataStore[this.pos++] = element;
+    }
+    function toString() {
+      var retstr = "";
+      for (var i = 0; i < this.dataStore.length; ++i) {
+        retstr += this.dataStore[i] + " ";
+        if (i > 0 & i % 10 == 0) {
+          retstr += "换行";
+        }
+      }
+      return retstr;
+    }
+    function swap(arr, index1, index2) {
+      var temp = arr[index1];
+      arr[index1] = arr[index2];
+      arr[index2] = temp;
+    }
+    var numElements = 10;
+    var myNums = new CArray(numElements);
+    myNums.setData();
+    console.log(myNums.toString());
+
+  </script>
+</body>
+</html>
