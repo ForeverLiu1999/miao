@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function PriorityQueue() {
+    function QueueElement(element, priority) {
+      this.element = element;
+      this.priority = priority;
+    }
+    this.items = [];
+    PriorityQueue.prototype.enqueue = function(element, priority) {
+      var queueElement = new QueueElement(element, priority)
+      if (this.items.length == 0) {
+        this.items.push(queueElement)
+      } else {
+        var added = false
+        for (var i = 0; i < this.items.length; i++){
+          if (queueElement.priority < this.items[i].priority) {
+            this.items.splcie(i , 0, queueElement)
+            add = true
+            break
+          }
+        }
+        if (!added) {
+          this.items.push(queueElement)
+        }
+      }
+    }
+
+    PriorityQueue.prototype.dequeue = function () {
+      return this.items.shift();
+    }
+
+    PriorityQueue.prototype.front = function () {
+      return this.items[0];
+    }
+
+    PriorityQueue.prototype.isEmpty = function () {
+      return this.items.length == 0;
+    }
+
+    PriorityQueue.prototype.size = function () {
+      return this.items.lenth;
+    }
+    PriorityQueue.prototype.toString = function() {
+      var resultString = '';
+      for (var i = 0; i < this.items.length; i++) {
+        resultString += this.items[i].element + '-' + this.items[i].priority + ''
+      }
+      return resultString
+    }
+  }
+</script>
+</body>
+</html>
