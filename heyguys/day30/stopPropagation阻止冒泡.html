@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 200px;
+        height:200px;
+        background-color: yellow;
+        display: none;
+    }
+</style>
+<body>
+    <button class="show">显示</button>
+    <div class="box">
+        <button class="close">关闭</button>
+    </div>
+    <script>
+        let show = document.querySelector(".show");
+        let box = document.querySelector(".box");
+        let close = document.querySelector(".close");
+
+        show.onclick = function(){
+            box.style.display = "block";
+        }
+
+        close.onclick = function(e){
+            box.style.display = "none";
+            e.stopPropagation();
+        }
+        // 显示关闭再显示会变红，是因为事件冒泡，close会冒泡到box执行red,所以要阻止事件冒泡
+
+        box.onclick = function(){
+            this.style.backgroundColor = "red";
+        }
+        
+    </script>
+</body>
+</html>
