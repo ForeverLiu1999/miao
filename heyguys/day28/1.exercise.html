@@ -17,18 +17,26 @@
     PriorityQueue.prototype.enqueue = function(element, priority) {
       var queueElement = new QueueElement(element, priority)
       if (this.items.length == 0) {
+        // 说明为空
         this.items.push(queueElement)
+        // 直接push
       } else {
         var added = false
+        // 添加状态
         for (var i = 0; i < this.items.length; i++){
+          // 遍历所有
           if (queueElement.priority < this.items[i].priority) {
+            // 如果要添加的优先级更高
             this.items.splcie(i , 0, queueElement)
+            // 添加
             add = true
+            // 修改添加状态为已添加，跳出循环，不需要执行完所有循环
             break
           }
         }
         if (!added) {
           this.items.push(queueElement)
+          // 如果未添加，把最新创建的添加进去
         }
       }
     }
