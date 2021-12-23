@@ -9,13 +9,14 @@
       digits[i] = 0;
     } else {
       // 其他数字加一就好
-      digits[i] += 1;
+      digits[i] ++;
       return digits;
     }
   }
-  // 当所有位都进位时，长度加一
-  digits = digits.length + 1;
-  // 而且说明首位为一
-  digits[0] = 1;
+  // // 当所有位都进位时，长度加一
+  // digits = digits.length + 1;
+  // // 而且说明首位为一
+  // digits[0] = 1;
+  digits.splice(0, 0, 1);
   return digits;
 };
