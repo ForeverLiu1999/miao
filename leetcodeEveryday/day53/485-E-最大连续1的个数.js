@@ -16,4 +16,21 @@
   }
   return result;
 };
+
+// var findMaxConsecutiveOnes = function(nums) {
+//   let max = 0;
+//   var c = 0;
+//   for (var i = 0; i < nums.length; i++) {
+//     if (nums[i] == 1) {
+//       c++;
+//       if (c > max) {
+//         max = c;
+//       }
+//     } else {
+//       c = 0;
+//     }
+//   }
+//   return max;
+// };
+
 findMaxConsecutiveOnes([1, 1, 0, 1, 1, 1]);
