@@ -2,6 +2,7 @@
  * @param {number} num
  * @return {boolean}
  */
+//  4的幂结尾都是4或6 4 16 64 256
  function isNotFour(num) {
   const remain = num % 10;
   if (remain === 4 || remain === 6) {
