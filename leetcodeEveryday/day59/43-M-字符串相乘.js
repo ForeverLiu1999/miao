@@ -3,10 +3,24 @@
  * @param {string} num2
  * @return {string}
  */
- var multiply = function(num1, num2) {
-  let a = Number(num1);
-  let b = Number(num2);
-  let c = a * b;
-  let d = c + "";
-  return d;
+
+// 0乘以任何数都是0
+// 各位取余，十位取整，用0|效率更高
+
+var multiply = function(num1, num2) {
+  if (num1 === '0' || num2 === '0') {
+    return '0';
+  }
+  var l1 = num1.length, l2 = num2.length, p = new Array(l1 + l2).fill(0);
+  for (var i =l1; i--;) {
+    for (var j = l2; j--;) {
+      var tmp = num1[i] * num2[j]+ p[i + j + 1];
+      p[i + j + 1] = tmp % 10;
+      p[i + j] += 0 | tmp / 10;
+    }
+  }
+  while(p[0] === 0) {
+    p.shift();
+  }
+  return p.join("");
 };
