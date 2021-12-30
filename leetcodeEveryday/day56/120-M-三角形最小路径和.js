@@ -12,7 +12,7 @@
   const dp = new Array(h);
   for (let i = 0; i < h; i++) {
     // 第0层就是triangle[0]的长度
-    dp[i] = new Array(tringle[i].length);
+    dp[i] = new Array(triangle[i].length);
   }
   // 自底向上遍历，i从h-1层遍历，每次结束减1
   for (let i = h - 1; i >= 0; i--) {
@@ -23,7 +23,7 @@
         dp[i][j] = triangle[i][j];
       } else { // 状态转移，上一层由他下面一层计算出
         dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
-      }想
+      }
     }
   }
   return dp[0][0];
