@@ -18,6 +18,7 @@
 // 聪明逼写法
 var firstUniqChar = function(s) {
   for (let i = 0; i < s.length; i++) {
+    // 如果第一个值等于最后一个值说明只有一个值
       if (s.indexOf(s[i]) === s.lastIndexOf(s[i])) {
           return i
       }
