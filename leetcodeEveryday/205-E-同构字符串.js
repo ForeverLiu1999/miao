@@ -22,3 +22,39 @@
   }
   return true;
 };
+
+// indexOf
+var isIsomorphic = function(s, t) {
+  for (let i = 0; i < s.length; i++)
+      if (s.indexOf(s[i]) !== t.indexOf(t[i])) return false
+  return true
+};
+
+// lastIndexOf
+var isIsomorphic = function(s, t) {
+  for (let i = s.length; i--;)
+      if (s.lastIndexOf(s[i]) !== t.lastIndexOf(t[i])) return false
+  return true
+};
+
+// 哈希索引
+var isIsomorphic = function(s, t) {
+  let S = Object.create(null), T = Object.create(null), i = -1
+  while (i++ < s.length) {
+      const a = s[i], b = t[i]
+      if (S[a] !== T[b]) return false
+      S[a] = i
+      T[b] = i
+  }
+  return true
+}
+var isIsomorphic = function(s, t) {
+  let S = Object.create(null), T = Object.create(null), i = -1
+  while (i++ < s.length) {
+      const a = s[i], b = t[i]
+      if (S[a] && S[a] !== b || T[b] && T[b] !== a) return false
+      S[a] = b
+      T[b] = a
+  }
+  return true
+}
