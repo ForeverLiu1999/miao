@@ -22,3 +22,24 @@
   return Array.from(map.values());
 };
 // debugger;groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]);
+
+// 算数基本定理，任何一个大于1的自然数N，如果不为质数，那么N可以唯一分解成有限个质数的乘积，
+// [a,z]Unicode编码 - 97 = [0, 25]对应26个质数
+// 每字母代表指数的乘积表示字符串
+// 乘法交换律忽略字母顺序，算数基本定理保证不通知书或相同质数不同个数，乘积唯一
+
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+
+var groupAnagrams = function (strs) {
+  var h = new Map, prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101];
+  for (var i = 0; i < strs.length; i++) {
+    for (var j = 0, sum = 1; j < strs[i].length; j++) {
+      sum *= prime[strs[i].charCodeAt(j) - 97];
+    }
+    h.has(sum) ? h.get(sum).push(strs[i]) : h.set(sum, [strs[i]]);
+  }
+  return Array.from(h.values());
+}
