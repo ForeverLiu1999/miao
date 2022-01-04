@@ -13,3 +13,15 @@ var containsDuplicate = function(nums) {
   }
   return false;
 };
+
+// 遍历数组中每个元素插入哈希表中，插入时判断哈希表内是否已存在相同元素
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (const x of nums) {
+    if (set.has(x)) {
+      return true;
+    }
+    set.add(x);
+  }
+  return false;
+}
