@@ -53,3 +53,21 @@ var reverseList = function (head) {
   head.next = null;
   return p;
 }
+
+var reverseList = function (head) {
+  if (!head || !head.next) {
+    return head;
+  }
+  var a = null;
+  var b = null;
+  var c = head;
+  while (c) {
+    a = b;
+    b = c;
+    c = c.next;
+    b.next = a;
+  }
+  return b;
+}
+
+
