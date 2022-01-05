@@ -32,3 +32,40 @@
   slow.next = slow.next.next;
   return dummy.next;
 };
+
+// 两种暴力数组
+// 第一种
+// 转换为纯数组，删除倒数第N个数，再转成链表
+var removeNthFromEnd = function (head, n) {
+  let newArr = [];
+  let dummy = new ListNode();
+  let newList = dummy;
+  while (head) {
+    newArr.push(head.val);
+    head = head.next;
+  }
+  newArr.splice (newArr.length - n, 1);
+  for (let i = 0; i < newArr.length; i++) {
+    newList.next = new ListNode(newArr[i]);
+    newList = newList.next;
+  }
+  return dummy.next;
+}
+
+// 第二种
+// 将链表存入数组，此次存放的是节点依次的头节点
+// 将数组倒数第N个元素中的前后节点相连就删除掉了这个节点
+var removeNthFromEnd = function (head, n) {
+  // 哑结点基本操作
+  const dummy = new ListNode(0, head);
+  const newArr = new Array();
+  let pushList = dummy;
+  while (pushList != null) {
+    newArr.push(pushList);
+    pushList = pushList.next;
+  }
+  // 可以补充n = newArr.length的情况,直接返回head.next
+  newArr[newArr.length - n - 1].next = newArr[newArr.length - n - 1].next.next;
+  return dummy.next;
+}
+
