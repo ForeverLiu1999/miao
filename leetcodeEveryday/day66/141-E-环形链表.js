@@ -22,3 +22,19 @@
   }
   return false;
 };
+
+var hasCycle = function (head) {
+  if (!head) {
+    return false;
+  }
+  var p = head;
+  var q = head;
+  while (p && q && q.next) {
+    p = p.next;
+    q = q.next.next;
+    if (p == q) {
+      return true;
+    }
+  }
+  return false;
+}
