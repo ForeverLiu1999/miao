@@ -87,3 +87,8 @@ var removeNthFromEnd = function (head, n) {
   return dummy.next;
 }
 
+var deleteNode = function (node) {
+  node.val = node.next.val;
+  node.next = node.next.next;
+}
+
