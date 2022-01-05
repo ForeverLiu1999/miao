@@ -69,3 +69,21 @@ var removeNthFromEnd = function (head, n) {
   return dummy.next;
 }
 
+// 栈
+// 将链表依次存入stack栈，再将栈后N个元素弹出，暴露出链表倒数第N个数的前一个节点，将其与倒数第N个数的后一个节点相连
+var removeNthFromEnd = function (head, n) {
+  const dummy = new ListNode(0, head);
+  const stack = new Array();
+  let pushList = dummy;
+  while (pushList != null) {
+    stack.push(pushList);
+    pushList = pushList.next;
+  }
+  for (let i = 0; i < n; i++) {
+    stack.pop();
+  }
+  let peek = stack[stack.length - 1];
+  peek.next = peek.next.next;
+  return dummy.next;
+}
+
