@@ -20,3 +20,48 @@
   a.next = swapPairs(c);
   return b;
 };
+
+var swapPairs = function (head) {
+  if (!head || !head.next) {
+    return head;
+  }
+  var dummy = new ListNode(0, head);
+  var a = dummy;
+  var b = head;
+  var c = head.next;
+  while (c) {
+    b.next = c.next;
+    c.next = b;
+    a.next = c;
+
+    a = b;
+    b = b.next;
+    c = b?.next;
+  }
+  return dummy.next;
+}
+
+var swapPairs = function (head) {
+  if (!head || !head.next) {
+    return head;
+  }
+  var dummy = new ListNode(0, head);
+  var a = dummy;
+  var b = head;
+  var c = head.next;
+  while (c) {
+    b.next = c.next;
+    c.next = b;
+    a.next = c;
+
+    a = b;
+    b = b.next;
+    if (b == null) {
+      break;
+    }
+    c = b.next;
+  }
+  return dummy.next;
+}
+
+
