@@ -70,4 +70,19 @@ var reverseList = function (head) {
   return b;
 }
 
-
+var reverseList = function (head) {
+  if (!head || !head.next) {
+    return head;
+  }
+  var nodes = [];
+  while (head) {
+    nodes.push(head);
+    head = head.next;
+  }
+  nodes.reverse();
+  for (var i = 0; i < nodeslength - 1; i++) {
+    nodes[i].next = nodes[i + 1];
+  }
+  nodes[i].next = null;
+  return nodes[0];
+}
