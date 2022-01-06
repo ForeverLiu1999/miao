@@ -30,3 +30,22 @@
   p.next = list1 || list2;
   return dummy.next;
 };
+
+// 递归写法
+var mergeTwoLists = function (list1, list2) {
+  // 递归结束限制
+  if (!list1) {
+    return list1;
+  }
+  if (!list2) {
+    return list2;
+  }
+  // 取两个链表中头节点小的那个链表的头节点,作为新的头节点指向剩下两链表的合并结果
+  if (list1.val < list2.val) {
+    list1.next = mergeTwoLists(list1.next, list2);
+    return list1;
+  } else {
+    list2.next = mergeTwoLists(list2, list2.next);
+    return list2;
+  }
+}
