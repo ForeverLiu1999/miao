@@ -16,7 +16,7 @@
   var p = dummy;
   // while循环条件就是list1和list2不为空
   while (list1 && list2) {
-    // 娇小的节点取出来连到p上
+    // 较小的节点取出来连到p上
     if (list1.val < list2.val) {
       p.next = list1;
       list1 = list1.next;
