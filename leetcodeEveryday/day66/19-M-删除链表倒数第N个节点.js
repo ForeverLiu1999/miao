@@ -52,6 +52,7 @@ var removeNthFromEnd = function (head, n) {
   return dummy.next;
 }
 
+// 两种暴力数组
 // 第二种
 // 将链表存入数组，此次存放的是节点依次的头节点
 // 将数组倒数第N个元素中的前后节点相连就删除掉了这个节点
