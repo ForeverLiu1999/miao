@@ -11,7 +11,7 @@
  * @return {ListNode}
  */
 
-// 双指针
+// 优雅双指针
 // 添加哑节点就可以不用去单独对头结点进行特殊的判断了
 // 所以从哑结点开始遍历到L-N+1时,下一个节点就是需要删除的节点
  var removeNthFromEnd = function(head, n) {
@@ -92,4 +92,5 @@ var deleteNode = function (node) {
   node.val = node.next.val;
   node.next = node.next.next;
 }
+
 
