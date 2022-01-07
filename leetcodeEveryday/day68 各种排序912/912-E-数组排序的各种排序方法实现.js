@@ -44,3 +44,17 @@ var sortArray = function(nums) {
   }
   return nums;
 };
+
+// 插入排序
+var sortArray = function(nums) {
+  for (let i = 1; i < nums.length; i++) {
+      let temp = nums[i];
+      let j = i - 1;
+      for (; j >= 0; j--) {
+          if (temp >= nums[j]) break;
+          nums[j + 1] = nums[j]
+      }
+      nums[j + 1] = temp;
+  }
+  return nums;
+};
