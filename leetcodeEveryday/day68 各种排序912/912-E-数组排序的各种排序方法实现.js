@@ -85,3 +85,38 @@ function partition (nums, left, right) {
   [nums[leftIndex], nums[pivot]] = [nums[pivot], nums[leftIndex]];
   return leftIndex;
 }
+
+// 归并排序
+var sortArray = function(nums) {
+  return mergeSort(nums, 0, nums.length - 1)
+};
+
+function mergeSort(nums, left, right) {
+  if (left >= right) return nums;
+  let mid = (left + right) >> 1;
+  mergeSort(nums, left, mid)
+  mergeSort(nums, mid + 1, right)
+  return merge(nums, left, mid, right)
+}
+
+function merge(nums, left, mid, right) {
+  let ans = [];
+  let c = 0, i = left, j = mid + 1;
+  while (i <= mid && j <= right) {
+      if (nums[i] < nums[j]) {
+          ans[c++] = nums[i++];
+      } else {
+          ans[c++] = nums[j++]
+      }
+  }
+  while (i <= mid) {
+      ans[c++] = nums[i++];
+  }
+  while (j <= right) {
+      ans[c++] = nums[j++];
+  }
+  for (let i = 0; i < ans.length; i++) {
+      nums[i + left] = ans[i];
+  }
+  return nums;
+}
