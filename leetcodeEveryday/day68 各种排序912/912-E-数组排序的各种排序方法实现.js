@@ -73,19 +73,37 @@ function quickSort(nums, left, right) {
 }
 
 // 快速排序
-function partition (nums, left, right) {
-  let pivot = right;
-  let leftIndex = left;
-  for (let i = left; i < right; i++) {
-      if (nums[i] < nums[pivot]) {
-          [nums[leftIndex], nums[i]] = [nums[i], nums[leftIndex]];
-          leftIndex++;
-      }
+var sortArray = function(nums) {
+  quick(nums, 0, nums.length - 1)
+  return nums
+};
+
+function quick (list, left, right) {
+  let index = 0
+  if (list.length > 1){
+    index = partition(list, left, right)             // 帮助我们将子数组分离为较小值数组和较大值数组
+    left < index - 1 && quick(list, left, index - 1)
+    index < right && quick(list, index, right)
   }
-  [nums[leftIndex], nums[pivot]] = [nums[pivot], nums[leftIndex]];
-  return leftIndex;
 }
 
+function partition(list, left, right){
+  let mid = list[(right + left) >> 1]
+  while (left <= right) {
+    while (list[left] < mid) {
+      left++
+    }
+    while (list[right] > mid) {
+      right--
+    }
+    if (left <= right) {
+      [list[left], list[right]] = [list[right], list[left]]
+      left++
+      right--
+    }
+  }
+  return left;
+}
 // 归并排序
 var sortArray = function(nums) {
   return mergeSort(nums, 0, nums.length - 1)
@@ -119,4 +137,38 @@ function merge(nums, left, mid, right) {
       nums[i + left] = ans[i];
   }
   return nums;
+}
+
+// 归并排序
+var sortArray = function(nums) {
+  return splitList(nums)
+};
+// 拆分数组
+function splitList (list) {
+  let len = list.length
+  if(len === 1) return list
+  let mid = len >> 1
+  let left = list.slice(0, mid)
+  let right = list.slice(mid)
+  return mergeList(splitList(left), splitList(right))
+}
+// 合并, 排序数组
+function mergeList (left, right) {
+  let res = []
+  let il = 0, lenl = left.length
+  let ir = 0, lenr = right.length
+  while(il < lenl && ir < lenr){
+    if(left[il] < right[ir]){
+      res.push(left[il++])
+    } else {
+      res.push(right[ir++])
+    }
+  }
+  while(il < lenl){
+    res.push(left[il++])
+  }
+  while(ir < lenr){
+    res.push(right[ir++])
+  }
+  return res
 }
