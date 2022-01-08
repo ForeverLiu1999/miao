@@ -253,3 +253,42 @@ function selectSort (ary) {
   }
   return ary;
 }
+
+// 归并排序
+/**
+ * 时间复杂度：n*log(n)
+ * 空间复杂度：n + log(n)
+ */
+ function mergeSort(ary) {
+  if (ary.length < 2) {
+    return ary
+  }
+  // 把数组一分为二
+  var mid = Math.floor(ary.length / 2)
+  var left = ary.slice(0, mid)
+  var right = ary.slice(mid)
+  // 左边排
+  mergeSort(left)
+  // 右边排
+  mergeSort(right)
+  // 合起来
+  var i = 0 // 指向left数组
+  var j = 0 // 指向right数组
+  var k = 0 // 指向结果数组
+  if (left.at(-1) > right.at(0)) {
+    while (i < left.length && j < right.length) {
+      if (left[i] < right[j]) {
+        ary[k++] = left[i++]
+      } else {
+        ary[k++] = right[j++]
+      }
+    }
+  }
+  while (i < left.length) {
+    ary[k++] = left[i++]
+  }
+  while (j < right.length) {
+    ary[k++] = right[j++]
+  }
+  return ary
+}
