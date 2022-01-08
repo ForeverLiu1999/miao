@@ -151,7 +151,22 @@
 
 // 生成n个由n以内的整数组成的随机数组
 function randomAry (n) {
+  var ary = [];
+  for (var i = 0; i < n; i++) {
+    var rand = Math.random();
+    ary.push(Math.floor(rand * n));
+  }
+  return ary;
+}
 
+// 判断一个数组是否升序排列
+function siSorted (ary) {
+  for (let i = 0; i < ary.length; i++) {
+    if (ary[i] < ary[i - 1]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 // sort排序 从小到大a-b，从大到小a+b
@@ -195,3 +210,4 @@ function insertSort (ary) {
   }
   return ary;
 }
+
