@@ -31,7 +31,7 @@
   return true;
 };
 
-//   // 定义一个函数用来反转链表
+// 定义一个函数用来反转链表
 const reverseList = (head) => {
   let prev = null;
   let curr = head;
@@ -43,7 +43,7 @@ const reverseList = (head) => {
   }
   return prev;
 }
-
+// 快指针一次两步，慢指针一次一步，当快指针在链表末尾时，慢指针在链表中间，所以慢指针把链表分成两部分
 const endOfFirstHalf = (head) => {
   let fast = head;
   let slow = head;
