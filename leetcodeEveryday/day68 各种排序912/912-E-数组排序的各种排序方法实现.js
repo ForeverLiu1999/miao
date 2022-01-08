@@ -169,6 +169,14 @@ function siSorted (ary) {
   return true;
 }
 
+// 交换数组第i和第j项
+function swap (ary, i, j) {
+  t = ary[i];
+  ary[i] = ary[j];
+  ary[j] = t;
+
+}
+
 // sort排序 从小到大a-b，从大到小a+b
 var sortArray = function(nums) {
   return nums.sort((a, b) => a - b);
@@ -176,6 +184,7 @@ var sortArray = function(nums) {
 
 // 冒泡排序
 // 比较所有相邻的两个项，如果第一个比第二个大就交换位置
+// 写法一
 // 内层循环减i，从内循环减去外循环中跑过的轮数，可以避免内循环中所有不必要的项
 var sortArray = function (nums) {
   // 外层每次循环找出最大的数
@@ -194,6 +203,23 @@ var sortArray = function (nums) {
   }
   return nums;
 }
+// 写法二
+function bubbleSort (ary) {
+  // 遍历交换的结束位置
+  for (var i = ary.length - 2; i >= 0; i--) {
+    var swapped = false;
+    for (var j = 0; j <= i; j++) { // 从0到第i个元素分别跟其右边的元素对比交换
+      if (ary[j] > ary[j + 1]) {
+        swapped = true;
+        swap (ary, j ,j + 1);
+      }
+    }
+    if (!swapped) { // 如果某次遍历没有交换过，说明书组已经有序，结束
+      break;
+    }
+  }
+  return ary;
+}
 
 // 插入排序
 function insertSort (ary) {
@@ -211,3 +237,19 @@ function insertSort (ary) {
   return ary;
 }
 
+// 选择排序
+function selectSort (ary) {
+  for (let i = 0; i < ary.length; i++) {
+    // 找出剩下元素中最小的放入i位置
+    //假设第一项为最小
+    var minIndex = i;
+    for (j = i + 1; j < ary.length - 1; j++) {
+      if (ary[j] < ary[minIndex]) {
+        minIndex = j;
+      }
+    }
+    // 将最小元素放到i位置上，并将i位置原来元素放入minIndex
+    swap (ary, i ,minIndex);
+  }
+  return ary;
+}
