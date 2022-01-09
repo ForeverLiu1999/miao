@@ -62,3 +62,15 @@ var reversePrint = function (head) {
   // 如果为空说明递归执行到了尽头，而且是从后往前拼的
   return head == null ? [] : reversePrint(head.next).concat(head.val);
 }
+// 写法二
+var reversePrint = function (head) {
+  let nums = [];
+  const visitor = function (head) {
+    if (head !== null) {
+      visitor(head.next);
+      nums.push(head.val);
+    }
+  }
+  visitor(head);
+  return nums;
+}
