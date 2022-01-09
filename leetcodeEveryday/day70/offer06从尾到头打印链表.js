@@ -74,3 +74,13 @@ var reversePrint = function (head) {
   visitor(head);
   return nums;
 }
+// 写法三 不创建函数
+var reversePrint = function (head, nums = []) {
+  if (head != null) {
+    if (head.next != null) {
+      reversePrint(head.next, nums);
+    }
+    nums.push(head.val);
+  }
+  return nums;
+}
