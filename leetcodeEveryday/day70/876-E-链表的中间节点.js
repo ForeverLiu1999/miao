@@ -45,3 +45,18 @@ var middleNode = function (head) {
   }
   return cur;
 }
+
+// 双指针优化单指针
+// 时间复杂度O(N)
+// 空间复杂度O(1)
+var middleNode = function (head) {
+  // 快慢指针都从头开始
+  slow = fast = head;
+  // 因为fast走得快，所以只判断fast.存在且fast.next存在，就还没遍历完
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  // slow只走了一半，所以正好是中点
+  return slow;
+}
