@@ -11,6 +11,9 @@
  * @param {number} right
  * @return {ListNode}
  */
+// 方法一切断反转再拼回去
+// 时间复杂度O(n)
+// 空间复杂度O(1)
  var reverseBetween = function(head, left, right) {
   // 因为头节点可能被波及，所以使用dummy哑结点以防万一
   const dummyNode = new ListNode(-1);
@@ -50,3 +53,5 @@ var reverseList = function(head) {
   }
   return prev;
 };
+
+// 方法二
