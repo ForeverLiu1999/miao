@@ -52,3 +52,33 @@ var partition = function(head, x) {
   // 返回虚拟节点pA的next就是新链表
   return pA.next;
 };
+
+var partition = function (head, x) {
+  // 创建数组a和b
+  let a = [], b = [], i = 0;
+  // 当head存在
+  while (head) {
+    // 小于x放入数组a
+    if (head.val < x) {
+      a.push(head);
+      head = head.next;
+      // 大于x放入数组b1
+    } else if (head.val >= x) {
+      b.push(head);
+      head = head.next;
+    }
+  }
+  // 如果a没东西，说明都在b1111111111111111111111111111111111111111111111111111111111
+  if (a.length === 0) {
+    return b[0] || head;
+  }
+  // a[i - 1].next = a[i]是正常拼接链表节点，或b[0]是指遍历完a之后拼接b
+  while (++i <= a.length) {
+    a[i - 1].next = a[i] || b[0] || null;
+  }
+  // 拼完a拼b同理
+  for (i = 1; i <= b.length; i++) {
+    b[i - 1].next = b[i] || null;
+  }
+  return a[0];
+}
