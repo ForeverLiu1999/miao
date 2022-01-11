@@ -68,7 +68,7 @@ var partition = function (head, x) {
       head = head.next;
     }
   }
-  // 如果a没东西，说明都在b1111111111111111111111111111111111111111111111111111111111
+  // 如果a没东西，说明都在b
   if (a.length === 0) {
     return b[0] || head;
   }
@@ -81,4 +81,33 @@ var partition = function (head, x) {
     b[i - 1].next = b[i] || null;
   }
   return a[0];
+}
+
+// 模拟 力扣官方题解
+// 整两个链表再往里塞节点然后拼接就完事儿了
+var partition = function (head, x) {
+  // small链表按顺序存储所有比x小的节点，large...，并且设smallHead和largeHead分别为两个链表的哑结点
+let small = new ListNode(0);
+const smallHead = small;
+let large = new ListNode(0);
+const largeHead = large;
+// 如此遍历直到head为空，说明遍历结束，所有节点都有去处
+while (head !== null) {
+  // 小的拼到small链表的next
+  if (head.val < x) {
+    small.next = head;
+    small = small.next;
+  } else {
+    // 大的...
+    large.next = head;
+    large = large.next;
+  }
+  head = head.next;
+}
+// 因为large灾后，所以large末尾就是合并后链表的结尾
+large.next= null;
+// 拼接
+small.next = largeHead.next;
+// 返回最初定义的small的哑结点的next
+return smallHead.next;
 }
