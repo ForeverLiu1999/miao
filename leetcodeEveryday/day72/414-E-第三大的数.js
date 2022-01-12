@@ -2,7 +2,9 @@
  * @param {number[]} nums
  * @return {number}
  */
-
+// 排序
+// 时间复杂度O(nlogn),n是nums的长度，排序需要O(nlogn)时间
+// 空间复杂度O(logn),排序需要的栈空间为O(logn)
 var thirdMax = function (nums) {
   // 从大到小排序
   nums.sort((a, b) => b - a);
