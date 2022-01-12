@@ -135,6 +135,7 @@ var foreverliu1999 = {
     var result = '';
     var len = array.length - 1;
     for (var i = 0; i < len; i++) {
+      // 字符串拼接
       result += array[i] + '' + separator;
     }
     return result + array[len] + '';
