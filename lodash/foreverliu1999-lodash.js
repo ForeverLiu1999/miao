@@ -194,16 +194,20 @@ var foreverliu1999 = {
     return result;
   },
 
-  zip: function (...array) { //将多个数组，按顺序重组
-    var result = [];
-    for (var i = 0; i < array[0].length; i++) {
-      var ary = [];
-      for (var j = 0; j < array.length; j++) {
+  // 创建一个分组元素的数组，数组的第一个元素包含所有给定数组的第一个元素，数组的第二个元素包含所有给定数组的第二个元素，以此类推。
+  zip: function (...array) {
+    let result = [];
+    // 外层遍历第几个数组
+    for (let i = 0; i < array[0].length; i++) {
+      let ary = [];
+      // 内层把第i个数组的第j个元素push进ary数组
+      for (let j = 0; j < array.length; j++) {
         ary.push(array[j][i]);
       }
+      // 再把ary数组push进result
       result.push(ary);
     }
     return result;
-  }
+  },
 
 }
