@@ -62,18 +62,12 @@ var foreverliu1999 = {
     return result;
   },
 
-  //dropRightWhile
-  // dropWhile
-
   fill: function (array, value, start = 0, end = array.length) { //将value的值填充到[start,end)数组的这个范围
     for (var i = start; i < end; i++) {
       array[i] = value;
     }
     return array;
   },
-
-  // findIndex
-  // findLastIndex
 
   flatten: function (array) { //将多维数组展开一层
     // reduce初始值为[]
@@ -89,7 +83,8 @@ var foreverliu1999 = {
     }, [])
   },
 
-  flattenDeep: function (array) { //展开多维数组(递归)
+  // 将array递归为一维数组。
+  flattenDeep: function (array) {
     var result = [];
     for (var i = 0; i < array.length; i++) {
       if (Array.isArray(array[i])) {
@@ -100,7 +95,6 @@ var foreverliu1999 = {
     }
     return result;
   },
-
   head: function (array) { //取出数组的第一个元素
     return array[0];
   },
