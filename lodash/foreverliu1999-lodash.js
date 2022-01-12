@@ -76,19 +76,18 @@ var foreverliu1999 = {
   // findLastIndex
 
   flatten: function (array) { //将多维数组展开一层
-    var result = [];
-    for (var i = 0; i < array.length; i++) {
-      if (Array.isArray(array[i])) {
-        for (var j = 0; j < array[i].length; j++) {
-          result.push(array[i][j]);
+    // reduce初始值为[]
+    return array.reduce((prev,item) => {
+      // 如果是数组则遍历取到每一个元素push进去
+      if (Array.isArray(item)) {
+        for (let it of item) {
+          prev.push(it)
         }
-      } else {
-        result.push(array[i]);
-      }
-    }
-    return result;
+        // 如果不是数组就是元素，直接push进去就行了
+      }else prev.push(item)
+      return prev
+    }, [])
   },
-
 
   flattenDeep: function (array) { //展开多维数组(递归)
     var result = [];
