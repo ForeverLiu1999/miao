@@ -102,19 +102,12 @@ var foreverliu1999 = {
     return result;
   },
 
-
-  //flattenDepth
-  // fromPairs
-
   head: function (array) { //取出数组的第一个元素
     return array[0];
   },
 
-
+// 返回首次 value 在数组array中被找到的 索引值
   indexOf: function (array, value, fromIndex = 0) {
-    if (fromIndex < 0) {
-      fromIndex += array.length;
-    }
     for (var i = fromIndex; i < array.length; i++) {
       if (array[i] == value) {
         return i;
