@@ -1,55 +1,65 @@
+// chunk,compact,drop,dropRight,dropRightWhile,dropWhile
+// fill,findIndex,findLastIndex
+// flatten,flattenDeep,flattenDepth
+// fromPairs,head,indexOf,initial,join,last,lastIndexOf,reverse
+// uniq,uniqBy,without
+// zip,countBy,every,filter,find,forEach,groupBy,keyBy,map
+// partition,reduce,reduceRight,reject,sample,shuffle,size,some
+
+// isBoolean,isEmpty,isEqual,
+// isNaN,isNil,isNull,isNumber,
+// toArray
+// ceil,max,maxBy,sumBy,sum,repeat,range,cloneDeep,
 var foreverliu1999 = {
 
   chunk: function (array, num = 1) { //将数组中的元素分成长度为num的组，若不能均分，最后的组都是剩余元素
-    var result = []
+    var result = [];
     while (num) {
-      result.push(array.splice(0, num))
+      result.push(array.splice(0, num));
       if (array.length == 0) {
-        break
+        break;
       }
     }
-    return result
+    return result;
   },
 
   compact: function (array) { //删出所有错误值的数组，false,NaN,0,'',undefined,dalsey
-    var result = []
+    var result = [];
     for (var i = 0; i < array.length; i++) {
       if (Boolean(array[i]) == false) {
-        result.push()
+        result.push();
       } else if (typeof (array[i]) == 'string') {
-        result.push()
+        result.push();
       } else {
-        result.push(array[i])
+        result.push(array[i]);
       }
     }
-    return result
+    return result;
   },
 
   drop: function (array, n = 1) { //从头开始删除数组的n个元素
     if (n > array.length) {
-      return []
+      return [];
     }
 
-    var result = []
+    var result = [];
     for (var i = n; i < array.length; i++) {
-      result.push(array[i])
+      result.push(array[i]);
     }
-    return result
-
-
+    return result;
     // array.slice(0,n)
     // return array
   },
 
   dropRight: function (array, n = 1) { //从末尾开始删除数组的n个元素
     if (n > array.length) {
-      return []
+      return [];
     }
-    var result = []
+    var result = [];
     for (var i = 0; i < array.length - n; i++) {
-      result.push(array[i])
+      result.push(array[i]);
     }
-    return result
+    return result;
   },
 
   //dropRightWhile
@@ -57,39 +67,39 @@ var foreverliu1999 = {
 
   fill: function (array, value, start = 0, end = array.length) { //将value的值填充到[start,end)数组的这个范围
     for (var i = start; i < end; i++) {
-      array[i] = value
+      array[i] = value;
     }
-    return array
+    return array;
   },
 
   // findIndex
   // findLastIndex
 
   flatten: function (array) { //将多维数组展开一层
-    var result = []
+    var result = [];
     for (var i = 0; i < array.length; i++) {
       if (Array.isArray(array[i])) {
         for (var j = 0; j < array[i].length; j++) {
-          result.push(array[i][j])
+          result.push(array[i][j]);
         }
       } else {
-        result.push(array[i])
+        result.push(array[i]);
       }
     }
-    return result
+    return result;
   },
 
 
   flattenDeep: function (array) { //展开多维数组(递归)
-    var result = []
+    var result = [];
     for (var i = 0; i < array.length; i++) {
       if (Array.isArray(array[i])) {
-        result.push(...this.flattenDeep(array[i]))
+        result.push(...this.flattenDeep(array[i]));
       } else {
-        result.push(array[i])
+        result.push(array[i]);
       }
     }
-    return result
+    return result;
   },
 
 
@@ -97,75 +107,75 @@ var foreverliu1999 = {
   // fromPairs
 
   head: function (array) { //取出数组的第一个元素
-    return array[0]
+    return array[0];
   },
 
 
   indexOf: function (array, value, fromIndex = 0) {
     if (fromIndex < 0) {
-      fromIndex += array.length
+      fromIndex += array.length;
     }
     for (var i = fromIndex; i < array.length; i++) {
       if (array[i] == value) {
-        return i
+        return i;
       }
     }
     return -1
   },
 
   initial: function (array) { //取出除数组最后一个元素的数组
-    var result = []
+    var result = [];
     for (var i = 0; i < array.length - 1; i++) {
-      result.push(array[i])
+      result.push(array[i]);
     }
-    return result
+    return result;
   },
 
   join: function (array, separator = ',') { //数组转换成字符串,并用separator中的符号分隔
-    var result = ''
-    var len = array.length - 1
+    var result = '';
+    var len = array.length - 1;
     for (var i = 0; i < len; i++) {
-      result += array[i] + '' + separator
+      result += array[i] + '' + separator;
     }
-    return result + array[len] + ''
+    return result + array[len] + '';
   },
 
 
   last: function (array) { //获取数组最后一个元素
-    return array[array.length - 1]
+    return array[array.length - 1];
   },
 
 
   lastIndexOf: function (array, value, fromIndex = array.length - 1) {
     if (fromIndex < 0) {
-      fromIndex += array.length
+      fromIndex += array.length;
     }
     for (var i = fromIndex; i >= 0; i--) {
       if (array[i] == value) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
 
   reverse: function (array) { //反转数组
-    var result = []
+    var result = [];
     for (var i = array.length - 1; i >= 0; i--) {
-      result.push(array[i])
+      result.push(array[i]);
     }
-    return result
+    return result;
   },
 
   uniq: function (array) { //去除数组中的重复数字
-    var map = {}
-    var result = []
+    var map = {};
+    var result = [];
     for (var i = 0; i < array.length; i++) {
       if (array[i] in map) {
-        map[array[i]]++
+        map[array[i]]++;
       } else {
-        map[array[i]] = 1
-        result.push(array[i])
+        map[array[i]] = 1;
+        result.push(array[i]);
       }
     }
     return result
@@ -174,46 +184,26 @@ var foreverliu1999 = {
   // uniqBy
 
   without: function (array, ...value) { //删出array中与value相同的元素，并返回新的数组
-    var result = []
-
+    var result = [];
     for (var i = 0; i < array.length; i++) {
       if (value.includes(array[i])) {
-        continue
+        continue;
       }
-      result.push(array[i])
+      result.push(array[i]);
     }
-    return result
+    return result;
   },
 
   zip: function (...array) { //将多个数组，按顺序重组
-    var result = []
+    var result = [];
     for (var i = 0; i < array[0].length; i++) {
-      var ary = []
+      var ary = [];
       for (var j = 0; j < array.length; j++) {
-        ary.push(array[j][i])
+        ary.push(array[j][i]);
       }
-      result.push(ary)
+      result.push(ary);
     }
-    return result
+    return result;
   }
 
-  // countBy
-  // every
-  // filter
-  // find
-  // forEach
-  // groupBy
-  // keyBy
-  // map
-  // partition
-  // reduce
-  // reduceRight
-  // reject
-  // sample
-  // shuffle
-  // size
-  // some
-  // isBoolean
-  // isEmpty
-  // isEqual
 }
