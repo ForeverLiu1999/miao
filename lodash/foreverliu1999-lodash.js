@@ -158,16 +158,17 @@ var foreverliu1999 = {
     return -1;
   },
 
-
-  reverse: function (array) { //反转数组
+  //反转数组
+  reverse: function (array) {
     var result = [];
+    // 从后往前遍历，push进result得到反转数组
     for (var i = array.length - 1; i >= 0; i--) {
       result.push(array[i]);
     }
     return result;
   },
 
-// 数组去重
+  // 数组去重
   uniq: function (array) {
     var result = [];
     for (let i of array) {
