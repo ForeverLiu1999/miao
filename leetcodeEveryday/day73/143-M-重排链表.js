@@ -33,7 +33,7 @@
     // 保存防断
     let lNext = left.next;
     let rNext = right.next;
-    // 各剪切出一个节点
+    // 各剪切出一个节点 left.next=>right=>...
     right.next = left.next;
     left.next = right;
     // 各剪切出一个节点然后复原
