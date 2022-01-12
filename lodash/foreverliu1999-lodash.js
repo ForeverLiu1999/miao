@@ -71,14 +71,14 @@ var foreverliu1999 = {
 
   flatten: function (array) { //将多维数组展开一层
     // reduce初始值为[]
-    return array.reduce((prev,item) => {
+    return array.reduce((prev, item) => {
       // 如果是数组则遍历取到每一个元素push进去
       if (Array.isArray(item)) {
         for (let it of item) {
           prev.push(it)
         }
         // 如果不是数组就是元素，直接push进去就行了
-      }else prev.push(item)
+      } else prev.push(item)
       return prev
     }, [])
   },
@@ -99,7 +99,7 @@ var foreverliu1999 = {
     return array[0];
   },
 
-// 返回首次 value 在数组array中被找到的 索引值
+  // 返回首次 value 在数组array中被找到的 索引值
   indexOf: function (array, value, fromIndex = 0) {
     for (var i = fromIndex; i < array.length; i++) {
       if (array[i] == value) {
@@ -117,22 +117,22 @@ var foreverliu1999 = {
     return result;
   },
 
-//数组转换成字符串,并用separator中的符号分隔
-join :function (arr, separator=',') {
-  let res = '';
-  for(let item of arr) {
-    res += '' + item + separator;
-  }
-  // 删除最后一个元素
-  return res.slice(0,-1);
-},
+  //数组转换成字符串,并用separator中的符号分隔
+  join: function (arr, separator = ',') {
+    let res = '';
+    for (let item of arr) {
+      res += '' + item + separator;
+    }
+    // 删除最后一个元素
+    return res.slice(0, -1);
+  },
 
 
   last: function (array) { //获取数组最后一个元素
     return array[array.length - 1];
   },
 
-//
+  //
   lastIndexOf: function (array, value, fromIndex = array.length - 1) {
     // 从后往前遍历找到返回索引
     for (var i = fromIndex; i >= 0; i--) {
@@ -194,5 +194,12 @@ join :function (arr, separator=',') {
     }
     return result;
   },
+
+  // 返回collection（集合）的长度，如果集合是类数组或字符串，返回其 length ；如果集合是对象，返回其可枚举属性的个数。
+  size: function (collection) {
+    return collection.length || Object.keys(collection).length;
+  },
+
+
 
 }
