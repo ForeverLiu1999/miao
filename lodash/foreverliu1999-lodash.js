@@ -167,15 +167,13 @@ var foreverliu1999 = {
     return result;
   },
 
-  uniq: function (array) { //去除数组中的重复数字
-    var map = {};
+// 数组去重
+  uniq: function (array) {
     var result = [];
-    for (var i = 0; i < array.length; i++) {
-      if (array[i] in map) {
-        map[array[i]]++;
-      } else {
-        map[array[i]] = 1;
-        result.push(array[i]);
+    for (let i of array) {
+      // 如果result中不存在i，就push进去
+      if (!result.includes(i)) {
+        result.push(i);
       }
     }
     return result
