@@ -37,6 +37,10 @@ var foreverliu1999 = {
     return result;
   },
 
+  difference: function (array, ...values) {
+
+  },
+
   drop: function (array, n = 1) { //从头开始删除数组的n个元素
     if (n > array.length) {
       return [];
