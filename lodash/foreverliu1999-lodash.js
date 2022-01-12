@@ -183,13 +183,14 @@ var foreverliu1999 = {
 
   // uniqBy
 
-  without: function (array, ...value) { //删出array中与value相同的元素，并返回新的数组
+  // 创建一个数组，其中包含array中与value值不相同的所有元素
+  without: function (array, ...value) {
     var result = [];
     for (var i = 0; i < array.length; i++) {
-      if (value.includes(array[i])) {
-        continue;
+      // 把不包含的push进result
+      if (!value.includes(array[i])) {
+        result.push(array[i]);
       }
-      result.push(array[i]);
     }
     return result;
   },
