@@ -131,15 +131,15 @@ var foreverliu1999 = {
     return result;
   },
 
-  join: function (array, separator = ',') { //数组转换成字符串,并用separator中的符号分隔
-    var result = '';
-    var len = array.length - 1;
-    for (var i = 0; i < len; i++) {
-      // 字符串拼接
-      result += array[i] + '' + separator;
-    }
-    return result + array[len] + '';
-  },
+//数组转换成字符串,并用separator中的符号分隔
+join :function (arr, separator=',') {
+  let res = '';
+  for(let item of arr) {
+    res += '' + item + separator;
+  }
+  // 删除最后一个元素
+  return res.slice(0,-1);
+},
 
 
   last: function (array) { //获取数组最后一个元素
