@@ -145,11 +145,9 @@ var foreverliu1999 = {
     return array[array.length - 1];
   },
 
-
+//
   lastIndexOf: function (array, value, fromIndex = array.length - 1) {
-    if (fromIndex < 0) {
-      fromIndex += array.length;
-    }
+    // 从后往前遍历找到返回索引
     for (var i = fromIndex; i >= 0; i--) {
       if (array[i] == value) {
         return i;
