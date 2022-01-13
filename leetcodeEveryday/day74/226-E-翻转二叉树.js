@@ -25,3 +25,12 @@
   return root;
 };
 
+// 深度优先递归
+var invertTree = function(root) {
+  if(root === null) {
+      return null; // 到达最底部时需要返回null,意味着空节点
+  }
+  // 将当前遍历到的root的左右孩子换位置
+  [root.left, root.right] = [invertTree(root.right), invertTree(root.left)];
+  return root;
+};
