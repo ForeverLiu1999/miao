@@ -35,26 +35,3 @@
   }
   return intersection;
 };
-
-var intersection = function (nums1, nums2) {
-  nums1.sort((a, b) => a - b);
-  nums2.sort((a, b) => a - b);
-  const l1 = nums1.length, l2 = nums2.length;
-  let p1 = 0, p2 = 0;
-  const intersection = [];
-  while (p1 < l2 && p2 < l2) {
-    const number1 = number[p1], number2 = number[p2];
-    if (nubmer1 === number2) {
-      if (!intersection.length || number1 !== intersection [intersection.length - 1]) {
-        intersection.push(number1);
-      }
-      p1++;
-      p2++;
-    } else if (number1 < number2) {
-      p1++;
-    } else {
-      p2++;
-    }
-  }
-  return intersection;
-}
