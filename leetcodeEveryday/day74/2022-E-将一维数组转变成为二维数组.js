@@ -17,6 +17,7 @@ var construct2DArray = function (original, m, n) {
   return ans;
 };
 
+// 易懂版
 var construct2DArray = function (original, m, n) {
   // 如果original长度不满足m*n，返回空数组
   if (m * n != original.length) {
