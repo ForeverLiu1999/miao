@@ -17,3 +17,17 @@ var construct2DArray = function (original, m, n) {
   return ans;
 };
 
+var construct2DArray = function (original, m, n) {
+  // 如果original长度不满足m*n，返回空数组
+  if (m * n != original.length) {
+    return [];
+  }
+  // 创建m行n列的二维数组
+  const res = new Array(m);
+  for (let i = 0; i < m; i++) {
+    res[i] = new Array(n)
+    for (let j = 0; j < n; j++)
+      res[i][j] = original[i * n + j];
+  }
+  return res;
+};
