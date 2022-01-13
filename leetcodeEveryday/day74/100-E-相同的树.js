@@ -19,7 +19,7 @@
     return true;
   }
   // 一个为null另一个不为null时说明不同，返回false
-  if (p == null || null) {
+  if (p == null || q == null) {
     return false;
   }
   // 两个节点都有值但不相等，返回false
