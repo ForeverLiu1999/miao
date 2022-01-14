@@ -17,20 +17,20 @@
   if (!root) {
     return 0;
   }
-  // 左右子树都为空，说明此处数到此为止，高度为1,而root不为null，所以1是最小值
-  if (!root.left && !root.right) {
-    return 1;
-  }
+  // // 左右子树都为空，说明此处数到此为止，高度为1,而root不为null，所以1是最小值
+  // if (!root.left && !root.right) {
+  //   return 1;
+  // }
+    // 只有左边不存在，返回右边
+    if (!root.left) {
+      return 1 + minDepth(root.right);
+    }
+    // 只有右边不存在，返回左边
+    if (!root.right) {
+      return 1 + minDepth(root.left);
+    }
   // 左右都能走就递归向小的
   if (root.left && root.right) {
     return 1 + Math.min(minDepth(root.left), minDepth(root.right));
-  }
-  // 只有左边不存在，返回右边
-  if (!root.left) {
-    return 1 + minDepth(root.right);
-  }
-  // 只有右边不存在，返回左边
-  if (!root.right) {
-    return 1 + minDepth(root.left);
   }
 };
