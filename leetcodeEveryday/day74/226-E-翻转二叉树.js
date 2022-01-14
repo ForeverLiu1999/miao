@@ -18,7 +18,7 @@ var invertTree = function (root) {
   if (!root) {
     return null;
   }
-  // 将当前遍历到的root的左右孩子换位置
+  // 将当前遍历到的root的左右孩子换位置，不能直接赋值交换，会被覆盖
   const left = invertTree(root.left);
   const right = invertTree(root.right);
   root.left = right;
