@@ -21,11 +21,15 @@
   if (!root.left && !root.right) {
     return 1;
   }
-  // 计算左子树最小深度
+  // 左右都能走就递归向小的
+  if (root.left && root.right) {
+    return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+  }
+  // 只有左边不存在，返回右边
   if (!root.left) {
     return 1 + minDepth(root.right);
   }
-  // 计算右子树最小深度
+  // 只有右边不存在，返回左边
   if (!root.right) {
     return 1 + minDepth(root.left);
   }
