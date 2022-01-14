@@ -32,3 +32,4 @@
 function isSimpleNode (node) {
   return node && node.left === null && node.right === null;
 }
+
