@@ -28,3 +28,25 @@ var inorderTraversal = function(root) {
   inorder(root);
   return res;
 };
+
+// 而迭代显性地创建一个栈
+var inorderTraversal = function(root) {
+  const res = [];
+  // 创建一个栈
+  const stk = [];
+  // 没到底就一直循环
+  while (root || stk.length) {
+
+      while (root) {
+          stk.push(root);
+          // 因为是中序遍历，所以先左左左左...
+          root = root.left;
+      }
+      // 对待每个root都是先push进去，然后弹出再push进去值
+      root = stk.pop();
+      res.push(root.val);
+      // 再右
+      root = root.right;
+  }
+  return res;
+};
