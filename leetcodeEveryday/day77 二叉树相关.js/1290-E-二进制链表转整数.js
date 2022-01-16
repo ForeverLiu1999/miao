@@ -31,3 +31,13 @@
   }
   return parseInt(str, 2)
 };
+
+ var getDecimalValue = function(head) {
+  let node = head;
+  let res = 0;
+  while(node){
+      res = res*2+node.val;
+      node = node.next;
+  }
+  return res;
+};
