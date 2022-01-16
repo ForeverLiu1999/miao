@@ -1,3 +1,13 @@
+function createTreeNode(val) {
+  var node = {
+    left: null,
+    val: val,
+    right: null,
+  }
+  node.__proto__ = null
+  return node
+}
+
 // 将使用顺序数组存放的根节点在rootPos位置的二叉树转换为二叉链表
 function aryToTree(ary, rootPos = 0) {
   if (ary[rootPos] == null) {
@@ -26,27 +36,38 @@ function treeToAry(tree, index = 0, ary = []) {
   return ary;
 }
 
+// 数组转树
 function condensedAryToTree(ary) {
   var nodes = [];
+  if (ary.length == 0) {
+    return null
+  }
+  // 用数组的第一个元素创建根节点并存入节点数组
+  var root = createTreeNode(ary[0]);
+  nodes.push(root);
+  var j = 0;
+
   for (let i = 0; i < ary.length; i++) {
+    var current = node[j++];
     var node;
-    var current = nodes.shift();
 
     if (ary[i] == null) {
       return null;
     } else {
-      let node = condensedAryToTree(ary[i]);
+      let node = createTreeNode(ary[i]);
+      nodes.push(node);
+    }
+    current.left = node;
+
+    i++;
+
+    if (ary[i] == null) {
+      return null;
+    } else {
+      let node = createTreeNode(ary[i]);
       nodes.push(node);
     }
     current.left = node;
   }
-
-  i++;
-  if (ary[i] == null) {
-    return null;
-  } else {
-    let node = condensedAryToTree(ary[i]);
-    nodes.push(node);
-  }
-  current.left = node;
+  return root;
 }
