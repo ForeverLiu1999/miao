@@ -71,3 +71,21 @@ function condensedAryToTree(ary) {
   }
   return root;
 }
+
+function treeCondensedAry(root) {
+  if (root == null) {
+    return [];
+  }
+  var nodes = [root];
+  var result = [];
+  while (nodes.length) {
+    var current = nodes.shift();
+    if (current) {
+      result.push(current.val);
+      nodes.push(current.left, current.right);
+    } else {
+      result.push(null);
+    }
+  }
+  return result;
+}
