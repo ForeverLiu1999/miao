@@ -25,3 +25,28 @@ function treeToAry(tree, index = 0, ary = []) {
   }
   return ary;
 }
+
+function condensedAryToTree(ary) {
+  var nodes = [];
+  for (let i = 0; i < ary.length; i++) {
+    var node;
+    var current = nodes.shift();
+
+    if (ary[i] == null) {
+      return null;
+    } else {
+      let node = condensedAryToTree(ary[i]);
+      nodes.push(node);
+    }
+    current.left = node;
+  }
+
+  i++;
+  if (ary[i] == null) {
+    return null;
+  } else {
+    let node = condensedAryToTree(ary[i]);
+    nodes.push(node);
+  }
+  current.left = node;
+}
