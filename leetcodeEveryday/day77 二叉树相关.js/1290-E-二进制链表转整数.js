@@ -21,23 +21,23 @@
  * @return {number}
  */
 // parseInt方法直接输出
- var getDecimalValue = function(head) {
+var getDecimalValue = function (head) {
   let node = head;
   let str = '';
   // 把链表所有节点的和加起来
-  while(node !== null){
-      str += node.val;
-      node = node.next;
+  while (node !== null) {
+    str += node.val;
+    node = node.next;
   }
   return parseInt(str, 2)
 };
 
- var getDecimalValue = function(head) {
+var getDecimalValue = function (head) {
   let node = head;
   let res = 0;
-  while(node){
-      res = res*2+node.val;
-      node = node.next;
+  while (node) {
+    res = res * 2 + node.val;
+    node = node.next;
   }
   return res;
 };
