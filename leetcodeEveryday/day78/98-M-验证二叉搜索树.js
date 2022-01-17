@@ -39,3 +39,22 @@
   }
   return true;
 };
+
+// 递归解法
+const helper = (root, lower, upper) => {
+  // 根节点存在
+  if (!root) {
+      return true;
+  }
+  // 判断所有节点在(lower,upper)范围内，不满足直接返回false
+  if (root.val <= lower || root.val >= upper) {
+      return false;
+  }
+  // 否则就继续递归判断当前root的左右子树，全满足才说明是
+  // 而递归电泳右子树时，需要把下界lower改为root.val，即调用helper(root.right, root.val, upper)
+  return helper(root.left, lower, root.val) && helper(root.right, root.val, upper);
+}
+var isValidBST = function(root) {
+  // 递归调用入口，上下界均为极限值
+  return helper(root, -Infinity, Infinity);
+};
