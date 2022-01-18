@@ -20,7 +20,7 @@
 // 如果root为空返回空
   if (!root) return null;
 // 如果val=root.val,返回root
-  if (root = root.val) return root;
+  if (val === root.val) return root;
   // 如果val<=root.val,返回左子树
 // 如果val>=root.val,返回右子树
   return searchBST(val < root.val ? root.left : root.right, val);
