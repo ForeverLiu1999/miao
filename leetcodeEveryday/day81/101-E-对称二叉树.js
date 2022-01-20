@@ -1,4 +1,4 @@
-// 101-E-对称二叉树
+// 101-E-对称二叉树 维护队列
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -50,4 +50,80 @@ const isSymmetric = (root) => {
     return true;
   }
   return check(root.left, root.right);
+}
+
+const isSymmetric = (root) => {
+  if (root == null) return true;
+
+  const queue = [];
+  queue.push(root.left, root.right);  // 起初入列两个子树
+
+  while (queue.length) {  // 队列清空就结束，没有节点可入列了
+    const levelSize = queue.length; // 当前层的节点个数
+    for (let i = 0; i < levelSize; i += 2) { // 当前层的节点成对出列
+      const left = queue.shift();
+      const right = queue.shift();  // 出列一对节点
+      if ((left && right == null) || (left == null && right)) { // 一个存在 一个不存在
+        return false;
+      }
+      if (left && right) { // 两个都存在
+        if (left.val != right.val) { // 节点值不同，不对称
+          return false;
+        }
+        queue.push(left.left, right.right); // 推入下一层的一对节点
+        queue.push(left.right, right.left); // 推入下一层的一对节点
+      }
+    }
+  }
+  return true; // bfs结束，始终没有返回false，则返回真
+};
+
+// 维护队列，如果根节点存在，左右子树入列
+// 每次出列一对节点，检查他们是否对称
+// 不对称情况包括，一个null另一个不为null 都存在但root.val不同
+const isSymmetric = (root) => {
+  if (root == null) return true;
+  const queue = [];
+  queue.push(root.left, root.right);  // 起初入列两个子树
+  while (queue.length) {  // 队列清空就结束，没有节点可入列了
+    const levelSize = queue.length; // 当前层的节点个数
+    for (let i = 0; i < levelSize; i += 2) { // 当前层的节点成对出列
+      const left = queue.shift();
+      const right = queue.shift();  // 出列一对节点
+      if ((left && right == null) || (left == null && right)) { // 一个存在 一个不存在
+        return false;
+      }
+      if (left && right) { // 两个都存在
+        if (left.val != right.val) { // 节点值不同，不对称
+          return false;
+        }
+        queue.push(left.left, right.right); // 推入下一层的一对节点
+        queue.push(left.right, right.left); // 推入下一层的一对节点
+      }
+    }
+  }
+  return true; // bfs结束，始终没有返回false，则返回真
+};
+const isSymmetric = (root) => {
+  if (root == null) return true;
+  const queue = [];
+  queue.push(root.left, root.right);
+  while (queue.length) {
+    const levelSize = queue.length;
+    for (let i = 0; i < levelSize; i += 2) {
+      const left = queue.shift();
+      const right = queue.shift();
+      if ((left && right == null) || (left == null && right)) {
+        return false;
+      }
+      if (left && right) {
+        if (left.val != right.val) {
+          return false;
+        }
+        queue.push(left.left, right.right);
+        queue.push(left.right, right.left);
+      }
+    }
+  }
+  return true;
 }
