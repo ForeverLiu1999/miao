@@ -28,7 +28,7 @@ const isSymmetric = (root) => {
     }
     // 一个子树存在一个不存在，肯定不对称
     return false;
-  };
+  }
   // 如果传入的root就是null，对称
   if (root == null) {
     return true;
@@ -36,3 +36,18 @@ const isSymmetric = (root) => {
   // 否则，调用check函数
   return check(root.left, root.right);
 };
+const isSymmetric = (root) => {
+  const check = (left, right) => {
+    if (left == null && right == null) {
+      return true;
+    }
+    if (left && right) {
+      return left.val == right.val && check(left.left, right.right) && check (left.right, right.left);
+    }
+    return false;
+  }
+  if (root == null) {
+    return true;
+  }
+  return check(root.left, root.right);
+}
