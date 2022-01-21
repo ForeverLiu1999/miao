@@ -10,17 +10,6 @@
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode[]} lists
- * @return {ListNode}
- */
 // 暴力转数组
  var mergeKLists = function(lists) {
   //先把所有链表的值放到数组
