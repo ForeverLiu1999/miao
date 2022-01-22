@@ -39,7 +39,7 @@ const binarySearch = (nums, target, lower) => {
 }
 
 var searchRange= function (nums, target) {
-  // 默认ans就是没找到
+  // 默认ans是没找到
   let ans = [-1, -1];
   const leftIdx = binarySearch(nums, target, true);
   const rightIdx = binarySearch(nums, target, false) - 1;
