@@ -26,7 +26,7 @@ const isSymmetric = (root) => {
     if (left && right) {
       return left.val == right.val && check(left.left, right.right) && check(left.right, right.left);
     }
-    // 一个子树存在一个不存在，肯定不对称
+    // 一个子树存在一个不存在，不对称
     return false;
   }
   // 如果传入的root就是null，对称
