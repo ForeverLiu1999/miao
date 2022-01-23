@@ -127,33 +127,3 @@ const isSymmetric = (root) => {
   }
   return true;
 }
-
-// 递归解法
-// 第一步 确认递归函数的参数和返回值
-// 第二步 确认终止条件
-// 第三步 单层递归的逻辑
-var isSymmetric = function(root) {
-  //使用递归遍历左右子树 递归三部曲
-  // 1. 确定递归的参数 root.left root.right和返回值true false
-  const compareNode=function(left,right){
-      //2. 确定终止条件 空的情况
-      // 左空右不空 或 左不空右空
-      if(left===null&&right!==null||left!==null&&right===null){
-          return false;
-          // 都为空
-      }else if(left===null&&right===null){
-          return true;
-          // 值不等
-      }else if(left.val!==right.val){
-          return false;
-      }
-      //3. 确定单层递归逻辑
-      let outSide=compareNode(left.left,right.right);
-      let inSide=compareNode(left.right,right.left);
-      return outSide&&inSide;
-  }
-  if(root===null){
-      return true;
-  }
-  return compareNode(root.left,root.right);
-};
