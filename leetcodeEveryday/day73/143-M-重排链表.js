@@ -16,7 +16,7 @@
   // 创建快慢指针
   let slow = dummy;
   let quick = dummy;
-  // 慢的走一步，快的走两步
+  // 慢的一步，快的两步
   while (quick && quick.next) {
     slow = slow.next;
     quick = quick.next.next;
