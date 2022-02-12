@@ -26,5 +26,5 @@
 // 2反转n到末尾
   s = reverse(s, n, s.length - 1);
 // 3反转整体字符串
-  return reverse(s, 0, length - 1);
+  return reverse(s, 0, s.length - 1);
 };
