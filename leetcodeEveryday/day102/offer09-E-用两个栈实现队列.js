@@ -6,6 +6,7 @@ var CQueue = function () {
 /**
  * @param {number} value
  * @return {void}
+ *
  */
 
 CQueue.prototype.appendTail = function (value) {
