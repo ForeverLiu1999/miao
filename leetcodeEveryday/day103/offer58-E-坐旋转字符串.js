@@ -28,3 +28,16 @@
 // 3反转整体字符串
   return reverse(s, 0, s.length - 1);
 };
+
+var reverseLeftWords = function(s, n) {
+  // 1. 库函数
+  return s.slice(n) + s.slice(0, n)
+
+  // // 2. 分治思想 分为左右两部分 最后想加 时间复杂度O(n) 空间复杂度O(1)
+  // let l = r = ''
+
+  // for (let c of s)
+  //     n-- > 0 ? (r += c): (l += c)
+
+  // return l + r
+};
