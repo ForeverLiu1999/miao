@@ -12,7 +12,18 @@ var minArray = function(numbers) {
           high -= 1;
       }
   }
-  return numbers[0];
+  return numbers[low];
+};
+
+var minArray = function(numbers) {
+  let left = 0, right = numbers.length - 1;
+  while(left < right){
+      let middle = left + ~~((right - left) / 2);
+      if(numbers[middle] > numbers[right]) left = middle + 1;
+      else if(numbers[middle] < numbers[right]) right = middle;
+      else right--;
+  }
+  return numbers[left];
 };
 
 // 暴破【不推荐】
