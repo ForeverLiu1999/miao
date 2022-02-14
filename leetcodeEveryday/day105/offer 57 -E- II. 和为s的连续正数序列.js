@@ -32,21 +32,21 @@ var findContinousSequence = function (target) {
 // 如果target是偶数就是target/2,如果是奇数就是target/2取整加一，
 // 即Math.floor(target/2)+1 或采用二进制取整(target/2 | 0) + 1,再对找到的数组采用滑动窗口模型，
 // 找出答案
-var findContinousSequence = function (target) {
-  let index = target % 2 === 0 ? target / 2 : (target / 2 | 0) + 1;
-  let res = [];
-  let temp = [];
-  let sum = 0;
+var findContinuousSequence = function (target) {
+  let index = target % 2 === 0 ? target / 2 : (target / 2 | 0) + 1
+  let res = []
+  let temp = []
+  let sum = 0
   for (let i = 1; i <= index; i++) {
-    temp.push(i);
-    sum = sum + i;
+    temp.push(i)
+    sum = sum + i
     while (sum > target) {
-      sum -= temp[0];
-      temp.shift();
+      sum -= temp[0]
+      temp.shift()
     }
     if (sum === target) {
-      temp.length >= 2 && res.push([...temp]);
+      temp.length >= 2 && res.push([...temp])
     }
   }
   return res;
-}
+};
