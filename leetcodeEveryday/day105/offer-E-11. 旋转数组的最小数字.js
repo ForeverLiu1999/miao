@@ -12,7 +12,7 @@ var minArray = function(numbers) {
           high -= 1;
       }
   }
-  return numbers[low];
+  return numbers[0];
 };
 
 // 暴破【不推荐】
