@@ -13,3 +13,7 @@
     }
     return result = odd.concat(even);
   };
+
+  var exchange = function (nums) {
+    return nums.sort((a,b) => (b % 2 - a % 2));
+  }
