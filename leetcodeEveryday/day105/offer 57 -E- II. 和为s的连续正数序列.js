@@ -1,31 +1,38 @@
 // offer 57 -E- II. 和为s的连续正数序列
 // 滑动窗口
 // 没有参考物数组，但是可以根据下标
-var findContinousSequence = function (target) {
-  let l = 1, r = 2, sum = 3, res = [];
+/**
+ * @param {number} target
+ * @return {number[][]}
+ */
+var findContinuousSequence = function(target) {
+  let l=1
+  let r=2
+  let sum = 3
+  let res=[]
   // 滑动窗口框架
-  while (l < r) {
-    if (sum === target) {
-    let ans = [];
-    for (let k = 1; k <= r; k++) {
-      ans[k - 1] = k;
-    }
-    res.push(ans);
-    // 等于的情况,继续窗口往右搜索，同时缩小左边的
-    sum = sum - 1;
-    l++;
-    } else if (sum > target) {
-      // 大于的条件,缩小窗口,sum已经加过了
-      sum = sum - 1;
-      l++;
-    } else {
-      // 小于的情况，滑动窗口继续扩大
-      r++;
-      sum = sum + r;
-    }
+  while(l<r){
+      if(sum===target){
+          let ans =[]
+          for(let k=l;k<=r;k++){
+              ans[k-l]=k
+          }
+          res.push(ans)
+          // 等于的情况 我们可以继续窗口往右搜索 同时缩小左边的
+           sum=sum-l
+           l++
+      } else if(sum>target){
+          // 大于的条件 缩小窗口 sum已经加过了
+          sum=sum-l
+          l++
+      } else {
+          // 小于的情况 滑动窗口继续扩大
+          r++
+          sum=sum+r
+      }
   }
-  return res;
-}
+  return res
+};
 
 // 先把数分解9=1+8=2+7=3+6=4+5,按这种，找到可能组成正确结果的数组，
 // 根据数的结构，易知结果可能存在[1,2,3,4,5]中，不难发现数组最后一个数,
