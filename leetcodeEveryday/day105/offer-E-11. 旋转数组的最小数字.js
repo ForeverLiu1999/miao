@@ -35,3 +35,8 @@ function minArray(numbers) {
   }
   return numbers[0];
 }
+
+function minArray (numbers) {
+  let numberMin =  numbers.sort((a, b) => a - b);
+  return numberMin[0];
+}
