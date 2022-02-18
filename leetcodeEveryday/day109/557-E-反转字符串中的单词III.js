@@ -27,3 +27,7 @@ var reverseWords = function (s) {
   // 数组转为字符串
   return ret.join('');
 };
+
+var reverseWords = function (s) {
+  return s.split(' ').map(item => item.split('').reverse().join('').join(' '));
+}
