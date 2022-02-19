@@ -31,3 +31,23 @@ var convert = function (s, numRows) {
   }
   return ans;
 };
+
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+// z型变v型以 V 字型为一个循环, 循环周期为 n = (2 * numRows - 2) （2倍行数 - 头尾2个）。
+// 对于字符串索引值 \color{red}ii，计算 x = i % n 确定在循环周期中的位置。
+// 则行号 \color{blue}yy = min(x, n - x)。
+// https://leetcode-cn.com/problems/zigzag-conversion/solution/ji-jian-jie-fa-by-ijzqardmbd/
+ var convert = function(s, numRows) {
+  if (numRows === 1) return s;
+  const rows = new Array(numRows).fill("");
+  const n = 2 * numRows - 2;
+  for(let i = 0; i < s.length; i++) {
+      const x = i % n;
+      rows[Math.min(x, n - x)] += s[i];
+  }
+  return rows.join("");
+};
