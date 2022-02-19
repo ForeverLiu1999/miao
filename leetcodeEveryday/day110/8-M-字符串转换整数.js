@@ -13,3 +13,10 @@
       return number;
   }
 };
+
+var myAtoi = function(str) {
+  const number = parseInt(str, 10),
+        INT_MAX = 2147483647,
+        INT_MIN = -2147483648;
+  return isNaN(number)? 0 : Math.max(Math.min(number,INT_MAX),INT_MIN);
+};
