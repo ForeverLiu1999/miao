@@ -11,6 +11,7 @@
  * @param {number} val
  * @return {ListNode}
  */
+// 哑结点
  var deleteNode = function(head, val) {
   // 设置哑结点
    let pre = new ListNode(-1);
@@ -28,3 +29,17 @@
   }
   return pre.next;
 };
+
+// 单指针
+var deleteNode = function (head, val) {
+  if (head.val === val) return head.next;
+  let cur = head;
+  while (cur.next) {
+    if (cur.next.val === val) {
+      cur.next = cur.next.next;
+      return head;
+    }
+    cur = cur.next;
+  }
+  return head;
+}
