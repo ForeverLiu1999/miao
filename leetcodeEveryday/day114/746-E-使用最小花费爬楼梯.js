@@ -12,7 +12,7 @@
 // 依次计算 dp 中的每一项的值，最终得到的 dp[n] 即为达到楼层顶部的最小花费。
  var minCostClimbingStairs = function(cost) {
   const n = cost.length;
-  const dp = new Array(n + 1);
+  const dp = new Array(n + 1);1
   dp[0] = dp[1] = 0;
   for (let i = 2; i <= n; i++) {
     dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
