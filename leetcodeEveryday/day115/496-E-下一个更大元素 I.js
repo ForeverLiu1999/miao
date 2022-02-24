@@ -30,6 +30,7 @@
 };
 // 预处理
 // 单调栈+哈希表
+//
 var nextGreaterElement = function(nums1, nums2) {
   const map = new Map();
   const stack = [];
