@@ -29,7 +29,6 @@
   122-65=57，还需加1来存放最后的小写字母z，故数组长度为58
   */
   let charTimeAry = new Array(58).fill(0);
-
   // 遍历字符串
   for(let char of s) {
       /*
@@ -38,10 +37,8 @@
       */
       charTimeAry[char.charCodeAt() - 65] += 1;
   }
-
   // 最大长度
   let maxSize = 0;
-
   // 遍历次数数组
   for(let time of charTimeAry) {
       /*
@@ -53,7 +50,6 @@
       */
       maxSize += parseInt((time / 2), 10) * 2;
   }
-
   // 如果计算出的长度小于字符串长度，则说明必然是奇数长度的回文，故长度需再加一
   return maxSize < s.length ? maxSize + 1 : maxSize;
 };
