@@ -21,3 +21,17 @@ var getRow = function (rowIndex) {
   // 返回第rowIndex行
   return C[rowIndex];
 };
+
+// 优化 因为第i行只用到了第i-1行的元素，所以不用从头再遍历
+var getRow = function (rowIndex) {
+  let pre = [], cur = [];
+  for (let i = 0; i <= rowIndex; ++i) {
+    cur = new Array(rowIndex + 1).fill(0);
+    cur[0] = cur[i] = i;
+    for (let j = 1; j < i; j++) {
+      cur[j] = pre[j - 1] + pre[j];
+    }
+    pre = cur;
+  }
+  return pre;
+}
