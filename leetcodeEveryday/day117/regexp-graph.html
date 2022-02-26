@@ -1,12 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<style>
+  svg {
+    border: 2px solid black;
+  }
+</style>
+Regular Expression:
+<input type="text" id="regInput" oninput="draw()" style="width: 500px;"> <button onclick="draw()">绘制铁路图</button>
 
-</body>
-</html>
+<svg width="5000px" height="5000px"></svg>
+<script>
+  function draw() {
+    var svg = document.querySelector('svg');
+    svg.innerHTML = '';
+    var re = regInput.value;
+    var tree = parseRegularExpressionGraph(tree);
+    svg.setAttribute('width', graph.width + 'px');
+    svg.setAttribute('height', graph.height + 'px');
+  }
+  // var Character = {
+  //     type: 'Character',
+  //     start: 0,
+  //     end: 1,
+  //     raw: 'a',
+  //     value: 'a',
+  //     ascii: 97
+  //   }
+  //   var Character = {
+  //     type: 'Character',
+  //     start: 5,
+  //     end: 7,
+  //     raw: '\\k',
+  //     value: 'k',
+  //     ascii: 97
+  //   }
+
+
+
+  //   var Quantifier = {
+  //     type: 'Quantifier',
+  //     重复的是: {
+  //       type: 'Character',
+  //       value: 'b',
+  //       ascii: 98
+  //     },
+  //     min: 2,
+  //     max: 5,
+  //     greedy: true,
+  //   }
+
+  //   var CharacterRange = {
+  //     type: 'CharacterRange',
+  //     start: {
+  //       type: 'Character',
+  //       value: 'i'
+  //     },
+  //     end: {
+  //       type: 'Character',
+  //       value: 'j'
+  //     }
+  //   }
+  //   var CharacterClass = {
+  //     type: 'CharacterClass',
+  //     revert: true,// 字符集是否取反
+  //     elements: [
+  //       {
+  //         type: 'Character',
+  //         value: 's',
+  //       },
+  //       {
+  //         type: 'Character',
+  //         value: 'o',
+  //       },
+  //       CharacterRange
+  //     ]
+  //   }
+
+  //   var CharacterEscape = {
+  //     type: 'CharacterEscape',
+  //     value: '\\d',
+
+  //   }
+
+
+  //   var CaptureGroup = {
+  //     type: 'CaptureGroup',
+  //     start: 4,
+  //     end: 17,
+  //     raw: '(?<!ow|e|aa+b)',
+  //     branchs: [
+  //       {
+  //         type: 'Branch',
+  //         elements: ['o', 'w']
+  //       },
+  //       {
+  //         type: 'Branch',
+  //         elements: ['e'],
+  //       },
+  //       {
+  //         type: 'Branch',
+  //         elements: ['a', 'a+', 'b']
+  //       },
+  //     ],
+  //     isAssertion: true,
+  //     lookahead: false,
+  //     positive: false,
+  //     name: 'owijef',
+  //     index: 1,
+  //   }
+
+  var str = '[a-d\\d]\\d\\n\\w\\S(foo|bar)(?:foo)|((?<=foo)|(?<!foo)(?<name>...))'
+  var i = 0
+
+  function parseOnePart() {
+    if (str[i] == '[') {
+      return parseCharacterClass();
+    }
+    if (str[i] == '(') {
+      return parseCaptureGroup();
+    }
+    if (str[i] == '\\') {
+      return parseEscape();
+    }
+    if (str[i] == '?' || str[i] == '+' || str[i] == '*' || str[i] == '{') {
+      return parseQuantifier();
+    }
+    return parseCharacter();
+  }
+
+  function parseCharacter() {
+    if (str[i] == '\\') {
+      return parseEscape();
+    }
+    var node = {
+      type: 'Charecter',
+      start: i,
+      end: i + 1,
+      raw: str.slice(i, i + 1),
+      value: str[i],
+    }
+    i++
+    return node
+  }
+
+  function parseCharacterClass() {
+    var node = {
+      type = 'CharacterClass',
+      start: i,
+      end: 0,
+      raw: '',
+      revert: false,
+      elements: [],
+    }
+    i++ // skip[
+      if (str[i] == "^") {
+        node.revert = true
+        i++ // skip ^
+      }
+      while (str[i] !== ']') {
+
+      }
+  }
+</script>
