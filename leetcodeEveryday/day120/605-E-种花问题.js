@@ -26,12 +26,11 @@ var canPlaceFlowers = function (flowerbed, n) {
 // 原数组前后种花 1 0 原数组 0 1
 var canPlaceFlowers = function (flowerbed, n) {
   let p = -2, i = -1, r = 0;
-  while (++i < flowerbed.length) {
+  while (++i < flowerbed.length)
     if (flowerbed[i]) {
       if ((r += (i - p - 2) >> 1) >= n) return true;
       p = i;
     }
     r += (i + 1 - p - 2) >> 1;
     return r >= n;
-  }
 }
