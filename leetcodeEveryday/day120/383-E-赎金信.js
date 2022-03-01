@@ -5,7 +5,7 @@
  * @return {boolean}
  */
 // ransomNote中每个字母的出现次数大于等于magazine中相同字母的出现次数即可
- var canConstruct = function(ransomNote, magazine) {
+var canConstruct = function (ransomNote, magazine) {
   // 如果ransomNote的长度大于magezine的长度，指定是不行了
   if (ransomNote.length > magazine.length) {
     return false;
@@ -17,7 +17,23 @@
   for (const c of ransomNote) {
     letter[c.charCodeAt() - 'a'.charCodeAt()]--;
     // 如果存在ransomNote中存在的某个字母次数大于magezine中存在的某个字母次数
-    if (letter[c.charCodeAt() - 'a'.charCodeAt() < 0]) return false;
+    if (letter[c.charCodeAt() - 'a'.charCodeAt()] < 0) return false;
   }
   return true;
 };
+
+var canConstruct = function (ransomNote, magazine) {
+  // 创建空数组
+  const strArr = new Array(26).fill(0);
+  // 参照物a的ascll码
+  base = "a".charCodeAt();
+  for (const s of magazine) {
+    strArr[s.charCodeAt() - base]++;
+  }
+  for (const s of ransomNote) {
+    const index = s.charCodeAt() - base;
+    if (!strArr[index]) return false;
+    strArr[index]--;
+  }
+  return true;
+}
