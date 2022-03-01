@@ -6,7 +6,7 @@
  */
 // 正则解法
  var canPlaceFlowers = function(flowerbed, n) {
-  return Array.from(flowerbed.join('').matchAll(/(^0(?=00)|^00|00$|00(?=00)|000|^0$)/g)).length >= n
+  return Array.from(flowerbed.join('').matchAll(/(^0(?=00)|^00|00$|00(?=00)|000|^0$)/g)).length >= n;
 };
 
 // 扫描解法
