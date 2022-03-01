@@ -10,6 +10,7 @@
 };
 
 // 扫描解法
+// 只有 前+中+后 不为1才能在中种花，而且i++的下一个位置也不能种花
 var canPlaceFlowers = function (flowerbed, n) {
   if (!n) return true;
   for (let i = 0; i < flowerbed.length; i++) {
