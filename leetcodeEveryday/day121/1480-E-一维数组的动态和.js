@@ -11,3 +11,12 @@ var runningSum = function(nums) {
  }
  return nums;
 };
+
+// 创建新数组来保存
+var runningSum = function (nums) {
+  let arr = [nums[0]];
+  for (let i = 1; i < nums.length; i++) {
+    arr[i] = arr[i - 1] + nums[i];
+  }
+  return arr;
+}
