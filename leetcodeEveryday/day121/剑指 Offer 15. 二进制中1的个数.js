@@ -29,3 +29,5 @@ var hammingWeight = function (n) {
   }
   return ret;
 };
+
+// 初二余一
