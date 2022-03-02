@@ -11,7 +11,7 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
-// 递归解法
+// 优雅递归老绅士伦敦腔May I help you sir?
  var mergeTwoLists = function(l1, l2) {
    debugger;
   if (!l1) return l2;
