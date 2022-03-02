@@ -31,3 +31,13 @@ var hammingWeight = function (n) {
 };
 
 // 初二余一
+var hammingWeight = function (n) {
+  let cur = n;
+  let count = 0;
+  while(cur > 0) {
+    let temp = cur % 2;
+    count = temp == 1 ? count + 1 : count;
+    cur = Math.floor (cur / 2);
+  }
+  return count;
+}
