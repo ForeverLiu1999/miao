@@ -38,7 +38,7 @@
 
 // 解法二 二叉搜索树的中序遍历是排好序的，所以反中序遍历然后k-1
 var kthLargest = function (root, k) {
-  let setArray = new Set();
+  let setArray = [];
   const dfs = function (node) {
     if (node === null) {
       return;
@@ -48,5 +48,5 @@ var kthLargest = function (root, k) {
     dfs(node.left);
   }
   dfs(root);
-  return array[k - 1];
+  return setArray[k - 1];
 }
