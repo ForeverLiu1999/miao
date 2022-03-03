@@ -1,0 +1,20 @@
+<script>
+  var lastClickTime = 0;
+  var continuesClickCount = 1;
+  window.addEventListener('click', function () {
+    var now = Date.now();
+    console.log('click');
+    if (now - lastClickTime < 600) {
+      continuesClickCount++;
+    } else {
+      continuesClickCount = 1;
+    }
+    if (continuesClickCount == 2) {
+      console.log('dbl click');
+    }
+    if (continuesClickCount == 3) {
+      console.log('triple click');
+    }
+    lastClickTime = now;
+  })
+</script>
