@@ -13,6 +13,7 @@
  */
 
 // 解法一 递归处理放进数组 然后sort一下找第k大的节点
+// 解法一 递归处理放进数组 然后sort一下找第k大的节点
  var kthLargest = function(root, k) {
   // 创建一个set
   let setArray = new Set();
