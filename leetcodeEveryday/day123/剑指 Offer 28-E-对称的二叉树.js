@@ -18,9 +18,9 @@
 };
 const check = (leftPtr, rightPtr) => {
   // 如果只有根节点，返回true
-  if (!leftPtr && rightPtr) return true;
+  if (!leftPtr && !rightPtr) return true;
   // 而如果左右节点只存在一个，则返回false
-  if (!leftPtr || rightPtr) return false;
+  if (!leftPtr || !rightPtr) return false;
   // 两对
   return leftPtr.val === rightPtr.val && check(leftPtr.left, rightPtr.right) && check(leftPtr.right, rightPtr.left);
 }
