@@ -1,0 +1,65 @@
+<textarea > Type something here ... </textarea>
+  <script >
+  var textarea = document.querySelector(" textarea ");
+  // var timeout;
+
+  // textarea.addEventListener("keydown", function () {
+  //   clearTimeout(timeout);
+  //   timeout = setTimeout(function () {
+  //     console.log(" You stopped typing .");
+  //   }, 500);
+  // });
+
+  textarea.addEventListener(
+    "keydown",
+    throttle(function () {
+      console.log(" You stopped typing .");
+    }, 500)
+  );
+
+  textarea.addEventListener(
+    "resize",
+    debounce(function () {
+      console.log(" You stopped resizing .");
+    }, 500)
+  );
+
+  function debounce(func, time) {
+    var timeout
+    return function () {
+      clearTimeout(timeout);
+      timeout = setTimeout(func, time);
+    }
+  }
+
+  function throttle(func, time) {
+    var timeout
+    var scheduled = false
+    var event
+    return function (e) {
+      event = e
+      //clearTimeout(timeout)
+      if (!scheduled) {
+        scheduled = true
+        timeout = setTimeout(() => {
+          func(event)
+          scheduled = false
+        }, time)
+      }
+    }
+  }
+
+
+  function throttle2(func, time) {
+    var lastTime = 0
+    return function (e) {
+      var now = Date.now()
+      if (now - lastTime > time) {
+        func(e)
+        lastTime = now
+      }
+    }
+  }
+
+
+</script>

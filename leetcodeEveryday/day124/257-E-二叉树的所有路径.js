@@ -10,7 +10,7 @@
 /**
  * @param {TreeNode} root
  * @return {string[]}
- */
+ */Z
 // 深度优先搜索遍历二叉树
 var binaryTreePaths = function (root) {
   const paths = [];
@@ -32,7 +32,6 @@ var binaryTreePaths = function (root) {
   construct_paths(root, "");
   return paths;
 };
-
 var binaryTreePaths = function (root) {
   const paths = [];
   const construct_paths = (root, path) => {
