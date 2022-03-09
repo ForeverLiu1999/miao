@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p><input type="text" value="abc"> (text) </p>
+  <p><input type="password" value="abc"> (password)</p>
+  <p><input type="checkbox" checked> (checkbox) </p>
+  <p><input type="radio" value="A" name="choice">
+    <input type="radio" value="B" name="choice">
+    <input type="radio" value="C" name="choice" checked> (radio) </p>
+  <p><input type="file" checked> (file) </p>
+  <textarea name="" id="" cols="30" rows="10">
+      one
+      two
+      three
+    </textarea>
+  <hr>
+  <select name="" id="">
+    <option value="">Pancakes</option>
+    <option value="">Pudding</option>
+    <option value="">Ice Cream</option>
+  </select>
+  <input type="text" autofocus>
+  <input type="text" tabindex=1> <a href=".">(help)</a>
+  <hr>
+  <button onclick="console.log('ok')" tabindex=2>OK</button>
+  <hr>
+  <button>ok</button>
+  <button disabled>not ok</button>
+  <button></button>
+  <script>
+    document.querySelector("input").focus();
+    console.log(document.activeElement.tagName);
+    document.querySelector("input").blur();
+    console.log(document.activeElement.tagName);
+  </script>
+</body>
+
+</html>
