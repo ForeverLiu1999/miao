@@ -4,7 +4,7 @@
  * @param {string} t
  * @return {boolean}
  */
-// 双指针解法
+// 双指针解法捏
  var backspaceCompare = function(s, t) {
 // ij分别指向st的末尾字符
   let i = s.length - 1,
