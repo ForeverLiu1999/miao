@@ -15,3 +15,8 @@
   return result;
 };
 
+// 超级无敌api玩的6啊
+var printNumbers = function (n) {
+  let max = Math.pow(10, n) - 1;
+  return Array.from({length: max}, (item, index) => index + 1);
+}
