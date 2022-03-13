@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      position: relative;
+      border: 1px solid;
+      display: inline-block;
+    }
+    ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      /* height: 50px; */
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      border: 1px solid;
+    }
+    input:focus + ul:not(:empty) {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <input type="text" name="word">
+    <ul class="suggestions"></ul>
+  </div>
+
+  <script>
+    var input = document.querySelector('input');
+    var input = document.querySelector('.suggestions');
+
+    input.addEventListener('input', function(e) {
+      var word = input.value;
+      var suggests = getSuggests(word);
+      var html = suggests.map(it => {
+        return `<li>${it}</li>`
+      }).join('');
+      suggestions.innerHTML = html;
+    })
+
+    function getSuggests(word) {
+      var result = [];
+      for (let i = 0; i < 10; i++) {
+        result.push(word + Math.random().toString(16).slice(2, 7));
+      }
+      return result;
+    }
+  </script>
+</body>
+</html>

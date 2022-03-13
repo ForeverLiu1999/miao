@@ -6,7 +6,6 @@
 // 动态规划
 // 方程dp[n] = MAX(dp[n - 1], dp[n - 2] + num)
 // 因为不可以闯入相邻房屋，所以当前位置n可盗窃的最大值，要么n-1位置可盗窃最大值，要么n-2位置可盗窃最大值加上当前房屋的值两者间取最大值
-//
  var rob = function(nums) {
   const len = nums.length;
   if (len == 0) return 0;
