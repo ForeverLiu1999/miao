@@ -50,11 +50,23 @@ var canJump = function (nums) {
   for (let i = 0; i <= cover; i++) {
     // 当前覆盖距离cover和当前位置加能跳跃的居立中取一个较大值
     cover = Math.max(cover, i + nums[i]);
+      // 覆盖距离大于或等于nums.length - 1说明能到达终点
     if (cover >= nums.length - 1) {
-      // 覆盖距离炒股或等于nums.length - 1说明能到达终点
       return true;
     }
   }
   // 循环完成之后，还没返回true 就是无法到达终点
+  return false;
+}
+
+var canJump = function (nums) {
+  if (nums.length === 1) return true;
+  let cover = nums[0];
+  for (let i = 0; i <= cover; i++) {
+    cover = Math.max(cover, i + nums[i]);
+    if (cover >= nums.length - 1) {
+      return true;
+    }
+  }
   return false;
 }
