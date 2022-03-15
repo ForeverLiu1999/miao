@@ -32,3 +32,20 @@
   }
   return dp[n - 1][0];
 };
+
+// 动态规划改进
+// 注意上面写法中，每一天的状态只与前一天的状态有关，而与更早但额状态都无关，因此不必存储这些无关的状态，只需要将dp[i - 1][0]和的dp[i - 1][1]存放在两个变量中
+// 通过他们计算出dp[i][0]和dp[i][1]并存回对应的变量，以至于第i + 1天的状态转移即可
+var maxProfit = function (prices) {
+  const n = prices.length;
+  let dp0 = 0, dp1 = -prices[0];
+  for (let i = 1; i < n; i++) {
+    let newDp0 = Math.max(dp0, dp1 + prices[i]);
+    let newDp1 = Math.max(dp1, dp0 - prices[i]);
+    dp0 = newDp0;
+    dp1 = newDp1;
+  }
+  return dp0;
+}
+// 时间复杂度O(n),n为数组长度,一共有2n个状态，每次转移状态O(1)，因此时间复杂度O(2n)=O(n)
+// 空间复杂度O(n)
