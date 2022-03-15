@@ -74,8 +74,8 @@ var fourSum = function (nums, target) {
         // 如果符合条件
         if (sum == target) {
           res.push([nums[i], nums[j], nums[left], nums[right]]);
-          /*
-          下面的代码相当于：
+
+          // 下面的代码相当于：
           while (left < right) {
               // 不管前后相不相等，left 都要往前走
               left++;
@@ -86,10 +86,10 @@ var fourSum = function (nums, target) {
               right--;
               if (nums[right + 1] != nums[right]) break;
           }
-          */
+
           // 去重
-          while (left < right && nums[left] == nums[++left]);
-          while (left < right && nums[right] == nums[--right]);
+          // while (left < right && nums[left] == nums[++left]);
+          // while (left < right && nums[right] == nums[--right]);
         } else if (sum < target) {
           left++;
         } else {
