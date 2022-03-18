@@ -11,16 +11,22 @@
   // 初始化第一项
   let str = "1";
   for (let i = 2; i <= n; i++) {
+    // 存放结果
     const nums = [];
     let start = 0;
+    // 记录连续数字
     let pos = 0;
+    // 遍历范围
     while (pos < str.length) {
+      // 说明有几个连续数字
       while (pos < str.length && str[pos] === str[start]) {
         pos++;
       }
+      // push进几个几
       nums.push('' + (pos - start) + str[start]);
       start = pos;
     }
+    // 最后拼成字符串
     str = nums.join('');
   }
   return str;
