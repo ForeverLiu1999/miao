@@ -73,3 +73,7 @@
   backtrack(0, [], 0);
   return res;
 };
+const backtrack = (index, path, sum) => {
+  if (sum > target) return;
+  if (sum == target) return res.push(path.slice());
+}
