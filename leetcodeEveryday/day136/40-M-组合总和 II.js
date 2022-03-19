@@ -6,28 +6,30 @@
  * @param {number} target
  * @return {number[][]}
  */
- var combinationSum2 = function(candidates, target) {
-  const res = []; path = [], len = candidates.length;
+var combinationSum2 = function (candidates, target) {
+  const res = [];
+  path = [], len = candidates.length;
   candidates.sort();
   backtracking(0, 0);
   return res;
+
   function backtracking(sum, i) {
-      if (sum > target) return;
-      if (sum === target) {
-          res.push(Array.from(path));
-          return;
-      }
-      let f = -1;
-      for(let j = i; j < len; j++) {
-          const n = candidates[j];
-          if(n > target - sum || n === f) continue;
-          path.push(n);
-          sum += n;
-          f = n;
-          backtracking(sum, j + 1);
-          path.pop();
-          sum -= n;
-      }
+    if (sum > target) return;
+    if (sum === target) {
+      res.push(Array.from(path));
+      return;
+    }
+    let f = -1;
+    for (let j = i; j < len; j++) {
+      const n = candidates[j];
+      if (n > target - sum || n === f) continue;
+      path.push(n);
+      sum += n;
+      f = n;
+      backtracking(sum, j + 1);
+      path.pop();
+      sum -= n;
+    }
   }
 };
 
@@ -36,7 +38,7 @@
  * @param {number} target
  * @return {number[][]}
  */
- var combinationSum2 = function (candidates, target) {
+var combinationSum2 = function (candidates, target) {
   //  先排序，使重复的元素相邻，容易去重
   candidates.sort((a, b) => a - b);
   let res = [];
@@ -57,7 +59,7 @@
       // 当前元素跟上一个元素相同，上一个元素没有选那当前元素也不能选，去重忽略同层重复项，避免产生重复的组合
       if (candidates[i - 1] == candidates[i] && !visited[i - 1]) continue;
       if (!visited[i]) {
-        visited[i] = true;
+        visited[i] = !visited[i];
         // 选择 candidates[i]
         path.push(candidates[i]);
         sum += candidates[i];
@@ -73,7 +75,28 @@
   backtrack(0, [], 0);
   return res;
 };
-const backtrack = (index, path, sum) => {
-  if (sum > target) return;
-  if (sum == target) return res.push(path.slice());
+
+var combinationSum2 = function (candidates, target) {
+  candidates.sort((a, b) => a - b);
+  let res = [];
+  let visited = new Array(candidates.length).fill(false);
+  const backtrack = (index, path, sum) => {
+    if (sum > target) return;
+    if (sum == target) return res.push(path.slice());
+    for (let i = index; i < candidates.length; i++) {
+      if (candidates[i - 1] == candidates[i] && !visited[i - 1]) continue;
+      if (!visited[i]) {
+        visited[i] = !visited[i];
+        path.push(candidates[i]);
+        sum += candidates[i];
+        backtrack(i + 1, path, sum);
+        sum -= candidates[i];
+        path.pop();
+        visited[i] = false;
+      }
+    }
+  }
+  backtrack(0, [], 0);
+  return res;
+
 }
