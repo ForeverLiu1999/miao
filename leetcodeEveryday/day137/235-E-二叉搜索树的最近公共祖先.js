@@ -29,3 +29,23 @@
   }
   return root;
 };
+
+// 迭代解法
+var lowestCommonAncestor = function (root, p, q) {
+  // 限制条件当while为null时结束循环
+  while (root) {
+    // 说明在左子树
+    if (p.val < root.val && q.val < root.val) {
+      // 往左子节点遍历
+      root = root.left;
+      // 说明在右子树
+    } else if (p.val > root.val && q.val > root.val) {
+      // 往右子节点遍历
+      root.root.right;
+    } else {
+      // 其他情况说明当前root是最近公共祖先，结束遍历break
+      break;
+    }
+  }
+  return root;
+}
