@@ -30,9 +30,10 @@
   // 限定遍历范围
   while (temp) {
     // 把所有元素加入visited中
-    visited.has(temp);
-    return temp.next;
+    if (visited.has(temp)) return temp;
+    temp = temp.next;
   }
+
   // 如果遍历完了headB的链表没找到就说明不相交
   return null;
 };
