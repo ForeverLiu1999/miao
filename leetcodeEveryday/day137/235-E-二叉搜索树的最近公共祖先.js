@@ -13,6 +13,7 @@
  * @param {TreeNode} q
  * @return {TreeNode}
  */
+// 递归解法
 // 二叉搜索树性质：如果p和q的val小于root.val，说明pq都在root的左子树，反之则在右子树
 // 只要p.val和q.val不是都大于或都小于root.val，也就是说pq不在root的同一个子树
 // 那就只有三种情况：
