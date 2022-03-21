@@ -1,0 +1,47 @@
+// chunk,compact,drop,dropRight,dropRightWhile,dropWhile
+// fill,findIndex,findLastIndex
+// flatten,flattenDeep,flattenDepth
+// fromPairs,head,indexOf,initial,join,last,lastIndexOf,reverse
+// uniq,uniqBy,without
+// zip,countBy,every,filter,find,forEach,groupBy,keyBy,map
+// partition,reduce,reduceRight,reject,sample,shuffle,size,some
+
+// isBoolean,isEmpty,isEqual,
+// isNaN,isNil,isNull,isNumber,
+// toArray
+// ceil,max,maxBy,sumBy,sum,repeat,range,cloneDeep,
+var foreverliu1999 = {
+
+  // chunck: function (array, num = 1) {
+  //   var result = [];
+  //   while (num) {
+  //     result.push(array.splice(0, num));
+  //     if (array.length == 0) {
+  //       break;
+  //     }
+  //   }
+  //   return result;
+  // }
+
+  chunck: function (array, size) {
+    let res = [];
+    if (array.length <= size) {
+      return array;
+    }
+    for (let i = 0; i < Math.ceil(array.length / size); i++) {
+      res[i] = array.slice(size * i, size * (i + 1));
+    }
+    return res;
+  },
+
+  compact: function (array) {
+    if (!array) return [];
+      for (let i of array)
+  }
+
+
+
+
+
+
+}
