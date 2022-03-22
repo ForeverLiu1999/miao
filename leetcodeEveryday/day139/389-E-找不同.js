@@ -28,11 +28,11 @@ var findTheDifference = function (s, t) {
 var findTheDifference = function (s, t) {
   let sSum = 0,
     tSum = 0;
-  for (let i of s) {
+  for (let i = 0; i < s.length; i++) {
     sSum += s[i].charCodeAt();
   }
-  for (let j of t) {
-    tSum += t[i].charCodeAt();
+  for (let j = 0; j < t.length; j++) {
+    tSum += t[j].charCodeAt();
   }
-  return String.formCharCode(tSum - sSum);
+  return String.fromCharCode(tSum - sSum);
 }
