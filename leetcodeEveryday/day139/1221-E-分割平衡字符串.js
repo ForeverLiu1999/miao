@@ -7,9 +7,18 @@
 // num为L和R的差值，如果为0，说明是平衡字符串，res++
  var balancedStringSplit = function(s) {
   let num = 0, result = 0;
-  for (leti = 0; i < s.length; i++) {
+  for (let i = 0; i < s.length; i++) {
     s[i] == 'L' ? num++ : num--;
-    if (num == 0) res++;
+    if (num == 0) result++;
   }
-  return res;
+  return result;
 };
+
+// var balancedStringSplit = function (s) {
+//   let num = 0, result = 0;
+//   for (let i = 0; i < s.length; i++) {
+//     s[i] == 'L' ? num++ : num--;
+//     if (num == 0) result++;
+//   }
+//   return result;
+// }
