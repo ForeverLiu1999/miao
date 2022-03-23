@@ -44,11 +44,15 @@ var smallerNumbersThanCurrent = function (nums) {
   return ret;
 }
 
-// 数组范围0-100,建立一个频次数组cnt,cnt[i]代表i出现的次数，那么对于数字i来说，小于他的数目为cnt[0...i-1]
+// 数组范围0-100,建立一个频次数组cnt,cnt[i]代表i出现的次数，
+// 那么对于数字i来说，小于他的数目为cnt[0...i-1]
 var smallerNumbersThanCurrent = function(nums) {
+  // 0-100是101个数
   const cnt = new Array(101).fill(0);
   const n = nums.length;
+  // 等于i的数有几个
   for (let i = 0; i < n; ++i) {
+    // nums[0]为1，nums[99]为100
       cnt[nums[i]] += 1;
   }
   for (let i = 1; i <= 100; ++i) {
