@@ -28,8 +28,29 @@ var reverseVowels = function(s) {
   // 拼成字符串
   return arr.join('');
 };
-
 // 是否是元音字母
 const isVowel = (ch) => {
   return "aeiouAEIOU".indexOf(ch) >= 0;
+}
+
+var reverseVowels = function (s) {
+  let vowelsArr = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+  let l = 0, r = s.length - 1;
+  let arr = s.split('');
+  while (l < r) {
+    // 找到左指针的元音字母
+    while (l < s.length && !vowelsArr.includes(s[l])) {
+      ++l;
+    }
+    // 找到右指针的元音字母
+    while (r > 0 && !vowelsArr.includes(s[r])) {
+      --r;
+    }
+    if (l < r) {
+      [arr[l], arr[r]] = [arr[r], arr[l]];
+      ++l;
+      --r;
+    }
+  }
+  return arr.join('');
 }
