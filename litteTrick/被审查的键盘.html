@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
+  <script>
+// <!-- 禁止了键盘输入却无法禁止cv输入 -->
+    var textarea = document.querySelector('textarea');
+    textarea.addEventListener('keydown', function (e) {
+      console.log(e);
+      if (e.key == 'Q' || e.key == 'W' || e.key == 'X') {
+        e.preventDefault();
+      }
+    })
+
+    // 限制复制
+    textarea.addEventListener('copy', function (e) {
+      var text = 'aaaaaaaaaaa';
+      text += 'bbbbbbb';
+      // 只有复制可以setData，粘贴只能getData
+      e.clipboardData.setData('text/plain', text);
+      e.preventDefault();
+    })
+  </script>
+</body>
+</html>
