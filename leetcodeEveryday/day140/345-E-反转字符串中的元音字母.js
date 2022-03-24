@@ -54,4 +54,3 @@ var reverseVowels = function (s) {
   }
   return arr.join('');
 }
-//
