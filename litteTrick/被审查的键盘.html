@@ -11,11 +11,23 @@
   <script>
 // <!-- 禁止了键盘输入却无法禁止cv输入 -->
     var textarea = document.querySelector('textarea');
+
     textarea.addEventListener('keydown', function (e) {
       console.log(e);
       if (e.key == 'Q' || e.key == 'W' || e.key == 'X') {
         e.preventDefault();
       }
+    })
+
+    textarea.addEventListener('paste', function (e) {
+      console.log(e);
+      e.preventDefault();
+      var text = e.clipboardData.getDate('text');
+      text = text.replace(/[QWX]/g, '*');
+      var beforeSelection = this.value.slice(0, this.selectionStart);
+      var afterSelection = this.value.slice(this.selectionEnd);
+      this.value = beforeSelection + text + afterSelection;
+      this.selectionStart = this.selectionEnd = beforeSelection.length + text.length;
     })
 
     // 限制复制
