@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <label for="fruit">Select the favorite fruit</label>
+  <select name="" id="fruit">
+    <option value="">make a choice</option>
+    <option value="apple">apple</option>
+    <option value="orange">orange</option>
+    <option value="banana">banana</option>
+  </select>
+  <p></p>
+
+  <script>
+    var select = document.querySelector('select');
+    var para = document.querySelector('p');
+    select.addEventListener('change', setWeather);
+    function setWeather () {
+      var choice = select.value;
+      switch (choice) {
+        case 'apple':
+        para.textContent = 'this is an apple';
+        break;
+        case 'orange':
+        para.textContent = 'this is an orange';
+        break;
+        case 'banana':
+        para.textContent = 'this is a banana';
+        break;
+        default:
+          para.textContent = '';
+      }
+    }
+  </script>
+</body>
+</html>
