@@ -35,3 +35,13 @@ var tribonacci = function (n) {
   ];
   return result[n];
 }
+
+// 动态规划
+var tribonacci = function (n) {
+  if (n <= 1) return n;
+  let dp = [0, 1, 1];
+  for (let i = 3; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+  }
+  return dp[n];
+}
