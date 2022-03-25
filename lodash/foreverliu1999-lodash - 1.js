@@ -59,7 +59,7 @@ var foreverliu1999 = {
   drop: function (array, n = 1) {
     if (n > array.length) return [];
     let result = [];
-    for (let i of array) result.push(array[i]);
+    for (let i = n; i < array.length; i++) result.push(array[i]);
     return result;
   },
 
@@ -70,6 +70,12 @@ var foreverliu1999 = {
   //   return result;
   // },
 
+  dropRight: function (array, n = 1) {
+    if (n > array.length) return [];
+    let result = [];
+    for (let i = 0; i < array.length - n; i--) result.push(array[i]);
+    return result;
+  },
 
 
 
