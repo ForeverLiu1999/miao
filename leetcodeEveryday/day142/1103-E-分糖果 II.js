@@ -39,5 +39,22 @@
 
 var distributeCandies = (candies, num_people) => {
   let result = new Array(num_people).fill(0);
-  let
+  let distribute = 1;
+  let people = 0;
+  while (candies) {
+    if (candies > distribute) {
+      result[people] += distribute;
+      candies -= distribute;
+    } else {
+      result[people] += candies;
+      candies = 0;
+    }
+    distribute++;
+    if (people + 1 === result.length) {
+      people = 0;
+    } else {
+      people;
+    }
+  }
+  return result;
 }
