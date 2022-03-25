@@ -56,6 +56,21 @@ var foreverliu1999 = {
     return newArray;
   },
 
+  drop: function (array, n = 1) {
+    if (n > array.length) return [];
+    let result = [];
+    for (let i of array) result.push(array[i]);
+    return result;
+  },
+
+  // drop: function (array, n = 1) {
+  //   if (n > array.length) return [];
+  //   let result = [];
+  //   result = result.slice(0, n);
+  //   return result;
+  // },
+
+
 
 
 
