@@ -3,7 +3,7 @@
  * @param {string} s
  * @return {string}
  */
-// 为防止消去导致相邻又消去，所以用栈来解决
+
 //  var removeDuplicates = function(s) {
 //    let result1 = [];
 //    s = s.sort((a, b) => a - b);
@@ -17,6 +17,7 @@
 //   return set.join("");
 // };
 
+// 为防止无法进行消去后导致相邻又消去，所以用栈来解决
 var removeDuplicates = function (s) {
   let stack = [];
   for (let i of s) {
