@@ -36,8 +36,12 @@ var foreverliu1999 = {
 
   compact: function (array) {
     if (!array) return [];
-      for (let i of array)
-  }
+    let result = [];
+      for (let i of array) {
+        if (array[i]) result.push(array[i]);
+      }
+      return result;
+  },
 
 
 
