@@ -82,7 +82,31 @@ var foreverliu1999 = {
       array[i] = value;
     }
     return array;
-  }
+  },
+
+
+  flatten: function (array) {
+    let ans = [];
+    for (let i of array) {
+      if (Array.isArray(array[i])) {
+        for (let j = 0; j < array[i].length; j++) {
+          ans.push(array[i][j]);
+        }
+      } else {
+        ans.push(array[i]);
+      }
+    }
+    return ans;
+  },
+  // flatten: function (array) {
+  //   return [].concat(...ary);
+  // },
+
+  flatten: function (array) {
+
+  },
+
+
 
 
 
