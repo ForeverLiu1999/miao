@@ -43,6 +43,21 @@ var foreverliu1999 = {
       return result;
   },
 
+  difference: function (array1, ...args) {
+    let newArray = [];
+    let result = [].concat(...args);
+    for (let i of array1) {
+      if (result.includes[array1[i]]) {
+        continue;
+      } else {
+        newArray.push(array1[i]);
+      }
+    }
+    return newArray;
+  },
+
+
+
 
 
 
