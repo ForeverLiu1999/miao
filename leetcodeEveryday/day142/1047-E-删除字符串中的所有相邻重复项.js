@@ -20,11 +20,14 @@
 var removeDuplicates = function (s) {
   let stack = [];
   for (let i of s) {
+    // 如果还有元素存在，且当前字母和栈顶字母相同，就消消乐
     if (stack.length && stack[stack.length - 1] === i) {
     stack.pop();
     } else {
+      // 否则就将其入栈
       stack.push(i);
     }
   }
+  // 因为得到的是数组，所以还要join成字符串
   return stack.join('');
 }
