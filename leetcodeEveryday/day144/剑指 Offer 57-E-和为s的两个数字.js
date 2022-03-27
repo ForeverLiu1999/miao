@@ -40,3 +40,17 @@ var twoSum = function (nums, target) {
   }
   // return [];
 }
+
+var twoSum = function (nums, target) {
+  let left = 0, right = nums.length - 1;
+  while (left <right) {
+    let sum = nums[left] + nums[right];
+    if (target < sum) {
+      right--;
+    } else if (target > sum) {
+      left++;
+    } else {
+      return [nums[left], nums[right]];
+    }
+  }
+}
