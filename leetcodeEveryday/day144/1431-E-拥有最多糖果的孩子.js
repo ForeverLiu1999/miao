@@ -24,14 +24,20 @@
 // };
 
 // 把extraCandies加给每个人，看是否都能大于等于最大的那个
-const kidsWithCandies = (candies, extraCandies) => {
-  let max = 0;
-  for (const candie of candies) { // 找到数组中最大值
-    max = Math.max(max, candie);
-  }
-  for (let i = 0; i < candies.length; i++) { // 再循环一遍数组
-    candies[i] = (candies[i] + extraCandies >= max);
-  }
-  return candies;
-};
+// const kidsWithCandies = (candies, extraCandies) => {
+//   let max = 0;
+//   for (const candie of candies) { // 找到数组中最大值
+//     max = Math.max(max, candie);
+//   }
+//   for (let i = 0; i < candies.length; i++) { // 再循环一遍数组
+//     candies[i] = (candies[i] + extraCandies >= max);
+//   }
+//   return candies;
+// };
 
+const kedsWithCandies = (candies, extraCandies) => {
+  let max = Math.max(...candies);
+  return candies.map(item => {
+    return item + extraCandies >= max;
+  })
+}
