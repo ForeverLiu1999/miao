@@ -84,7 +84,7 @@ console.log(i);
 
 // javaScript函数式编程思想:变量不可变,如果一个变量不需要变化的时候,应该用const定义.而如果你要改变一个变量,则需要一个新的变量去存储它的值.
 
-// demo1
+// demo0
 // 用let或const改写var程序.
 var j = 1;
 var k = 0.1;
@@ -93,7 +93,7 @@ console.log(l);
 // 解
 // 所有var改成let或const都可以
 
-// demo2
+// demo1
 // 用let或const改写var程序,可以适当改变部分代码.
 var m = 95;
 if (m >= 60) {
