@@ -41,3 +41,15 @@ const kthToLast = (head, k) => {
   }
   return slow.val;
 }
+
+// 创建一个数组,然后遍历链表然后push进数组,然后直接返回arr[arr.length - k]即可
+var kthToLast = function (head, k) {
+  const arr = [];
+  // let newList = new ListNode(0, head);
+  let cur = head;
+  while (cur) {
+    arr.push(cur.val);
+    cur = cur.next;
+  }
+  return arr[arr.length - k];
+}
