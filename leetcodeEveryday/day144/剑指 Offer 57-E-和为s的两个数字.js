@@ -5,19 +5,22 @@
  * @return {number[]}
  */
 
-// 哈希表
- var twoSum = function(nums, target) {
-  let result = new Array(2).fill(0);
-  for (let i of nums) {
-    for (let j of nums) {
-      if (nums[i] + nums[j] == target) {
-        result[1] = nums[i];
-        result[2] = nums[j];
-        return result;
-      }
+// 哈希map
+var twoSum = function (nums,target) {
+  let map = new Map(), result = [];
+  nums.forEach((item, ind) => {
+    map.set(item, item);
+  })
+  nums.forEach(item => {
+    if (map.has(target - item) && result.length == 0) {
+      result.push(map.get(target - item), item);
     }
-  }
-};
+  })
+  return result;
+}
+
+
+
 
 // 双指针
 // 左指针在数组头，右指针在数组尾，如果sum小于target则左指针右移，如果sum大于target则右指针左移
