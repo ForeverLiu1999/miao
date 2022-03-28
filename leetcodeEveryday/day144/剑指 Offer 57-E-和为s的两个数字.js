@@ -19,6 +19,20 @@ var twoSum = function (nums,target) {
   return result;
 }
 
+var twoSum = function (nums, target) {
+  let map = newMap();
+  let result = [];
+  nums.forEach((item, ind) => {
+    map.set(item, item);
+  })
+  nums.forEach(item => {
+    if (map.has(target - item) && result.length == 0) {
+      result.push(map.get(target - item), item);
+    }
+  })
+  return result;
+}
+
 
 
 
