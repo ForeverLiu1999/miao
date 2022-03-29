@@ -11,7 +11,7 @@
  * @param {number} k
  * @return {number}
  */
- 优雅双指针,快慢指针相隔k,则快指针结束时,慢指针指向倒数第k个节点
+//  优雅双指针,快慢指针相隔k,则快指针结束时,慢指针指向倒数第k个节点
  var kthToLast = function(head, k) {
   let slow = head;
   let fast = head;
