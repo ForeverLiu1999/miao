@@ -64,5 +64,22 @@ const {
   others : { height : bigHeight }
 } = person4;
 console.log(person4Name, bigHeight);
-// 如果没有name属性,则会返回 guest short
-// 如果有name属性,则会返回 小平 short
+// 如果没有name属性,则会返回 guest short.
+// 如果有name属性,则会返回 小平 short.
+
+// 数组解构赋值
+const person5 = ["小强", "male", 18];
+const [name5, sex5, age5] = person5;
+console.log(name5, sex5, age5);
+// 应用场景,得到一个长字符串,先用split(",")拆成数组,再解构赋值提出来成为一个一个变量.
+const info = "小刚, female, 20";
+const person6 = info.split(",");
+const [name6, sex6, age6] = person6;
+console.log(name6, sex6, age6);
+
+// 常用功能:互换两个变量.
+// 极大提升代码可读性,二十万次测试性能只降低一二毫秒.
+let a = 1, b = 2;
+[a, b] = [b, a];
+console.log(a, b);
+// 2 1
