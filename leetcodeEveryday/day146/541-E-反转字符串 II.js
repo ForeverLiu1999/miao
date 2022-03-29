@@ -16,7 +16,6 @@ var reverseStr = function (s, k) {
   // 重新拼成字符串
   return arr.join('');
 };
-
 const reverse = (arr, left, right) => {
   while (left < right) {
     [arr[left], arr[right]] = [arr[right], arr[left]];
