@@ -33,5 +33,68 @@ orderEat2(undefined, "milk");
 
 
 // 字符串方法
+// includes是否包含xxx startsWith是否以xxx开头 endsWith是否以xxx结束
+const fatherString = "abcdefg";
+const sonString = "cdef";
+const startString = "abc";
+const endString = "efg";
+console.log(fatherString.includes(sonString));
+// true
+console.log(fatherString.startsWith(startString));
+// true
+// 可以加参数验证是否以第几个字符开头的
+console.log(fatherString.startsWith(sonString, 2));
+// true
+console.log(fatherString.startsWith("b", 1));
+// true
+console.log(fatherString.endsWith(endString));
+// 也可以加参数,但意思是指前(第二个参数)个字符是否以第一个参数结尾
+console.log(fatherString.endsWith("e", 5));
+// true
+console.log(fatherString.endsWith("de", 5));
 
 
+// for of
+// 数组
+const foods0 = ["food1", "food2", "food3"];
+for (const [index, food] of foods0.entries()) {
+  console.log(`第${index + 1}号食物是${food}`);
+}
+// (2) [0, 'food1']
+// (2) [1, 'food2']
+// (2) [2, 'food3']
+
+// Set
+const foods1 = new Set();
+foods1.add("food4");
+foods1.add("food5");
+foods1.add("food6");
+for (const food of foods1) {
+  console.log(food);
+}
+// food4
+// food5
+// food6
+
+// Map
+const foods2 = new Map();
+foods2.set("food7", "egg");
+foods2.set("food8", "beef");
+foods2.set("food9", ["suggar", "shit", "rice"]);
+for (const [key, value] of foods2) {
+  console.log(key, value);
+}
+// food7 egg
+// food8 beef
+// food9 (3) ['suggar', 'shit', 'rice']
+
+// 注意!对对象内元素的遍历还是用for in,对象以外如数组、Set、Map用ES6新语法for of.
+// 对象
+const foods3 = {
+  foods10 : "rice",
+  foods11 : "nooodles",
+  foods12 : "shit"
+};
+for (const food in foods3) {
+  console.log(food, foods3[food]);
+}

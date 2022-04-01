@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    class SnakeGame {
+      // h是外层数组,w是内层数组.
+      constructor(width = 10, height = 10) {
+        this.width = width;
+        this.height = height;
+        this.world = null;
+        this.snakeLength = 0 // 蛇长.
+        this.headpos = null; // 蛇头位置,位置是一个左边[4, 8].
+        this.tailpos = null; // 蛇尾位置.
+      }
+
+      // 初始化蛇的位置.
+      init() {
+        this.world = Array(this.height).fill(0).map(it => Array(width).fill('.'));
+        this.world[3][3] = '>';
+        this.snakeLength = 1;
+        this.headpos = {
+          row: 3,
+          col: 3
+        };
+        this.tailpos = {
+          row: 3,
+          col: 3
+        };
+        this.placeApple();
+      }
+
+      placeApple() {
+        var row = Math.foor(this.height * Math.random());
+        var col = Math.foor(this.width * Math.random());
+        if (this.world[row][col] == '.') {
+          this.world[row][col] = 'Q';
+        } else {
+          this.placeApple();
+        }
+      }
+
+      // 返回世界某个坐标的符号.
+      getChar(pos) {
+        return this.world[pos.row][pos.col];
+      }
+
+      setChar(pos, char) {
+        this.world[pos.row][pos.col] = char;
+      }
+
+      // 获取这个位置指向的下一位置的坐标.
+      getNextPos(pos) {
+        var currChar = this.getChar(pos);
+        if (currChar == '>') {
+          return this.getChar({
+            row: pos.row,
+            col: pos.col + 1
+          });
+        }
+        if (currChar == '<') {
+          return this.getChar({
+            row: pos.row,
+            col: pos.col - 1
+          });
+        }
+        if (currChar == '^') {
+          return this.getChar({
+            row: pos.row - 1,
+            col: pos.col
+          });
+        }
+        if (currChar == 'v') {
+          return this.getChar({
+            row: pos.row + 1,
+            col: pos.col
+          });
+        }
+      }
+
+      gameOver() {
+        alert('game over, score:' + this.snakeLength);
+      }
+
+      next() {
+        var headChar = this.getChar(this.headpos); // 头的符号.
+        var headNextPos = this.getNextPos(this.headpos); // 头的下一位位置的.
+        var headNextChar = this.getChar(headNextPos); // 头的下一个位置的符号.
+        if (headNextChar == '.') { // 如果此处为 "." 也就是空地,那下一个位置填成蛇头符号.
+          this.setChar(headNextChar, headChar);
+          this.headpos = headNextPos; // 更新蛇头的位置
+        } else if (headNextChar == 'Q') {
+          this.setChar(headNextPos, headChar);
+          this.headpos = headNextPos; // 更新蛇头的位置
+        this.placeApple();
+        } else {
+          this.gameOVer();
+        }
+
+
+        if (headNextChar == '.') {
+          var tailNextPos = this.getNextPos(this.tailpos); // 蛇尾的下一位位置的.由this.tailpos算出tailNextPos蛇尾的下一个位置.
+          this.setChar(this.tailpos, '.');
+          this.tailpos = tailNextPos;
+        }
+        return this;
+      }
+      print () {
+        console.log(this.toString);
+      }
+      toString () {
+        return this.world.map(row => {
+          return row.join('');
+        }).join('\n');
+      }
+
+    }
+  </script>
+</body>
+
+</html>
