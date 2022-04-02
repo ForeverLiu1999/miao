@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
   <script>
     class SnakeGame {
       // h是外层数组,w是内层数组.
@@ -25,7 +24,7 @@
 
       // 初始化蛇的位置.
       init() {
-        this.world = Array(this.height).fill(0).map(it => Array(width).fill('.'));
+        this.world = Array(this.height).fill(0).map(it => Array(this.width).fill('.'));
         this.world[3][3] = '>';
         this.snakeLength = 1;
         this.headpos = {
@@ -124,6 +123,8 @@
       }
 
     }
+
+    var sg = new SnakeGame();
   </script>
 </body>
 
