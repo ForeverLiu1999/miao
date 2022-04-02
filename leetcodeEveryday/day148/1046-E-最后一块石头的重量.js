@@ -24,3 +24,20 @@
   // 不为空就是只剩一块石头,返回他
   return pq.isEmpty() ? 0 : pq.dequeue()['priority'];
 };
+
+// 递归
+var lastStoneWeight = function (stones) {
+// 升序排列
+  stones.sort((a, b) => a - b);
+  // 递归直至边界数组长度 <= 1
+  if (stones.length > 1) {
+    // 最重和次重的差
+    const d = stones.pop() - stones.pop();
+    // 如果差d存在,就把它重新push回stones
+    if (d) stones.push(d);
+    // 开始递归
+    return lastStoneWeight(stones);
+  }
+  // 如果不为空就只剩一块石头,返回它
+  return stones.length ? stones[0] : 0;
+}
