@@ -40,6 +40,16 @@ var lastStoneWeight = stones => {
   return pq.ieEmpty() ? 0 : pq.dequeue(["priority"]);
 };
 
+var lastStoneWeight = stones => {
+  stones.sort((a, b) => a - b);
+  if (stones.length > 1) {
+    const d = stones.pop() - stones.pop();
+    if (d) stones.push(d);
+    return lastStoneWeight(stones);
+  }
+  return stones.length ? stone[0] : 0;
+}
+
 // 递归
 var lastStoneWeight = function (stones) {
 // 升序排列
