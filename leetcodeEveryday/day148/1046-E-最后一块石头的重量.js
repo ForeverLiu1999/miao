@@ -25,6 +25,21 @@
   return pq.isEmpty() ? 0 : pq.dequeue()['priority'];
 };
 
+var lastStoneWeight = stones => {
+  const pq = new MaxPriorityQueue();
+  for (const stone of stones) {
+    pq.enqueue("x", stone);
+  }
+  while (pq.size() > 1) {
+    const a = pq.dequeue(["priority"]);
+    const b = pq.dequeue(["priority"]);
+    if (a > b) {
+      pq.enqueue("x", a - b);
+    }
+  }
+  return pq.ieEmpty() ? 0 : pq.dequeue(["priority"]);
+};
+
 // 递归
 var lastStoneWeight = function (stones) {
 // 升序排列
@@ -41,3 +56,4 @@ var lastStoneWeight = function (stones) {
   // 如果不为空就只剩一块石头,返回它
   return stones.length ? stones[0] : 0;
 }
+
