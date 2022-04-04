@@ -21,6 +21,7 @@
       pq.enqueue('x', a - b);
     }
   }
+
   // 不为空就是只剩一块石头,返回他
   return pq.isEmpty() ? 0 : pq.dequeue()['priority'];
 };
