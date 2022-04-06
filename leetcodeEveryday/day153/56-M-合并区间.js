@@ -12,7 +12,7 @@
   for (let i = 1; i < intervals.length; i++) {
     let cur = intervals[i];
     // 如果prev区间右闭合处的值大于等于cur区间的左闭合处值,说明有重合
-    if (prev[1] > cur[0]) {
+    if (prev[1] >= cur[0]) {
       // 而在重合情况下,要判断cur右闭合处和prev右闭合处哪个大,取大的值,这样就可以把prev和cur两个区间合并
       prev[1] = Math.max(cur[1], prev[1]);
       // 而如果prev区间右闭合处的值小于cur区间的左闭合处值说明区间没有重合,将上次的prev压入res并更新prev
