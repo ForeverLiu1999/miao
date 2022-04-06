@@ -14,7 +14,6 @@
  */
 // javaScript特色算法主义解法
  var isSubtree = (root, subRoot) => (JSON.stringify(root).indexOf(JSON.stringify(subRoot))) > -1;
-
 // 递归遍历treeA的每个节点,看看以当前节点为root的子树,是否和treeB相同
 // 从根节点开始,判断整个树是否和treeB相同,不相同则递归左右子树,是否和treeB相同
 // 当遍历到null节点,时钟没有返回true,则返回false
