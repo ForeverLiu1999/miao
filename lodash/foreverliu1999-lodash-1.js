@@ -103,7 +103,7 @@ var foreverliu1999 = {
     return array[0];
   },
 
-  // 返回首次 value 在数组array中被找到的 索引值
+  // 返回首次 value 在数组 array 中被找到的索引值
   indexOf: function (array, value, fromIndex = 0) {
     for (var i = fromIndex; i < array.length; i++) {
       if (array[i] == value) {

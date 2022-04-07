@@ -37,10 +37,10 @@ var foreverliu1999 = {
   compact: function (array) {
     if (!array) return [];
     let result = [];
-      for (let i of array) {
-        if (array[i]) result.push(array[i]);
-      }
-      return result;
+    for (let i of array) {
+      if (array[i]) result.push(array[i]);
+    }
+    return result;
   },
 
   difference: function (array1, ...args) {
@@ -103,32 +103,39 @@ var foreverliu1999 = {
   // },
 
   // 将array递归为一维数组。
-    flattenDeep : array => {
-      let res = [];
-      for (let i of array) {
-        if (Array.isArray(array[i])) {
-          res.push(...this.flattenDeep(array[i]));
-        } else {
-          res.push(array[i]);
-        }
+  flattenDeep: array => {
+    let res = [];
+    for (let i of array) {
+      if (Array.isArray(array[i])) {
+        res.push(...this.flattenDeep(array[i]));
+      } else {
+        res.push(array[i]);
       }
-      return res;
-    },
+    }
+    return res;
+  },
 
-    // 返回一个由键值对组成的对象
-    fromPairs : (pairs) => {
-      let obj = {};
-      for (let i = 0; i < pairs.length; i++) {
-        obj[pairs[i][0]] = pairs[i][1];
-      }
-      return obj;
-    },
+  // 返回一个由键值对组成的对象
+  fromPairs: (pairs) => {
+    let obj = {};
+    for (let i = 0; i < pairs.length; i++) {
+      obj[pairs[i][0]] = pairs[i][1];
+    }
+    return obj;
+  },
 
-    //取出数组的第一个元素
-    head : (array) => {
-      return array[0];
-    },
+  //取出数组的第一个元素
+  head: (array) => {
+    return array[0];
+  },
 
+  // 返回首次 value 在数组 array 中被找到的索引值
+  indexOf : (array, value, fromIndex = 0) => {
+    for (let i = fromIndex; i < array.length; i++) {
+      if (array[i] == value) return i;
+    }
+    return -1;
+  },
 
 
 
