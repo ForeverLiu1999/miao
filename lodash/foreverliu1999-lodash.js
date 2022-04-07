@@ -102,9 +102,28 @@ var foreverliu1999 = {
   //   return [].concat(...ary);
   // },
 
-  flatten: function (array) {
+  // 将array递归为一维数组。
+    flattenDeep : array => {
+      let res = [];
+      for (let i of array) {
+        if (Array.isArray(array[i])) {
+          res.push(...this.flattenDeep(array[i]));
+        } else {
+          res.push(array[i]);
+        }
+      }
+      return res;
+    },
 
-  },
+    // 返回一个由键值对组成的对象
+    fromPairs : (pairs) => {
+      let obj = {};
+      for (let i = 0; i < pairs.length; i++) {
+        obj[pairs[i][0]] = pairs[i][1];
+      }
+      return obj;
+    },
+
 
 
 
