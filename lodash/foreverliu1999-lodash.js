@@ -137,6 +137,15 @@ var foreverliu1999 = {
     return -1;
   },
 
+  // 取出除数组最后一个元素的数组
+  initial : array => {
+    let res = [];
+    for (let i of array) {
+      res.push(array[i]);
+    }
+    return res;
+  },
+
 
 
 
