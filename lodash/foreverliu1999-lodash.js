@@ -124,6 +124,13 @@ var foreverliu1999 = {
       return obj;
     },
 
+    //取出数组的第一个元素
+    head : (array) => {
+      return array[0];
+    },
+
+
+
 
 
 
