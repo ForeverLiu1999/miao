@@ -129,6 +129,7 @@ var foreverliu1999 = {
     return array[0];
   },
 
+
   // 返回首次 value 在数组 array 中被找到的索引值
   indexOf : (array, value, fromIndex = 0) => {
     for (let i = fromIndex; i < array.length; i++) {
@@ -145,6 +146,21 @@ var foreverliu1999 = {
     }
     return res;
   },
+
+  // 返回一个包含所有传入数组交集元素的新数组。
+  intersection : array => {
+    let res = [];
+    for (let num of arguments[0]) {
+      for (let i = 1; i < arguments.length; i++) {
+        if (arguments[i].includes(num));
+          res.push(num);
+      }
+    }
+    return res;
+  },
+
+
+
 
 
 
