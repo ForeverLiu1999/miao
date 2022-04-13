@@ -5,7 +5,6 @@
  */
 // 动态规划
 // 走到(i, j)只有两种可能要么从上边的(i, j - 1),要么就是从左边的(i - 1, j)走过来的
-//
 const uniquePathsWithObstacles = (obstacleGrid) => {
   if (obstacleGrid[0][0] == 1) return 0; // 出发点就被障碍堵住
   const m = obstacleGrid.length;
@@ -14,11 +13,11 @@ const uniquePathsWithObstacles = (obstacleGrid) => {
   const dp = new Array(m);
   for (let i = 0; i < m; i++) dp[i] = new Array(n);
   // base case
-  dp[0][0] = 1;                 // 终点就是出发点
-  for (let i = 1; i < m; i++) { // 第一列其余的case
+  dp[0][0] = 1; // 终点就是出发点
+  for (let i = 1; i < m; i++) { // 第一列其余的case,如果当前点走不了,要么当前点是障碍,要么当前点左边的点走不了,否则路径是1,走一条直线过来
     dp[i][0] = obstacleGrid[i][0] == 1 || dp[i - 1][0] == 0 ? 0 : 1;
   }
-  for (let i = 1; i < n; i++) { // 第一行其余的case
+  for (let i = 1; i < n; i++) { // 第一行其余的case,如果当前点走不了,要么当前点是障碍,要么当前点上边的点走不了,否则路径是1,走一条竖线过来
     dp[0][i] = obstacleGrid[0][i] == 1 || dp[0][i - 1] == 0 ? 0 : 1;
   }
   // 迭代
