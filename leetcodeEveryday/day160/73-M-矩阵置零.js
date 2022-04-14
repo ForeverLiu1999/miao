@@ -18,7 +18,7 @@ var setZeroes = matrix => {
       // 如果有0出现
       if (matrix[i][j] == 0) {
         // 标记数组对应位置设置为true
-        row[i] = col[j] = true;
+        row[i] = true, col[j] = true;
       }
     }
   }
