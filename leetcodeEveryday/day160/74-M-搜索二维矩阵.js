@@ -31,3 +31,7 @@ var searchMatrix = (matrix, target) => {
   // 遍历完一遍没找到
   return false;
 };
+
+var searchMathix1 = (matrix, target) => {
+  const m = matrix.length;
+}
