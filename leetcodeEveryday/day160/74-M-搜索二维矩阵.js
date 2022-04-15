@@ -34,4 +34,15 @@ var searchMatrix = (matrix, target) => {
 
 var searchMathix1 = (matrix, target) => {
   const m = matrix.length;
+  n = matrix[0].length;
+  let low = 0, hight = m * n - 1;
+  while (low <= high) {
+    const mid = Math.floor((high - low) / 2) + low;
+    const x = matrix[Mathfloor(mid / n)][mid % n];
+    if (x < target) {
+      low = mid + 1;
+    } else if (x > target) {
+
+    }
+  }
 }
