@@ -3,17 +3,16 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-// 非原地暴力解法
- var sortColors = function(nums) {
-  const newNums = new Array(nums.length).fill(0);
-  let nums0 = 0, nums1 = 0, nums2 = 0;
+// 冒泡排序原地解决
+var sortColors = function (nums) {
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] == 0) nums0++;
-    if (nums[i] == 1) nums1++;
-    if (nums[i] == 2) nums2++;
+    for (let j = 0; j < nums.length - i; j++) {
+      // 如果前一个元素比后一个元素大
+      if (nums[j] > nums[j + 1]) {
+        // 那么就交换两个值的位置
+        [nums[j], nums[j + 1]] = [nums[j + 1], nums[j]];
+      }
+    }
   }
-  for (let j = 0; j < newNums.length; j++) {
-
-  }
-  return newNums;
+  return nums;
 };
