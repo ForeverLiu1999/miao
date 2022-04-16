@@ -4,7 +4,7 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 // 冒泡排序原地解决
-var sortColors = function (nums) {
+var sortColors = nums => {
   for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < nums.length - i; j++) {
       // 如果前一个元素比后一个元素大
@@ -16,3 +16,11 @@ var sortColors = function (nums) {
   }
   return nums;
 };
+
+// 一次遍历,如果是0移动到数组头,如果是2移动到数组尾
+
+
+// sort大法好
+var sortColors = nums => {
+  nums.sort((a, b) => a - b);
+}
