@@ -18,7 +18,27 @@ var sortColors = nums => {
 };
 
 // 一次遍历,如果是0移动到数组头,如果是2移动到数组尾
-
+var sortColors = nums => {
+  let i = 0, count = 0;
+  // 数组有多长就遍历多少次
+  while (count < nums.length) {
+    // 如果这个元素是0,就把它splice取出,然后从数组头部加进去一个0,所以数组长度不变
+    if (nums[i] === 0) {
+      nums.splice(i, 1);
+      nums.unshift(0);
+      i++;
+    } else if (nums[i] === 2) {
+      // 此处不需要i++,因为删除前一个,后一个会顶上来
+      nums.splice(i, 1);
+      nums.push(2);
+      // 如果这个元素不是0也不是2那就是1,不用管直接跳过
+    } else {
+      i++;
+    }
+    count++;
+  }
+  return nums;
+}
 
 // sort大法好
 var sortColors = nums => {
