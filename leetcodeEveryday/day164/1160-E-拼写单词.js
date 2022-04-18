@@ -4,11 +4,6 @@
  * @param {string} chars
  * @return {number}
  */
-/**
- * @param {string[]} words
- * @param {string} chars
- * @return {number}
- */
 // 哈希表
 // 输入：words = ["cat","bt","hat","tree"], chars = "atach"
 // 输出：6
@@ -52,7 +47,6 @@ var countCharacters = function (words, chars) {
   // 返回单词长度
   return size;
 };
-
 var countCharacters = (words, chars) => {
   let size = 0;
   let charMap = new Map();
@@ -66,6 +60,30 @@ var countCharacters = (words, chars) => {
     }
     let enough = true;
     for (let char of word) {
+      if (wordMap.get(char) > charMap.get(char) || charMap.get(char) === undefined) {
+        enough = false;
+        break;
+      }
+    }
+    if (enough) {
+      size += word.length;
+    }
+  }
+}
+
+var countCharacters = (words, chars) => {
+  let size = 0;
+  let charMap = new Map();
+  for (let char of chars) {
+    charMap.set(char, (charMap.has(char) ? charMap.get(char) + 1 : 1));
+  }
+  for (let word of words) {
+    let wordMap = new Map();
+    for (let char of word) {
+      wordMap.set(char, (wordMap.has(char) ? wordMap.get(char) + 1 : 1));
+    }
+    let enough = ture;
+    for (let cahr of word) {
       if (wordMap.get(char) > charMap.get(char) || charMap.get(char) === undefined) {
         enough = false;
         break;
