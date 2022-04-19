@@ -23,13 +23,14 @@ var relativeSortArray = function (arr1, arr2) {
 };
 
 var relativeSortArray = (arr1, arr2) => {
+  // 因为范围:1 <= arr1.length, arr2.length <= 1000,所以创建数组时
   const counts = new Array(1001).fill(0);
-  for (const n of arr1) { // 统计arr1数字的出现次数
+  for (const n of arr1) { // 统计arr1数字的出现次数,一次遍历,counts[n]是几就说明出现了几次
     counts[n]++;
   }
   const res = [];
   for (const n of arr2) { // 遍历arr2
-    while (counts[n] > 0) { // 出现次数>0，循环推入res
+    while (counts[n] > 0) { // 出现次数 > 0，循环推入res
       res.push(n); // 循环结束时，值变为0
       counts[n]--;
     }
