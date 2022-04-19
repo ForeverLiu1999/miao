@@ -4,6 +4,7 @@
  * @param {number[]} arr2
  * @return {number[]}
  */
+// 聪明的sort排序
 var relativeSortArray = function (arr1, arr2) {
   //sort(a,b) 正常a,b中谁小排到前面
   return arr1.sort((a, b) => {
