@@ -8,7 +8,7 @@
  var matrixReshape = function(nums, r, c) {
   const m = nums.length;
   const n = nums[0].length;
-  // 说明元素个数不同,所以无法重塑
+  // 说明元素个数不同,所以不能重塑
   if (m * n != r * c) {
       return nums;
   }
