@@ -13,12 +13,21 @@
   </div>
 
   <script>
+    // function loadDoc () {
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.onreadystatechange = function () {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //       document.getElementById("demo").innerHTML = this.responseText;
+    //     }
+    //   };
+    //   xhr.open("GET", "aaa.txt", true);
+    //   xhr.send();
+    // }
+
     function loadDoc () {
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
           document.getElementById("demo").innerHTML = this.responseText;
-        }
       };
       xhr.open("GET", "aaa.txt", true);
       xhr.send();
