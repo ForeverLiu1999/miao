@@ -17,9 +17,9 @@
           ans.push(temp);
           return;
       }
-      // 考虑选择当前位置
+      // 选择当前位置
       dfs(cur + 1, n, k, [...temp, cur]);
-      // 考虑不选择当前位置
+      // 不选择当前位置
       dfs(cur + 1, n, k, temp);
   }
   dfs(1, n, k, []);
