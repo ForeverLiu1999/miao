@@ -27,9 +27,18 @@
   used[row][col] = true; // 记录一下当前点被访问
   // canFindRest: 基于当前选择的点[row, col],能否找到剩余字符的路径
   const canFindRest = canFind(row + 1, col, i + 1) || canFind(row - 1, col, i + 1) || canFind(row + 1, i + 1) || canFind(row, col = 1, i + 1);
-
-
-
+  if (canFindRest) { // 基于当前点[row, col],可以为剩下的字符找到路径
+    return true;
+  }
+  used[row][col] = false; // 不能为剩下字符找到路径,返回false,撤销当前点的访问状态
+  return false;
+ };
+ for (let i = 0; i < m; i++) {
+   for (let j = 0; j < n; j++) {
+     if (board[i][j] == word[0] && canFind(i, j, 0)) { // 找到七点且递归结果为真,找到目标路径
+        return true;
+     }
+   }
  }
-
+ return false; // 各种条件下都没有true,则返回默认的false
 };
