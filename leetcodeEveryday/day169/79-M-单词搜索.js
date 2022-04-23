@@ -12,7 +12,7 @@
   for (let i = 0; i < m; i++) {
     used[i] = new Array(n);
   }
- // canFind判断房钱点是否是目标路径上的点
+ // canFind判断当前点是否是目标路径上的点
  const canFind = (row, col, i) => { // row col 当前点的左标,i当前考察的word字符索引
   if (i == word.length) { // 递归的出口,i越界了就返回true
     return true;
