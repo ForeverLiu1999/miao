@@ -100,7 +100,29 @@ try {
 } catch (e) {1
   processerr;
 }
+
 // 所以需要promise在一个地方处理错误
+get (url).then (data => {
+  return JSON.parse(data); // data中如果拿到JSON数据的话,parse返回这个对象传给then
+}).then (obj => {
+
+})
+
+
+// 常见同步写法
+function getJSON (url) {
+  var data = get (url); // 如果get (url)请求都没请求到就会报错被try捕获到
+  var obj = JSON.parse (data); // 如果请求成功但请求到的数据不是JSON格式,解析不了,所以还是会报错
+  return obj;
+}
+
+// 异步,promise改写
+function getJSON (url) {
+  return get (url).then(JSON.parse);
+}
+
+// 都不用的写法
+
 
 
 
