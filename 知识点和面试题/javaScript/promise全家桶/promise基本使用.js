@@ -16,11 +16,11 @@ var b = new Promise(
       resolve(0);
     }, 3000);
   })
-  b.then((value) => {
-    console.log("true:" + value + 1);
-  }, (reason) => {
-    console.log("false:" + value + 2);
-  })
+b.then((value) => {
+  console.log("true:" + value + 1);
+}, (reason) => {
+  console.log("false:" + value + 2);
+})
 
 // 同步执行,构造函数直接调用还没返回,所以先输出1,函数执行完毕才输出2
 var c = new Promise(
@@ -71,11 +71,11 @@ p.then(f1, f2)
 
 // promise改写try catch
 try {
-  var data1 = get (url);
-  var data2 = get (data1.url);
-  var data2 = get (data1.url);
-  var data2 = get (data1.url);
-  var data2 = get (data1.url);
+  var data1 = get(url);
+  var data2 = get(data1.url);
+  var data2 = get(data1.url);
+  var data2 = get(data1.url);
+  var data2 = get(data1.url);
 } catch (e) {
   processerror;
 }
@@ -86,44 +86,61 @@ try {
     if (err) {
       throw err;
     } else {
-      get (url2, function (err, data) {
+      get(url2, function (err, data) {
         if (err) {
           throw err;
         } else {
-          get (data.url, function (err, data) {
+          get(data.url, function (err, data) {
 
           })
         }
       })
     }
   })
-} catch (e) {1
+} catch (e) {
+  1
   processerr;
 }
 
 // 所以需要promise在一个地方处理错误
-get (url).then (data => {
+get(url).then(data => {
   return JSON.parse(data); // data中如果拿到JSON数据的话,parse返回这个对象传给then
-}).then (obj => {
+}).then(obj => {
 
 })
 
 
 // 常见同步写法
-function getJSON (url) {
-  var data = get (url); // 如果get (url)请求都没请求到就会报错被try捕获到
-  var obj = JSON.parse (data); // 如果请求成功但请求到的数据不是JSON格式,解析不了,所以还是会报错
+function getJSON(url) {
+  var data = get(url); // 如果get (url)请求都没请求到就会报错被try捕获到
+  var obj = JSON.parse(data); // 如果请求成功但请求到的数据不是JSON格式,解析不了,所以还是会报错
   return obj;
 }
 
 // 异步,promise改写
-function getJSON (url) {
-  return get (url).then(JSON.parse);
+function getJSON(url) {
+  return get(url).then(JSON.parse);
+}
+// 都不用的写法
+function getJSON(url, f) {
+  get(url, function (err, data) {
+    if (err) {
+      f(err)
+    } else {
+      try {
+        var obj = SJON.parse(data);
+        f(null, obj);
+      } catch (e) {
+        f(err);
+      }
+    }
+  })
 }
 
-// 都不用的写法
-
-
+//  catch源代码
+Promise.prototype.catch = function (f) {
+  return this.then(null, f);
+}
 
 
 
