@@ -11,7 +11,6 @@ const port = 8899
 const baseDir = 'C:\\Users\\xieran\\Desktop\\10\\node\\node_modules\\express'
 
 // C:/Users/xieran/Desktop/yanzhao.png
-// 20次烈焰刺 影袭100功 15双杀
 // http://10.3.3.3:8899/aaa.js
 
 
