@@ -23,7 +23,7 @@ server.on('request', async (req, res) => {
 
   const targetPath = path.join(baseDir, decodeURIComponent(urlObj.pathname))
 
-  if (!targetPath.startsWith(baseDir)) {
+  if (!targetPath.startsWith(baseDir)) {654333333333321·
     res.writeHead(404)
     res.write('404 Not Found')
     res.end()
