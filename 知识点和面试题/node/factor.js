@@ -17,4 +17,4 @@ function factor (num) {
 var factors = factor (number);
 console.log (number + ': ' + factors.join (' '));
 
-// 利爪7次 鞭笞阻止治疗150
+//
