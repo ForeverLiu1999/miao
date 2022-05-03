@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { result } = require('lodash');
 const fsp = fs.promises;
 const path = require('path');
 const cwd = process.cwd();
@@ -16,7 +17,30 @@ function getFileListSync (dir) {
   }
   return result;
 }
-console.log(getFileListSync('./test-a'));
+// console.log(getFileListSync('./test-a'));
 
 
 // 异步版本
+async function getFileList (dir) {
+  var reusult = [];
+  var entries = await fsp.readdir (dir, { withFileTypes: true });
+  for (var entry of entries) {
+    var entryPath = path.join(dir, entry.name);
+    if (entry.isFile()) {
+      result.push(entrypath);
+    } else if (entry.isDirectory()) {
+      var resultOfChild = await getFileList(antryPath);
+      result.push(...resultOfChild);
+    }
+  }
+  return result;
+}
+
+async function main () {
+  console.log(await getFileList('./test-a'));
+}
+main();
+
+// getFileList ('./test-a').then(result => {
+//   console.log(result);
+// })
