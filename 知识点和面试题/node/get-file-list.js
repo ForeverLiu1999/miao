@@ -49,10 +49,10 @@ async function getFileList(dir) {
 // console.log(await, getFileList('./test-a'));
 
 // 所以可以放进一个异步函数内然后调用
-async function main() {
-  console.log(await getFileList('./test-a'));
-}
-main();
+// async function main() {
+//   console.log(await getFileList('./test-a'));
+// }
+// main();
 
 // 如果直接输出会得到一个promise
 // console.log (getFileList('./test-a'));
@@ -62,6 +62,7 @@ main();
 // })
 
 
+// 回调版本
 function getFileListCallback(dir, callback) {
   var result = [];
   fs.readdir(dir, {
