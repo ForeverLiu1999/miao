@@ -1,13 +1,18 @@
 const fs = require('fs');
-const { result } = require('lodash');
+const {
+  result,
+  entries
+} = require('lodash');
 const fsp = fs.promises;
 const path = require('path');
 const cwd = process.cwd();
 
 // 同步版本
-function getFileListSync (dir) {
+function getFileListSync(dir) {
   var result = []; // 如果是文件就push进result,如果是文件夹就对其中进行递归
-  var entries = fs.readdirSync(dir, { withFileTypes: true });
+  var entries = fs.readdirSync(dir, {
+    withFileTypes: true
+  });
   for (var entry of entries) {
     if (entry.isFile()) {
       result.push(path.join(cwd, dir, entry.name));
@@ -21,9 +26,11 @@ function getFileListSync (dir) {
 
 
 // 异步版本
-async function getFileList (dir) {
+async function getFileList(dir) {
   var result = [];
-  var entries = await fsp.readdir (dir, { withFileTypes: true });
+  var entries = await fsp.readdir(dir, {
+    withFileTypes: true
+  });
   for (var entry of entries) {
     var entryPath = path.join(dir, entry.name);
     if (entry.isFile()) {
@@ -36,11 +43,13 @@ async function getFileList (dir) {
   return result;
 }
 
+//
+
 // 不能直接console,await会被识别为一个变量
 // console.log(await, getFileList('./test-a'));
 
 // 所以可以放进一个异步函数内然后调用
-async function main () {
+async function main() {
   console.log(await getFileList('./test-a'));
 }
 main();
@@ -52,5 +61,34 @@ main();
 //   console.log(result);
 // })
 
-// 践踏
 
+function getFileListCallback(dir, callback) {
+  var result = [];
+  fs.readdir(dir, {
+    withFileTypes: true
+  }, (err, entries) => {
+    var i = entries.filter(it => it.isDirectory()).length;
+    for (let idx = 0; idx < entries.length; idx++) {
+      let entry = entries[idx];
+      var entryPath = path.join(dir, entry.name);
+      if (entry.isFile()) {
+        result[idx] = entryPath;
+      } else if (entry.isDirectory()) {
+        getFileListCallback(entryPath, list => {
+          // result.push(...list);
+          result[idx] = list;
+          i--;
+          if (i == 0) {
+            callback(result.flat());
+          }
+        })
+      }
+    }
+    if (i == 0) {
+      callback(result.flat());
+    }
+  })
+}
+getFileListCallback('./test-a', function (result) {
+  console.log(result);
+})
