@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>todos</title>
+  <style>
+    body {
+      counter-reset: items-left;
+    }
+    li.completed {
+      counter-increment: items-left;
+    }
+    .items-left2::before {
+      content: counter(items-left)
+    }
+
+    li.completed {
+      text-decoration: line-through;
+    }
+
+    ul.active li.completed {
+      display: none;
+    }
+    ul.completed li.active {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper"></div>
+
+  <script src="./jquery-3.5.1.min.js"></script>
+  <script type="module">
+    import {html, render} from 'https://unpkg.com/lit-html@1.4.1?module'
+
+    window.html = html
+    window.render = render
+
+    var editingIdx = -1
+
+    $(wrapper).on('click', 'button', function(e) {
+      editingIdx++
+      update()
+    })
+
+    update()
+
+    function update() {
+      var vdom = html`
+        <div>
+          <h1>todos</h1>
+          <div>
+            ${editingIdx}
+            <button>+++</button>
+          </div>
+        </div>
+      `
+      render(vdom, wrapper)
+    }
+
+  </script>
+</body>
+</html>

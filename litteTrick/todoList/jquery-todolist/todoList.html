@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>todoList</title>
+
+  <!-- 也可以这里引入
+  <script src="./jquery-3.4.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+    }) // 把这个函数绑在document的ready事件上
+  </script> -->
+
+  <!-- 简写为:
+  <script src="./jquery-3.4.1.min.js"></script>
+  <script>
+    $(function () {
+    })
+  </script> -->
+
+</head>
+
+<body>
+  <h1>todoList</h1>
+  <div>
+    <input type="checkbox">
+    <input type="text" id="todo-input">
+  </div>
+
+  <ul class="todo-list"></ul>
+
+  <div class="status">
+    <span>xxx item(s) left</span>
+
+    <span>
+      <label><input type="radio" name="" id="">All</label>
+      <label><input type="radio" name="" id="">Active</label>
+      <label><input type="radio" name="" id="">Completed</label>
+    </span>
+  </div>
+
+<button style="display: none;">clear</button>
+
+
+
+  <script src="./jquery-3.5.1.min.js"></script>
+  <script>
+    // var todoInput = document.querySelector('#todo-input');
+    $('#todo-input').on('keyup', function (e) {
+      // console.log(e); // 看是否绑成功
+
+      if (e.code == 'Enter') {
+        var todoText = this.value.trim(); // trim()去除两边空白 这个this上不能使用Jquery方法
+        // var todoText = this.val(); // 原生dom对象没有".val()"方法
+        // var todoText = $(this).val(); // 但可以用原生dom对象创建一个Jquery对象
+
+        if (todoText == '') {
+          return;
+        }
+
+        var a = $(`
+          <li>
+            <input type = "checkbox" />
+            <span>${todoText}</span>
+            <button>&times;</button>
+          </li>
+          `).appendTo('.todo-list')
+          .on('click', 'button', function (e) {
+            $(this).parent().remove();
+          })
+          .on('click', 'span', function (e) {
+
+          })
+          .on('click', 'input', function (e) {
+
+          })
+
+
+
+        this.value = '';
+      }
+    })
+11
+    elt('li', {
+      class: 'woef',
+      id: 'wef'
+    }, 'owiejf', elt('input'), elt('span', {}, 'todoText'), elt('button'));
+
+    function elt(type, attrs = {}, ...children) {
+      var node = document.createElement(type);
+      for (var [key, val] of Object.entries(attrs)) {
+        node.setAttribute(key, val);
+      }
+      for (var child of children) {
+        node.append(child);
+      }
+      return node;
+    }
+  </script>
+</body>
+
+</html>

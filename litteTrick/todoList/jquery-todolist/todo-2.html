@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>todos</title>
+  <style>
+    body {
+      counter-reset: items-left;
+    }
+    li.completed {
+      counter-increment: items-left;
+    }
+    .items-left2::before {
+      content: counter(items-left)
+    }
+
+    li.completed {
+      text-decoration: line-through;
+    }
+
+    ul.active li.completed {
+      display: none;
+    }
+    ul.completed li.active {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+  </div>
+
+  <script src="./jquery-3.5.1.min.js"></script>
+  <script>
+
+    // 数据驱动  data driven
+
+    var visible = 'all'
+    var editingIdx = -1
+
+    var todos = [{
+      text: 'eat',
+      done: true,
+    }, {
+      text: 'drink',
+      done: false,
+    }, {
+      text: 'sleep',
+      done: false,
+    }]
+
+    render()
+
+    function addTodo(e) {
+      if (e.code == 'Enter') {
+        var text = e.target.value.trim()
+
+        if (text) {
+          todos.push({
+            text: text,
+            done: false,
+          })
+          e.target.value = ''
+          render()
+          document.querySelector('#todo-input').focus()
+        }
+      }
+    }
+
+    function toggleStatus(e) {
+      var idx = e.target.dataset.idx
+      todos[idx].done = !todos[idx].done
+      render()
+    }
+
+    $(wrapper)
+      .on('click', 'button.del', function(e) {
+        var idx = this.dataset.idx
+        todos.splice(idx, 1)
+        render()
+      })
+      .on('click', '#toggle-select-all', function(e) {
+        if (todos.every(it => it.done)) {
+          todos.forEach(it => {
+            it.done = false
+          })
+        } else {
+          todos.forEach(it => {
+            it.done = true
+          })
+        }
+        render()
+      })
+      .on('click', '.state-select input', function(e) {
+        visible = this.value
+        render()
+      })
+      .on('keyup', '.edit-box', function(e) {
+        if (e.code == 'Enter') {
+          var text = e.target.value.trim()
+          var idx = e.target.dataset.idx
+          todos[idx].text = text
+          editingIdx = -1
+          render()
+        }
+        if (e.code == 'Escape') {
+          editingIdx = -1
+          render()
+        }
+      })
+      .on('blur', '.edit-box', function(e) {
+        var text = e.target.value.trim()
+        var idx = e.target.dataset.idx
+        todos[idx].text = text
+        editingIdx = -1
+        render()
+      })
+      .on('dblclick', '.todo-text', function(e) {
+        editingIdx = this.dataset.idx
+        render()
+        document.querySelector('ul .edit-box').focus()
+      })
+
+
+    function elt(type, ...children) {
+      var node = {
+        type: type,
+        children: children
+      }
+      return node
+    }
+
+    function render() {
+      var dom = elt()
+      var html = `
+        <h1>todos</h1>
+        <div>
+          <div>
+            <input type="checkbox" id="toggle-select-all" ${todos.every(it => it.done) ? 'checked' : ''}>
+            <input type="text" id="todo-input" onkeyup="addTodo(event)">
+          </div>
+
+          <ul class="todo-list ${visible}">
+            ${
+              todos.map((todo, idx) => {
+                if (visible == 'active' && todo.done == true) {
+                  return ''
+                }
+                if (visible == 'completed' && todo.done == false) {
+                  return ''
+                }
+
+                return `
+                  <li class="todo-item ${todo.done ? 'completed' : 'active'}">
+                    <input data-idx="${idx}" onclick="toggleStatus(event)" type="checkbox" ${todo.done ? 'checked' : ''}/>
+                    ${
+                      idx == editingIdx
+                        ? `<input data-idx="${idx}" class="edit-box" type="text" value="${todo.text}" />`
+                        : `<span  data-idx="${idx}" class="todo-text">${todo.text}</span>`
+                    }
+
+                    <button data-idx="${idx}" class="del">del</button>
+                  </li>
+                `
+              }).join('')
+            }
+          </ul>
+
+          <div class="status">
+            <span>${todos.filter(it => !it.done).length} item(s) left</span>
+
+            <div class="state-select">
+              <label><input type="radio" value="all" name="visible"       ${visible == 'all' ? 'checked' : ''}> All</label>
+              <label><input type="radio" value="active" name="visible"    ${visible == 'active' ? 'checked' : ''}> Active</label>
+              <label><input type="radio" value="completed" name="visible" ${visible == 'completed' ? 'checked' : ''}> Completed</label>
+            </div>
+
+            ${
+              todos.some(it => it.done)
+                ? `<button class="clear-completed">clear completed</button>`
+                : ''
+            }
+          </div>
+
+        </div>
+      `
+
+      console.log(html)
+
+      wrapper.innerHTML = html
+    }
+
+  </script>
+</body>
+</html>

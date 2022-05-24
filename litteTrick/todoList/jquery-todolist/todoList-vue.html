@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <h1>todos</h1>
+    <div>
+      <div>
+        <input type="checkbox" id="toggle-select-all" :checked="todos.every(it => it.done)">
+        <input type="text" id="todo-input" @keyup="addTodo">
+      </div>
+
+      <ul class="todo-list" :class="visible">
+        <li class="todo-item completed" v-for="(todo,idx) of todos">
+          <input type="checkbox" :checked="todo.done" @click="toggleStatus(idx)">
+          <input v-if="editingIdx == idx" @blur="editingIdx = -1" @keyup="editTodo($event, idx)" class="edit-box"
+            type="text" :value="todo.text" />
+          <span v-else @dblclick="startEdit(idx)" class="todo-text">{{todo.text}}</span>
+          <button class="del" @click="deleteTodo(idx)">del</button>
+        </li>
+      </ul>
+
+      <div class="status">
+        <span>{{todos.filter(it => !it.done).length}} item(s) left</span>
+
+        <div class="state-select">
+          <label><input type="radio" name="visible" value="all" @click="visible = 'all'" :checked="visible == 'all'">
+            All</label>
+          <label><input type="radio" name="visible" value="active" @click="visible = 'active'"
+              :checked="visible == 'active'"> Active</label>
+          <label><input type="radio" name="visible" value="completed" @click="visible = 'completed'"
+              :checked="visible == 'completed'"> Completed</label>
+        </div>
+
+        <button v-if="todos.some(it => it.done)" class="clear-completed">clear completed</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./vue-2.6.14.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#wrapper',
+      data: {
+        visible: 'all',
+        editingIdx: -1,
+        todos: [{
+          text: 'eat',
+          done: true,
+        }, {
+          text: 'drink',
+          done: true,
+        }, {
+          text: 'sleep',
+          done: true,
+        }]
+      },
+      methods: {
+        addTodo(e) {
+          if (e.code == 'Enter') {
+            var text = e.target.value.trim();
+            if (text) {
+              var todo = {
+                text,
+                done: false,
+              }
+              this.todos.push(todo);
+              e.target.value = '';
+            }
+          }
+        },
+        //
+        toggleStatus(idx) {`
+          this.todos[idx].done = !this.todos[idx].done;
+        },
+        deleteTode(idx) {
+          this.todos.splice(idx, 1);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
