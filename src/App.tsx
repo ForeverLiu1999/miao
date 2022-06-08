@@ -17,6 +17,9 @@ import Servers from './Servers';
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
+import { State } from './store';
+import { useDispatch } from 'react-redux';
 
 
 // @ts-ignore
@@ -29,6 +32,17 @@ function App() {
   var [connectState, setConnectState] = useState('连接中...')
   var [selectedIdx, setSelectedIdx] = useState('0')
   var [globalStat, setGlobalStat] = useState<any>({})
+
+  var dispatch = useDispatch()
+  var servers = useSelector((state: State) => {
+    return state.servers
+  })
+  var server = useSelector((state: State) => {
+    return state.servers[state.selectedServerIndex]
+  })
+  var globalStat = useSelector((state: State) => {
+    return state.globalStat
+  })
 
   var aria2Servers = useMemo(() => {
     return JSON.parse(localStorage.ARIA2_SERVERS ?? '[]')
@@ -51,6 +65,7 @@ function App() {
     }, () => {
       setConnectState('连接失败')
     })
+
 
 
     var id: NodeJS.Timer
