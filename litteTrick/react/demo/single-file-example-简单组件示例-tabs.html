@@ -17,8 +17,6 @@
       }
     </style>
     <script type="text/babel">
-
-
       class Tabs extends React.Component {
         constructor(props) {
           super()
@@ -98,6 +96,14 @@
           )
         }
       }
+
+
+      function  Button(props) {
+        if (props['r-if'] == false) {
+          return null
+        }
+      }
+      <Button r-if={false}></Button>
 
 
 
