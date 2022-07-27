@@ -2,6 +2,7 @@
 export default class Aria2Client {
   ws: WebSocket;
   id: number;
+  readyPromise: Promise<Aria2Client> // 希望resolve出对象自身的话,就要这样设置类型.
 
   // 为了使发送的请求和返回的响应可以一一对应,该对象记录每个id的请求对应的回调函数.
   // 内容为id => callback
@@ -13,7 +14,14 @@ export default class Aria2Client {
   constructor(private ip: string = '127.0.0.1', public port: number | string, public secret: string) {
     var url = `ws://${ip}:${port}/jsonrpc` // 可以在jsonrpc连接的请求头中查看.
     this.ws = new WebSocket(url) // 创建webSocket连接.
-    this.id = 1 // id从1开始,否则第一个就是0了
+    this.id = 1 // id从1开始,否则第一个就是0了.
+
+    // 创建一个Promise等待连接成功的状态,对连接建立成功事件进行监听.
+    this.readyPromise = new Promise(resolve => {
+      this.ws.addEventListener('open', (e) => {
+        resolve(this)
+      })
+    })
 
     // 不需要发一次监听一次,所以整个Client只需要监听一次message事件.
     this.ws.addEventListener('message', (e) => { // 这里必须用箭头函数的写法,这样可以绑定到aria2-client的this,否则'var callback = this.callbacks[id]'中的this会指向WebSocket,因为事件绑给WebSocket,this就指向它.
@@ -33,6 +41,12 @@ export default class Aria2Client {
 
     })
   }
+
+  ready() {
+    return this.readyPromise
+  }
+
+
 
   // 手动实现addUri方法
   // aria2 = new Aria2Client('127.0.0.1', '11000', '111222333');
@@ -80,7 +94,7 @@ var aria2Methods = [
   "unpauseAll",
   "forceRemove",
   "changePosition",
-  "tellStatus",
+  "tellready",
   "getUris",
   "getFiles",
   "getServers",
