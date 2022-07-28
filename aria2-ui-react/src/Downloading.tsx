@@ -1,6 +1,6 @@
 import { useEffect, useInsertionEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import Aria2Client from "./aria2-client"
+import  client from "./aria2-client"
 
 // 想要接什么属性,就把属性的类型声明成一个接口."I"开头代表是一个接口.
 interface IProps {

@@ -6,15 +6,14 @@ import Downloading from './Downloading';
 import Waiting from './Downloading';
 import NewTask from './NewTask';
 import Header from './Header';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
-import Aria2Client from './aria2-client'; // 手动创建连接aria2
+import client from './aria2-client'; // 手动创建连接aria2
 
 // @ts-ignore 让typescript不再检查这一行
-globalThis.Aria2Client = Aria2Client;
+globalThis.client = client;
 
 function App() {
-  var aria2 = useMemo(() => new Aria2Client('127.0.0.1', '11000', '111222333'), [])
 
   return (
     <HashRouter>
@@ -33,11 +32,11 @@ function App() {
         <div>
           <Routes>
           {/* Downloading要接属性需要去Downloading.tsx文件进行声明 */}
-            <Route path='/downloading' element={<Downloading  client={aria2}/>}>
+            <Route path='/downloading' element={<Downloading />}>
             </Route>
-            <Route path='/waiting' element={<Waiting client={aria2}/>}>
+            <Route path='/waiting' element={<Waiting />}>
             </Route>
-            <Route path='/new' element={<NewTask client={aria2}/>}>
+            <Route path='/new' element={<NewTask />}>
             </Route>
           </Routes>
         </div>
