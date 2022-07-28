@@ -1,5 +1,5 @@
 // 简化 因为上边构造函数所有参数都直接放在this上,可以用private私有声明减少代码量.
-class Aria2Client {
+export default class Aria2Client {
   addUris() {
     throw new Error("Method not implemented.");
   }
@@ -84,50 +84,49 @@ class Aria2Client {
 }
 
 var aria2Methods = [
-  "aria2.addUri",
-  "aria2.addTorrent",
-  "aria2.getPeers",
-  "aria2.addMetalink",
-  "aria2.remove",
-  "aria2.pause",
-  "aria2.forcePause",
-  "aria2.pauseAll",
-  "aria2.forcePauseAll",
-  "aria2.unpause",
-  "aria2.unpauseAll",
-  "aria2.forceRemove",
-  "aria2.changePosition",
-  "aria2.tellStatus",
-  "aria2.getUris",
-  "aria2.getFiles",
-  "aria2.getServers",
-  "aria2.tellActive",
-  "aria2.tellWaiting",
-  "aria2.tellStopped",
-  "aria2.getOption",
-  "aria2.changeUri",
-  "aria2.changeOption",
-  "aria2.getGlobalOption",
-  "aria2.changeGlobalOption",
-  "aria2.purgeDownloadResult",
-  "aria2.removeDownloadResult",
-  "aria2.getVersion",
-  "aria2.getSessionInfo",
-  "aria2.shutdown",
-  "aria2.forceShutdown",
-  "aria2.getGlobalStat",
-  "aria2.saveSession",
-  "system.multicall",
-  "system.listMethods",
-  "system.listNotifications",
+  "addUri",
+  "addTorrent",
+  "getPeers",
+  "addMetalink",
+  "remove",
+  "pause",
+  "forcePause",
+  "pauseAll",
+  "forcePauseAll",
+  "unpause",
+  "unpauseAll",
+  "forceRemove",
+  "changePosition",
+  "tellStatus",
+  "getUris",
+  "getFiles",
+  "getServers",
+  "tellActive",
+  "tellWaiting",
+  "tellStopped",
+  "getOption",
+  "changeUri",
+  "changeOption",
+  "getGlobalOption",
+  "changeGlobalOption",
+  "purgeDownloadResult",
+  "removeDownloadResult",
+  "getVersion",
+  "getSessionInfo",
+  "shutdown",
+  "forceShutdown",
+  "getGlobalStat",
+  "saveSession",
+  // "system.multicall",
+  // "system.listMethods",
+  // "system.listNotifications",
 ]
 
 aria2Methods.forEach(methodName => {
-  var [, method] = methodName.split('.')
+  //  var [, methodName] = methodName.split('.')
 
   // @ts-ignore
-  Aria2Client.prototype[method] = function (...args: any[]) {
-    return this.ready().then(() => {
+  Aria2Client.prototype[methodName] = function (...args: any[]) {
       return new Promise((resolve, reject) => {
         var id = this.id++;
 
@@ -147,15 +146,10 @@ aria2Methods.forEach(methodName => {
         this.ws.send(JSON.stringify({
           jsonrpc: '2.0',
           id: id,
-          method: methodName,
+          method: 'aria2.' + methodName,
           // 给addUri传递的其他参数就跟在rpc调用的params的密码的后边.
           params: [`token:${this.secret}`, ...args]
         }))
-      })
     })
   }
 })
-
-let client = new Aria2Client('127.0.0.1', '11000', '111222333');
-
-export default client
