@@ -1,8 +1,10 @@
-import { useTasks } from "./hooks"
+import { useTasks, useTasks2 } from "./hooks"
 import { IProps } from "./NewTask"
 
 export default function Waiting({ client }: IProps) {
-  var tasks = useTasks(client, 1000, 'Waiting')
+  var tasks = useTasks2(() => {
+    return client.ready().then((client: any) => client.tellWaiting(0, 100))
+  }, 1000)
   return <div>
     等待中...
     <ul>

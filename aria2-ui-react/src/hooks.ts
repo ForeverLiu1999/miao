@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Aria2Client from "./aria2-client";
 // import Aria2Client from "./aria2-client";
 
@@ -72,22 +72,19 @@ export function useTasks(client: Aria2Client, interval: number, state: 'Active' 
 
 export function useTasks2(getTasks: () => Promise<any[]>, interval: number) { // 不关心state的情况下,getTasks函数最终返回一个tasks.
   var [tasks, setTasks] = useState<any[]>([])
+  var ref = useRef<typeof getTasks>(getTasks) // 每次useTask2都会传一个新的函数,调用的也是新的.
+  ref.current = getTasks
   useEffect(() => {
-    var unmount = false
-
-    getTasks().then(tasks => { // getTasks会有用时比较久的情况,网络正常时也无须担心,但网络质量差时,因为  组件挂载成功才能getTasks,回调还没有运行,可他所在的组件已经销毁.
-      if (!unmount) {
+    ref.current().then(tasks => { // getTasks会有用时比较久的情况,网络正常时也无须担心,但网络质量差时,因为  组件挂载成功才能getTasks,回调还没有运行,可他所在的组件已经销毁.
         setTasks(tasks)
-      }
     })
     var id = setInterval(() => {
-      getTasks().then(tasks => {
+      ref.current().then(tasks => {
         setTasks(tasks)
       })
     }, interval)
     return () => {
       clearInterval(id)
-      unmount = true
     }
   }, [])
   return tasks

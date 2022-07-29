@@ -1,17 +1,11 @@
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import Aria2Client from "./aria2-client"
-import { useTasks, useTasks2 } from "./hooks"
+import { useTasks2 } from "./hooks";
+import { IProps } from "./NewTask";
 
-// 想要接什么属性,就把属性的类型声明成一个接口."I"开头代表是一个接口.
-interface IProps {
-  client: Aria2Client
-}
-
-export default function Downloading({ client }: IProps) {
-  // taks每秒更新
-  var tasks = useTasks2(() => {
-    return client.ready().then((client: any) => client.tellActive())
+export default function Stopped({client}: IProps) {
+  var tasks = useTasks2(async () => {
+    await client.ready()
+    // @ts-ignore
+    return client.tellStopped(0, 100)
   }, 1000)
 
   return (
