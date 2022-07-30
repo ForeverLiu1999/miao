@@ -14,10 +14,12 @@ export default function NewTask({ client }: IProps) {
 
   function start () {
     var links = uris.value.split('/n').map(it => it.trim()).filter(it => it) // useInput展开后有value属性和onChange事件,按回车拆分,而且每次回车是一个新链接,空格是不要的,trim()掉空格.最后过滤一下取非空.
-    // @ts-ignore
-      client.addUri([link], {
+    for (var link of links) { // 每一个link都要调用一次
+      // @ts-ignore
+      client.addUri([link], { // 数组形式允许添加多个地址链接.
         'max-download-limit': downloadSpeed.value
       })
+    }
     navigate('/downloading')
   }
 

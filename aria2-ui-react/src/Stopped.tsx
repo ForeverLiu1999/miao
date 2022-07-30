@@ -10,7 +10,7 @@ export default function Stopped({client}: IProps) {
 
   return (
     <div>
-      下载中...
+      已停止...
       <ul>
         {
           tasks.map(task => {

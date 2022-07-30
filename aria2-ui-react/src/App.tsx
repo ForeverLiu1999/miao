@@ -18,10 +18,10 @@ function App() {
     <HashRouter>
       <div className="App">
         <div className="App-left">
-          <div><NavLink to="/downloading">下载中</NavLink></div>
-          <div><NavLink to="/waiting">等待中</NavLink></div>
-          <div><NavLink to="/stopped">已完成</NavLink></div>
-          <div><NavLink to="/new">新建任务</NavLink></div>
+          <div><NavLink style={({isActive}) => ({color: isActive ? 'red' : ''})} to="/downloading">下载中</NavLink></div>
+          <div><NavLink style={({isActive}) => ({color: isActive ? 'red' : ''})} to="/waiting">等待中</NavLink></div>
+          <div><NavLink style={({isActive}) => ({color: isActive ? 'red' : ''})} to="/stopped">已完成</NavLink></div>
+          {/* <div><NavLink to="/new">新建任务</NavLink></div> */}
         </div>
         <div className="App--right">
           <div className="App-header">
@@ -35,7 +35,7 @@ function App() {
             </Route>
             <Route path='/waiting' element={<Waiting client={aria2}/>}>
             </Route>
-            <Route path='/stopped' element={Stopped client={aria2}/>}>
+            <Route path='/stopped' element={<Stopped client={aria2}/>}>
             </Route>
             <Route path='/new' element={<NewTask client={aria2}/>}>
             </Route>
