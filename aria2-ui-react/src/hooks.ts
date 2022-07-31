@@ -90,3 +90,33 @@ export function useTasks2(getTasks: () => Promise<any[]>, interval: number) { //
   }, [])
   return tasks
 }
+
+
+  export const useAsync = (asyncFunction: () => Promise<any>, immediate = true) => {
+    const [pending, setPending] = useState<boolean>(false);
+    const [value, setValue] = useState<any>(null);
+    const [error, setError] = useState<any>(null);
+
+    const execute = useCallback(() => {
+      setError(null);
+      setPending(true);
+      setValue(null);
+
+      return asyncFunction()
+      .then((response: any) => setValue(response))
+      .catch((err: any) => setError(err))
+      .finally(() => setPending(false));
+    }, [asyncFunction]);
+
+    useEffect(() => {
+      if (immediate) {
+        execute();
+      }
+    }, [execute, immediate]);
+
+    return {
+      error, execute, pending, value,
+    }
+  }
+
+

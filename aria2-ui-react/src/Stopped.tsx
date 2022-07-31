@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useTasks2 } from "./hooks";
 import { IProps } from "./NewTask";
 
@@ -23,6 +24,8 @@ export default function Stopped({client}: IProps) {
               |
               {/* 下载速度 */}
               <span>{task.downloadSpeed}B/s</span>
+              |
+              <Link to={"/task/detail/" + task.gid}>详情</Link>
             </li>
           })
         }

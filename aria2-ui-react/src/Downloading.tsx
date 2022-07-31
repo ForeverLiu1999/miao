@@ -29,6 +29,8 @@ export default function Downloading({ client }: IProps) {
               |
               {/* 下载速度 */}
               <span>{task.downloadSpeed}B/s</span>
+              |
+              <Link to={"/>task/detail/" + task.gid}>详情</Link>
             </li>
           })
         }

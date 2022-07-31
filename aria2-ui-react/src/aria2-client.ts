@@ -1,5 +1,8 @@
 // 简化 因为上边构造函数所有参数都直接放在this上,可以用private私有声明减少代码量.
 export default class Aria2Client {
+  tellStatus(gid: string | undefined) {
+    throw new Error("Method not implemented.");
+  }
   addUris() {
     throw new Error("Method not implemented.");
   }
