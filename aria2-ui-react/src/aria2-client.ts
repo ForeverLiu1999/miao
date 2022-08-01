@@ -1,11 +1,11 @@
 // 简化 因为上边构造函数所有参数都直接放在this上,可以用private私有声明减少代码量.
 export default class Aria2Client {
-  tellStatus(gid: string | undefined) {
-    throw new Error("Method not implemented.");
-  }
-  addUris() {
-    throw new Error("Method not implemented.");
-  }
+  // tellStatus(gid: string | undefined) {
+  //   throw new Error("Method not implemented.");
+  // }
+  // addUris() {
+  //   throw new Error("Method not implemented.");
+  // }
   ws: WebSocket;
   id: number;
   readyPromise: Promise<Aria2Client> // 希望resolve出对象自身的话,就要这样设置类型.
@@ -16,8 +16,8 @@ export default class Aria2Client {
     [id: number]: (data: any) => void
   } = {}
 
-  // ts可以限定类型,private私有声明可以节省代码,不然ip port secret ws这些字段都要在上边先声明一遍.
-  constructor(private ip: string = '127.0.0.1', public port: number | string, public secret: string) {
+  // ts可以限定类型,private/public声明可以节省代码,不然ip port secret ws这些字段都要在上边先声明一遍.
+  constructor(public ip: string = '127.0.0.1', public port: number | string, public secret: string) {
     var url = `ws://${ip}:${port}/jsonrpc` // 可以在jsonrpc连接的请求头中查看.
     this.ws = new WebSocket(url) // 创建webSocket连接.
     this.id = 1 // id从1开始,否则第一个就是0了.
@@ -52,8 +52,6 @@ export default class Aria2Client {
     return this.readyPromise
   }
 
-
-
   // 手动实现addUri方法
   // aria2 = new Aria2Client('127.0.0.1', '11000', '111222333');
   // var id = await aria2.addUri(['https://freetestdata.com/wp-content/uploads/2022/02/Free_Test_Data_5MB_AVI.avi'])
@@ -86,7 +84,8 @@ export default class Aria2Client {
   // }
 }
 
-var aria2Methods = [
+// as const用法,aria2Methods类型改变.
+const aria2Methods = [
   "addUri",
   "addTorrent",
   "getPeers",
@@ -123,36 +122,85 @@ var aria2Methods = [
   // "system.multicall",
   // "system.listMethods",
   // "system.listNotifications",
-]
+] as const
 
 aria2Methods.forEach(methodName => {
   //  var [, methodName] = methodName.split('.')
 
   // @ts-ignore
   Aria2Client.prototype[methodName] = function (...args: any[]) {
-      return new Promise((resolve, reject) => {
-        var id = this.id++;
+    return new Promise((resolve, reject) => {
+      var id = this.id++;
 
-        // 发送完之后得到一个回调函数.
-        function callback(data: any) {
-          if (data.error) {
-            reject(data.error)
-          } else {
-            resolve(data.result)
-          }
+      // 发送完之后得到一个回调函数.
+      function callback(data: any) {
+        if (data.error) {
+          reject(data.error)
+        } else {
+          resolve(data.result)
         }
+      }
 
-        this.callbacks[id] = callback
+      this.callbacks[id] = callback
 
-        // @ts-ignore
-        // 发送
-        this.ws.send(JSON.stringify({
-          jsonrpc: '2.0',
-          id: id,
-          method: 'aria2.' + methodName,
-          // 给addUri传递的其他参数就跟在rpc调用的params的密码的后边.
-          params: [`token:${this.secret}`, ...args]
-        }))
+      // @ts-ignore
+      // 发送
+      this.ws.send(JSON.stringify({
+        jsonrpc: '2.0',
+        id: id,
+        method: 'aria2.' + methodName,
+        // 给addUri传递的其他参数就跟在rpc调用的params的密码的后边.
+        params: [`token:${this.secret}`, ...args]
+      }))
     })
   }
 })
+
+// const ary1 = ['foo', 'bar', 'baz'] as const
+
+// type Aria2MethodNames = typeof aria2Methods[number] // 只能对const的数组进行这个操作. type MethodNames = "xxx" | "xxx" | "xxx" 把aria2Methods数组所有内容取出构建一个字符串常量联合类型.
+
+// type Aria2Client2 = {
+//   [method in Aria2MethodNames]?: () => void;
+// }
+
+// function createAria2Client(ip: string, port: string, secret: string) {
+//   var client: Aria2Client2 = {}
+//   var url = `ws://${ip}:${port}/jsonrpc`
+//   var ws = new WebSocket(url)
+//   var id = 0
+//   var callbacks: any = {}
+//   var readyPromise = new Promise(resolve => {
+
+//   })
+//   for (var methodName of aria2Methods) {
+//     client[methodName] = function (...args: any[]) {
+//       return new Promise((resolve, reject) => {
+
+//         // 发送完之后得到一个回调函数.
+//         function callback(data: any) {
+//           if (data.error) {
+//             reject(data.error)
+//           } else {
+//             resolve(data.result)
+//           }
+//         }
+//         callbacks[id++] = callback
+//         // @ts-ignore
+//         // 发送
+//         ws.send(JSON.stringify({
+//           jsonrpc: '2.0',
+//           id: id,
+//           method: 'aria2.' + methodName,
+//           // 给addUri传递的其他参数就跟在rpc调用的params的密码的后边.
+//           params: [`token:${secret}`, ...args]
+//         }))
+//       })
+//     }
+//   }
+//   return client
+// }
+
+// var client = createAria2Client('', '', '')
+
+// client.addMetalink!()
