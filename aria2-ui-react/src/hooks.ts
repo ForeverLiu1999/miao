@@ -1,3 +1,4 @@
+import React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Aria2Client from "./aria2-client";
 // import Aria2Client from "./aria2-client";
@@ -118,5 +119,11 @@ export function useTasks2(getTasks: () => Promise<any[]>, interval: number) { //
       error, execute, pending, value,
     }
   }
+
+export const SelectedTasksContext = React.createContext<{selectedTasks: any[],setSelectedTasks:Function}>({ // context具体格式
+  selectedTasks: [],
+  setSelectedTasks: (tasks: any[]) => {}
+}) // 创建一个Context
+SelectedTasksContext.displayName = 'SelectedTasksContext' // 上一行并不是函数声明,不能通过变量得到名字
 
 

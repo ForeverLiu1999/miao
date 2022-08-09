@@ -21,6 +21,8 @@ export default function Downloading({ client }: IProps) {
         {
           tasks.map(task => {
             return <li key={task.gid}>
+
+              <input type="checkbox" />
               {/* 下载路径 */}
               <span>{task.files[0].path}</span>
               |
