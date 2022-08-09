@@ -10,6 +10,7 @@ import Stopped from './Stopped';
 import Aria2Client from './aria2-client'; // 手动创建连接aria2
 import TaskDetail from './TaskDetail';
 import { SelectedTasksContext } from './hooks';
+import Settings from './Settings';
 
 // @ts-ignore 让typescript不再检查这一行
 globalThis.Aria2Client = Aria2Client;
@@ -29,6 +30,7 @@ function App() {
             <div><NavLink style={({ isActive }) => ({ color: isActive ? 'red' : '' })} to="/downloading">下载中</NavLink></div>
             <div><NavLink style={({ isActive }) => ({ color: isActive ? 'red' : '' })} to="/waiting">等待中</NavLink></div>
             <div><NavLink style={({ isActive }) => ({ color: isActive ? 'red' : '' })} to="/stopped">已完成</NavLink></div>
+            <div><NavLink style={({ isActive }) => ({ color: isActive ? 'red' : '' })} to="/settings">设置</NavLink></div>
             {/* <div><NavLink to="/new">新建任务</NavLink></div> */}
           </div>
           <div className="App--right">
@@ -46,6 +48,8 @@ function App() {
               <Route path='/stopped' element={<Stopped ref={listComp} client={aria2} />}>
               </Route>
               <Route path='/new' element={<NewTask client={aria2} />}>
+              </Route>
+              <Route path='/settings' element={<Settings client={aria2} />}>
               </Route>
               <Route path='/task/detail/:gid' element={<TaskDetail client={aria2} />}></Route>
             </Routes>

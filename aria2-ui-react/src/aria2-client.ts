@@ -129,29 +129,31 @@ aria2Methods.forEach(methodName => {
 
   // @ts-ignore
   Aria2Client.prototype[methodName] = function (...args: any[]) {
-    return new Promise((resolve, reject) => {
-      var id = this.id++;
+    return this.ready().then(() => {
+      return new Promise((resolve, reject) => {
+        var id = this.id++;
 
-      // 发送完之后得到一个回调函数.
-      function callback(data: any) {
-        if (data.error) {
-          reject(data.error)
-        } else {
-          resolve(data.result)
+        // 发送完之后得到一个回调函数.
+        function callback(data: any) {
+          if (data.error) {
+            reject(data.error)
+          } else {
+            resolve(data.result)
+          }
         }
-      }
 
-      this.callbacks[id] = callback
+        this.callbacks[id] = callback
 
-      // @ts-ignore
-      // 发送
-      this.ws.send(JSON.stringify({
-        jsonrpc: '2.0',
-        id: id,
-        method: 'aria2.' + methodName,
-        // 给addUri传递的其他参数就跟在rpc调用的params的密码的后边.
-        params: [`token:${this.secret}`, ...args]
-      }))
+        // @ts-ignore
+        // 发送
+        this.ws.send(JSON.stringify({
+          jsonrpc: '2.0',
+          id: id,
+          method: 'aria2.' + methodName,
+          // 给addUri传递的其他参数就跟在rpc调用的params的密码的后边.
+          params: [`token:${this.secret}`, ...args]
+        }))
+      })
     })
   }
 })

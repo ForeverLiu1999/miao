@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SelectedTasksContext } from "./hooks";
 
@@ -8,7 +8,12 @@ interface IProps {
 
 export default function Header ({listComp}: IProps) {
   var navigate = useNavigate()
-  var tasksContext = useContext(SelectedTasksContext)
+
+  var [selectedTasks, setSelectedTasks] = useState<any>([])
+
+  useEffect(() => {
+    setSelectedTasks(listComp.current.getSelectedTasks())
+  })
 
   function selectAll() {
     listComp.current.selectAll()
@@ -21,7 +26,7 @@ export default function Header ({listComp}: IProps) {
   return (
     <div>
       <button onClick={goNew}>新建下载</button>
-      <button hidden={tasksContext.selectedTasks.length <= 0}>删除任务</button>
+      <button hidden={selectedTasks.length <= 0}>删除任务</button>
       <button>清空已完成任务</button>
       <button onClick={selectAll}>全选</button>
     </div>
