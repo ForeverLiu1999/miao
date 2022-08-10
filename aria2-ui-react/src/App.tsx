@@ -11,6 +11,7 @@ import Aria2Client from './aria2-client'; // 手动创建连接aria2
 import TaskDetail from './TaskDetail';
 import { SelectedTasksContext } from './hooks';
 import Settings from './Settings';
+import Servers from './Servers';
 
 // @ts-ignore 让typescript不再检查这一行
 globalThis.Aria2Client = Aria2Client;
@@ -51,7 +52,10 @@ function App() {
               </Route>
               <Route path='/settings' element={<Settings client={aria2} />}>
               </Route>
-              <Route path='/task/detail/:gid' element={<TaskDetail client={aria2} />}></Route>
+              <Route path='/服务器管理' element={<Servers />}>
+              </Route>
+              <Route path='/task/detail/:gid' element={<TaskDetail client={aria2} />}>
+              </Route>
             </Routes>
           </div>
         </div>

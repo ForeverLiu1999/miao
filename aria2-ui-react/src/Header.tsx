@@ -12,8 +12,17 @@ export default function Header ({listComp}: IProps) {
   var [selectedTasks, setSelectedTasks] = useState<any>([])
 
   useEffect(() => {
-    setSelectedTasks(listComp.current.getSelectedTasks())
-  })
+    if (listComp.current) {
+      listComp.current.onSelectedTaskChanged = function (tasks: any) {
+        setSelectedTasks(tasks)
+      }
+    }
+    return () => {
+      if (listComp.current) {
+        listComp.current.onSelectedTaskChanged = [] // 重新置空
+      }
+    }
+  }, [listComp.current])
 
   function selectAll() {
     listComp.current.selectAll()
