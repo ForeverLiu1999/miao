@@ -19,6 +19,8 @@ globalThis.Aria2Client = Aria2Client;
 function App() {
   var curentServerIdx = useMemo(() => localStorage.currentServerIdx ?? 0, []); // 如果不存在就用0,从localStorage里边读一次以后就不用变了.
 
+  var [connectState, setConnectState] = useState("conecting...")
+
   var aria2Servers = useMemo(() => { // 从localStorage取出的已经保存的服务器.
     return JSON.parse(localStorage.ARIA2_SERVERS ?? "[]"); // 传一个字符串,解析为空数组.
   }, [])
@@ -27,6 +29,9 @@ function App() {
     useMemo(() => {
       var server = aria2Servers[curentServerIdx]
       var aria2 = new Aria2Client(server.ip, server.port, server.secret)
+      aria2.ready().then(() => {
+
+      })
       return aria2
     }, [])
   )
@@ -49,7 +54,8 @@ function App() {
       <HashRouter>
         <div className="App">
           <div className="App-left">
-            <select onChange={(e) => changeServer(e)} value={0}>
+          {/* 就地写select元素的change事件,就地写的好处是不用传给别人,不需要考虑类型问题. */}
+            <select onChange={changeServer} value={0}>
               {
                 aria2Servers.map((server: any, idx: number) => {
                   return <option key={server.ip} value={idx}>{server.ip}</option> // server对象的ip属性.
