@@ -69,7 +69,8 @@ function Stopped({ client }: IProps, ref: React.Ref<any>) { // 确认ref类型�
     await client.ready()
     // @ts-ignore
     return client.tellStopped(0, 100)
-  }, 1000)
+  }, 1000, client)
+
 
   return (
     <div>

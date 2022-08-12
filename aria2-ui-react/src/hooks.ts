@@ -71,11 +71,16 @@ export function useTasks(client: Aria2Client, interval: number, state: 'Active' 
 }
 
 
-export function useTasks2(getTasks: () => Promise<any[]>, interval: number) { // 不关心state的情况下,getTasks函数最终返回一个tasks.
+export function useTasks2(getTasks: () => Promise<any[]>, interval: number, client?: Aria2Client) { // 不关心state的情况下,getTasks函数最终返回一个tasks.
   var [tasks, setTasks] = useState<any[]>([])
   // ref创建后指向undefined,所以可以给useRef传一个默认值,但createRef不行.
   var ref = useRef<typeof getTasks>(getTasks) // 每次useTask2都会传一个新的函数,调用的也是新的.
   ref.current = getTasks
+
+  useEffect(() => {
+    setTasks([])
+  }, [client])
+
   useEffect(() => {
      ref.current().then(tasks => { // getTasks会有用时比较久的情况,网络正常时也无须担心,但网络质量差时,因为  组件挂载成功才能getTasks,回调还没有运行,可他所在的组件已经销毁.
         setTasks(tasks)
@@ -88,7 +93,7 @@ export function useTasks2(getTasks: () => Promise<any[]>, interval: number) { //
     return () => {
       clearInterval(id)
     }
-  }, [])
+  }, [client])
   return tasks
 }
 

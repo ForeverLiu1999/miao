@@ -1,5 +1,7 @@
+import EventEmitter from "events"
+
 // 简化 因为上边构造函数所有参数都直接放在this上,可以用private私有声明减少代码量.
-export default class Aria2Client {
+export default class Aria2Client extends EventEmitter{
   // tellStatus(gid: string | undefined) {
   //   throw new Error("Method not implemented.");
   // }
@@ -18,6 +20,7 @@ export default class Aria2Client {
 
   // ts可以限定类型,private/public声明可以节省代码,不然ip port secret ws这些字段都要在上边先声明一遍.
   constructor(public ip: string = '127.0.0.1', public port: number | string, public secret: string) {
+    super( )
     var url = `ws://${ip}:${port}/jsonrpc` // 可以在jsonrpc连接的请求头中查看.
     this.id = 1 // id从1开始,否则第一个就是0了.
     this.ws = null
@@ -47,7 +50,8 @@ export default class Aria2Client {
         delete this.callbacks[id]
         callback(data)
       } else { // 说明是事件,比如onDownloadStar, onDownloadError
-
+        var eventName = data.method.slice(8) // aria2onDownloadStar,从第八个拿到事件名称.
+        this.emit('eventName', ...data.params)
       }
 
     })
