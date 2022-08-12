@@ -19,7 +19,8 @@ globalThis.Aria2Client = Aria2Client;
 function App() {
   var curentServerIdx = useMemo(() => localStorage.currentServerIdx ?? 0, []); // 如果不存在就用0,从localStorage里边读一次以后就不用变了.
 
-  var [connectState, setConnectState] = useState("conecting...")
+  var [connectState, setConnectState] = useState("连接中...")
+  var [selectedIdx, setSelectedIdx] = useState("0")
 
   var aria2Servers = useMemo(() => { // 从localStorage取出的已经保存的服务器.
     return JSON.parse(localStorage.ARIA2_SERVERS ?? "[]"); // 传一个字符串,解析为空数组.
@@ -30,13 +31,16 @@ function App() {
       var server = aria2Servers[curentServerIdx]
       var aria2 = new Aria2Client(server.ip, server.port, server.secret)
       aria2.ready().then(() => {
-
+        setConnectState("已连接.")
+      }, () => {
+        setConnectState("连接失败.")
       })
-      return aria2
+     return aria2
     }, [])
   )
 
   var [selectedTasks, setSelectedTasks] = useState([])
+
 
   var listComp = useRef()
 
@@ -44,8 +48,15 @@ function App() {
 
   function changeServer(e: React.ChangeEvent<HTMLSelectElement>) { // 把旧的服务器关掉,往下层传递一个新的aria2对象,
     var idx = e.target.value
+    setSelectedIdx(idx)
     var server = aria2Servers[idx]
-    setAria2(new Aria2Client(server.ip, server.port, server.secret))
+    var aria2 = new Aria2Client(server.ip, server.port, server.secret)
+    aria2.ready().then(() => { // ready可以让无论绑定成功还是失败都能没问题.
+      setConnectState("已连接.")
+    }, () => {
+      setConnectState("连接失败.")
+    })
+    setAria2(aria2)
   }
 
   return (
@@ -55,13 +66,14 @@ function App() {
         <div className="App">
           <div className="App-left">
           {/* 就地写select元素的change事件,就地写的好处是不用传给别人,不需要考虑类型问题. */}
-            <select onChange={changeServer} value={0}>
+            <select onChange={changeServer} value={selectedIdx}>
               {
                 aria2Servers.map((server: any, idx: number) => {
-                  return <option key={server.ip} value={idx}>{server.ip}</option> // server对象的ip属性.
+                  return <option key={idx} value={idx}>{server.ip}:{server.port}</option> // server对象的ip属性.
                 })
               }
             </select>
+            <div>{connectState}</div>
             <div><NavLink style={({ isActive }) => ({ color: isActive ? 'red' : '' })} to="/downloading">下载中</NavLink></div>
             <div><NavLink style={({ isActive }) => ({ color: isActive ? 'red' : '' })} to="/waiting">等待中</NavLink></div>
             <div><NavLink style={({ isActive }) => ({ color: isActive ? 'red' : '' })} to="/stopped">已完成</NavLink></div>

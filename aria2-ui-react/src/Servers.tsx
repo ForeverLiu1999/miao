@@ -34,9 +34,9 @@ export default function Servers() {
       <h2>服务器管理</h2>
       <ul>
         {
-          servers.map((server: any) => {
+          servers.map((server: any, idx: number) => {
             return (
-              <li>
+              <li key={idx}>
                 <div>ip: {server.ip}</div>
                 <div>port: {server.port}</div>
                 <div>secret: {server.secret}</div>
