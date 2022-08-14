@@ -19,10 +19,10 @@ import 'react-toastify/dist/ReactToastify.css'
 globalThis.Aria2Client = Aria2Client;
 
 function App() {
-  var curentServerIdx = useMemo(() => localStorage.currentServerIdx ?? 0, []); // 如果不存在就用0,从localStorage里边读一次以后就不用变了.
+  var currentServerIdx = useMemo(() => localStorage.currentServerIdx ?? 0, []); // 如果不存在就用0,从localStorage里边读一次以后就不用变了.
 
   var [connectState, setConnectState] = useState("连接中...")
-  var [selectedIdx, setSelectedIdx] = useState("0")
+  var [selectedIdx, setSelectedIdx] = useState(currentServerIdx)
   var [globalStat, setGlobalStat] = useState<any>({})
 
   var aria2Servers = useMemo(() => { // 从localStorage取出的已经保存的服务器.
@@ -31,7 +31,7 @@ function App() {
 
   var [aria2, setAria2] = useState(
     useMemo(() => {
-      var server = aria2Servers[curentServerIdx]
+      var server = aria2Servers[currentServerIdx]
       var aria2 = new Aria2Client(server.ip, server.port, server.secret)
       return aria2
     }, [])
@@ -39,9 +39,21 @@ function App() {
 
   useEffect(() => {
     aria2.ready().then(() => { // ready可以让无论绑定成功还是失败都能没问题.
-      setConnectState('已连接.')
+      setConnectState(connState => {
+        if (connState == '连接中...') {
+          return '已连接'
+        } else {
+          return connState
+        }
+      })
     }, () => {
-      setConnectState('连接失败.')
+      setConnectState(connState => {
+        if (connState == '连接中...') {
+          return '连接失败'
+        } else {
+          return connState
+        }
+      })
     })
 
     // 监听setInterval应该在ready之后
@@ -78,13 +90,18 @@ function App() {
   var listComp = useRef()
 
   function changeServer(e: React.ChangeEvent<HTMLSelectElement>) { // 把旧的服务器关掉,往下层传递一个新的aria2对象,
-    var idx = e.target.value
-    setSelectedIdx(idx)
-    var server = aria2Servers[idx]
-    setConnectState('连接中...')
-    var aria2 = new Aria2Client(server.ip, server.port, server.secret)
-    setAria2(aria2)
+    var idx = e.target.value // 从select元素中选择一个下标.
+    setSelectedIdx(idx) // 设置一下就可以点击改变.
+    localStorage.currentServerIdx = idx // 放进localStorage以便于下次读出来.
   }
+
+  useEffect(() => {
+    var serverInfo = aria2Servers[selectedIdx]
+    setConnectState('连接中...')
+    var aria2 = new Aria2Client(serverInfo.ip, serverInfo.port, serverInfo.secret)
+    setAria2(aria2)
+  }, [selectedIdx])
+
 
   return (
     // Context.provider的用法就是在组件上一层包起来.

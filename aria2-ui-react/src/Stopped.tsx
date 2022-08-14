@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { useImperativeHandle } from "react";
 import { forwardRef } from "react";
 import { useContext } from "react";
@@ -27,6 +27,14 @@ function Stopped({ client }: IProps, ref: React.Ref<any>) { // 确认ref类型�
   var gidRef = useRef<string[]>()
   gidRef.current = selectedGids
 
+  var tasksRef = useRef<any[]>()
+
+  tasksRef.current = useTasks2(async () => {
+    await client.ready()
+    // @ts-ignore
+    return client.tellStopped(0, 100)
+  }, 1000, client)
+
   function selectTask(e: any, gid: string) {
     var gids // 将即将setSelectedGids的最新变量存入gids
     if (e.target.checked) {
@@ -40,7 +48,7 @@ function Stopped({ client }: IProps, ref: React.Ref<any>) { // 确认ref类型�
     if (typeof ref === "object") {
       ref?.current?.onSelectedTaskChanged?.(
         gids.map(gid => {
-          return tasks.find(task => task.gid === gid)
+          return tasksRef.current!.find(task => task.gid === gid)
         }).filter(it => it)
       ) // 这里的ref类型必须是一个对象
     }
@@ -49,7 +57,7 @@ function Stopped({ client }: IProps, ref: React.Ref<any>) { // 确认ref类型�
   useImperativeHandle(ref, () => ({ // 第二个参数是一个函数返回一个对象,返回的对象挂载在ref上.
     selectAll: function () { // 全选
       // tasksContext.setSelectedTasks(tasks) // 为了向上层组件传递选中的任务
-      setSelectedGids(tasks.map(it => it.gid)) // 为了切换下方的多选框把每一个gid都存到selectedGids上
+      setSelectedGids(tasksRef.current!.map(it => it.gid)) // 为了切换下方的多选框把每一个gid都存到selectedGids上
     },
 
     // getSelectedTasks (){
@@ -65,19 +73,12 @@ function Stopped({ client }: IProps, ref: React.Ref<any>) { // 确认ref类型�
   // var setCount: (v: SetStateAction<string>) => void
   // setCount = ('abcd')
 
-  var tasks = useTasks2(async () => {
-    await client.ready()
-    // @ts-ignore
-    return client.tellStopped(0, 100)
-  }, 1000, client)
-
-
   return (
     <div>
       已停止...
       <ul>
         {
-          tasks.map(task => {
+          tasksRef.current.map(task => {
             return <li key={task.gid}>
               <input type="checkbox" checked={selectedGids.includes(task.gid)} onChange={(e) => selectTask(e, task.gid)} />
               {/* 下载路径 */}
@@ -98,5 +99,5 @@ function Stopped({ client }: IProps, ref: React.Ref<any>) { // 确认ref类型�
   )
 }
 
-export default forwardRef(Stopped)
+export default memo(forwardRef(Stopped))
 

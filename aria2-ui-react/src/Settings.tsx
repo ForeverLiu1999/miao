@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { memo, useCallback, useState } from "react"
 import { useAsync } from "./hooks"
 import { IProps } from "./NewTask"
 
@@ -8,7 +8,7 @@ var aria2OptionNameMap: any = {
 
 }
 
-export default function Settings({ client }: IProps) {
+function Settings({ client }: IProps) {
   var [option, setOption] = useState<any>({})
 
   var { pending, value: options } = useAsync(useCallback(async () => {
@@ -60,3 +60,5 @@ export default function Settings({ client }: IProps) {
 
   return <div>loading </div>
 }
+
+export default (Settings)

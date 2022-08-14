@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Aria2Client from "./aria2-client"
 import { useTasks, useTasks2 } from "./hooks"
+import { State } from "./store"
 
 // 想要接什么属性,就把属性的类型声明成一个接口."I"开头代表是一个接口.
 interface IProps {
@@ -9,10 +11,37 @@ interface IProps {
 }
 
 export default function Downloading({ client }: IProps) {
+  var dispatch = useDispatch()
+
+  var tasks = useSelector((state: State) => { // 箭头函数声明参数类型要打括号.
+    return state.activeTasks
+  })
+
+  useEffect(() => {
+    // @ts-ignore
+    client.tellActive().then(tasks => {
+      dispatch({
+        type: 'updateActiveTasks',
+        tasks: tasks
+      })
+    })
+
+    var id = setInterval(async () => {
+      await client.ready()
+      // @ts-ignore
+      var tasks = await client.tellActive()
+      dispatch({
+        type: 'updateActiveTasks',
+        tasks: tasks
+      })
+    }, 1000)
+    return () => clearInterval(id)
+  }, [client])
+
   // taks每秒更新
-  var tasks = useTasks2(() => {
-    return client.ready().then((client: any) => client.tellActive())
-  }, 1000)
+  // var tasks = useTasks2(() => {
+  //   return client.ready().then((client: any) => client.tellActive())
+  // }, 1000)
 
   return (
     <div>
