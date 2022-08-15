@@ -1,11 +1,9 @@
 import { memo, useRef, useState } from "react";
 import { useImperativeHandle } from "react";
 import { forwardRef } from "react";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { SelectedTasksContext, useTasks2 } from "./hooks";
+import { useTasks2 } from "./hooks";
 import { IProps } from "./NewTask";
-import { RefObject } from "react";
 
 // 通过一层抽象更容易理解.
 // type SetStateAction<T> = T | ((v: T) => T) // 联合类型要用括号括起来,SetStateAction是用来传给setVal函数的类型.

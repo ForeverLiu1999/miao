@@ -21,12 +21,10 @@ export default function TaskDetail ({client}: IProps) {
         <div>任务名称: {task!.files[0].path}</div>
       </div>
       <div>
-        <h3></h3>
-        <div></div>
+        <h3>区块信息</h3>
       </div>
       <div>
-        <h3></h3>
-        <div></div>
+        <h3>总览</h3>
       </div>
     </div>
   }

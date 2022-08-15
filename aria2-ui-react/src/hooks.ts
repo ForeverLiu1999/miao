@@ -1,7 +1,6 @@
 import React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Aria2Client from "./aria2-client";
-// import Aria2Client from "./aria2-client";
 
 export function useInput(init = "") {
   var [value, setValue] = useState(init);
@@ -36,7 +35,7 @@ export function useTasks(client: Aria2Client, interval: number, state: 'Active' 
     var id = setInterval(() => {
       client.ready().then(client => {
         // @ts-ignore
-        client['tell' + state]().then(tasks => {
+        client['tell' + state](0, 100).then(tasks => {
           setTasks(tasks)
         })
       })

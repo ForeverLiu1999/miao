@@ -5,7 +5,7 @@
 }
 
 .App-left {
-  width: 150px;
+  /* width: 150px; */
   flex: 150px 0 0;
   border-right: 1px solid;
   text-align: center;

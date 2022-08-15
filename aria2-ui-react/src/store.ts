@@ -12,17 +12,17 @@ type ActionTypes =
 
 type MyActions = Action<ActionTypes>
 
-// Reducer<State, AnyAction> reducer函数的泛型类型,State是状态的类型,AnyAction是action的类型
-const reducer: Reducer<State, AnyAction> = (state: State = initState, action: AnyAction ): State => {
+// // Reducer<State, AnyAction> reducer函数的泛型类型,State是状态的类型,AnyAction是action的类型
+// const reducer: Reducer<State, AnyAction> = (state: State = initState, action: AnyAction ): State => {
 
-  switch(action.type) {
-    case 'updateActiveTasks':
-      return produce(state, draft => {
-        draft.activeTasks = action.tasks
-      })
-  }
-  return state
-}
+//   switch(action.type) {
+//     case 'updateActiveTasks':
+//       return produce(state, draft => {
+//         draft.activeTasks = action.tasks
+//       })
+//   }
+//   return state
+// }
 
 export interface State { // 为状态声明类型.
   activeTasks: any[],
@@ -40,6 +40,18 @@ const initState: State = {
   servers: [],
   selectedServerIndex: 0,
   selectedTasksGid: [],
+}
+
+// Reducer<State, AnyAction>    reducer函数的泛型类型，State是状态的类型，AnyAction是action的类型
+const reducer: Reducer<State, AnyAction> = (state: State = initState, action: AnyAction): State => {
+
+  switch (action.type) {
+    case 'updateActiveTasks':
+      return produce(state, draft => {
+        draft.activeTasks = action.tasks
+      })
+  }
+  return state
 }
 
 const store = createStore(reducer, initState)

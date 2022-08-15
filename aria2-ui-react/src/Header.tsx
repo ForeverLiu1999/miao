@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SelectedTasksContext } from "./hooks";
 
 interface IProps {
   listComp: any
@@ -11,6 +10,8 @@ export default function Header ({listComp}: IProps) {
 
   var [selectedTasks, setSelectedTasks] = useState<any>([])
 
+  console.log(listComp.current)
+
   useEffect(() => {
     if (listComp.current) {
       listComp.current.onSelectedTaskChanged = function (tasks: any) {
@@ -19,7 +20,7 @@ export default function Header ({listComp}: IProps) {
     }
     return () => {
       if (listComp.current) {
-        listComp.current.onSelectedTaskChanged = [] // 重新置空
+        listComp.current.onSelectedTaskChanged = null // 重新置空
       }
     }
   }, [listComp.current])

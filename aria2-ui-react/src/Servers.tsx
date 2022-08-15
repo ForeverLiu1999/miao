@@ -1,4 +1,3 @@
-import { getValue } from "@testing-library/user-event/dist/utils"
 import { useMemo, useState } from "react"
 import { useInput } from "./hooks"
 
@@ -22,6 +21,7 @@ export default function Servers() {
 
     setServers(newServers)
 
+    console.log(newServers)
     localStorage.ARIA2_SERVERS = JSON.stringify(newServers) // 存入localStorage中.
 
     ip.clear()
@@ -50,9 +50,8 @@ export default function Servers() {
         <div>port: <input type="text" {...port} /></div>
         <div>secret: <input type="text" {...secret} /></div>
         {/* form内的button如果不设置type,默认是submit,点击button就会提交form,所以要修改类型,当然也可以去掉form. */}
-        <button type="button" onClick={addServer}>添加</button>
+        <button onClick={addServer}>添加</button>
       </form>
     </div>
-
   )
 }

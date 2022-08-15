@@ -28,11 +28,11 @@ export default class Aria2Client extends EventEmitter{
     // 创建一个Promise等待连接成功的状态,对连接建立成功事件进行监听.
     this.readyPromise = new Promise((resolve, reject) => {
       this.ws = new WebSocket(url) // 创建webSocket连接.
-      this.ws.addEventListener('open', (e) => {
+      this.ws.addEventListener('open', e => {
         resolve(this)
       })
-      this.ws.addEventListener('error', (e) => {
-        reject(this)
+      this.ws.addEventListener('error', e => {
+        reject(e)
       })
     })
 
@@ -51,10 +51,13 @@ export default class Aria2Client extends EventEmitter{
         callback(data)
       } else { // 说明是事件,比如onDownloadStar, onDownloadError
         var eventName = data.method.slice(8) // aria2onDownloadStar,从第八个拿到事件名称.
-        this.emit('eventName', ...data.params)
+        this.emit(eventName, ...data.params)
       }
-
     })
+  }
+
+  destroy () {
+    this.ws?.close()
   }
 
   ready() {

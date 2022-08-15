@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Aria2Client from "./aria2-client"
-import { useTasks, useTasks2 } from "./hooks"
 import { State } from "./store"
 
 // 想要接什么属性,就把属性的类型声明成一个接口."I"开头代表是一个接口.
@@ -27,9 +26,9 @@ export default function Downloading({ client }: IProps) {
     })
 
     var id = setInterval(async () => {
-      await client.ready()
       // @ts-ignore
       var tasks = await client.tellActive()
+      console.log('-------', tasks)
       dispatch({
         type: 'updateActiveTasks',
         tasks: tasks
@@ -61,7 +60,7 @@ export default function Downloading({ client }: IProps) {
               {/* 下载速度 */}
               <span>{task.downloadSpeed}B/s</span>
               |
-              <Link to={"/>task/detail/" + task.gid}>详情</Link>
+              <Link to={"/task/detail/" + task.gid}>详情</Link>
             </li>
           })
         }

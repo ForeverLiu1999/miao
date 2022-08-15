@@ -1,4 +1,4 @@
-import { useTasks, useTasks2 } from "./hooks"
+import { useTasks2 } from "./hooks"
 import { IProps } from "./NewTask"
 
 export default function Waiting({ client }: IProps) {
